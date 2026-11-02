@@ -1,0 +1,28 @@
+.frame {
+    display: grid;
+    gap: var(--sp-5);
+    align-content: start;
+}
+
+.head {
+    display: grid;
+}
+
+.objective {
+    display: grid;
+    gap: var(--sp-1);
+    max-width: 64ch;
+    font-size: var(--fs-lead);
+    line-height: var(--lh-body);
+    text-wrap: pretty;
+    padding-left: var(--sp-4);
+    border-left: 2px solid var(--c-accent);
+}
+
+.label {
+    font-size: var(--fs-caption);
+    font-weight: 600;
+    letter-spacing: var(--tr-label);
+    text-transform: uppercase;
+    color: var(--c-dim);
+}

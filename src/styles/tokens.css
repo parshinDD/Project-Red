@@ -1,0 +1,41 @@
+:root {
+    --red-900: #900020;
+    --red-400: #ee566d;
+    --ink-950: #08080a;
+    --ink-900: #0d0e12;
+    --ink-850: #12131a;
+    --ink-700: #23252d;
+    --ink-600: #363944;
+    --gray-100: #dfe2e8;
+    --gray-400: #8d939f;
+
+    --font-mono:
+        "JetBrains Mono", "IBM Plex Mono", "Cascadia Mono", ui-monospace,
+        "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+
+    --fs-caption: 0.8125rem;
+    --fs-sm: 0.875rem;
+    --fs-body: 1rem;
+    --fs-lead: 1.125rem;
+    --fs-h3: 1.25rem;
+    --fs-h2: 1.75rem;
+    --fs-h1: 2.5rem;
+    --lh-display: 1.1;
+    --lh-head: 1.25;
+    --lh-body: 1.55;
+    --tr-head: -0.015em;
+    --tr-label: 0.05em;
+
+    --sp-1: 0.25rem;
+    --sp-2: 0.5rem;
+    --sp-3: 0.75rem;
+    --sp-4: 1rem;
+    --sp-5: 1.5rem;
+    --sp-6: 2rem;
+    --sp-7: 3rem;
+
+    --radius: 0;
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+    --shell-max: 1440px;
+}

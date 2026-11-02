@@ -1,0 +1,149 @@
+.layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 28rem);
+    gap: var(--sp-6);
+    align-items: start;
+}
+
+.info {
+    display: grid;
+    gap: var(--sp-4);
+    align-content: start;
+}
+
+.readout {
+    display: grid;
+    gap: var(--sp-2);
+    font-size: var(--fs-sm);
+    letter-spacing: var(--tr-label);
+    text-transform: uppercase;
+}
+
+.readout div {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--sp-4);
+    border-bottom: 1px solid var(--c-edge);
+    padding-bottom: var(--sp-2);
+}
+
+.readout dt {
+    color: var(--c-dim);
+}
+
+.readout dd {
+    margin: 0;
+    font-variant-numeric: tabular-nums;
+}
+
+.state {
+    color: var(--c-hi);
+    font-weight: 600;
+}
+
+.text {
+    color: var(--c-dim);
+    max-width: 52ch;
+    text-wrap: pretty;
+}
+
+.actions {
+    display: flex;
+    gap: var(--sp-3);
+    flex-wrap: wrap;
+}
+
+.device {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-3);
+    padding: var(--sp-3);
+    border: 1px solid var(--c-edge-strong);
+    background: var(--c-surface);
+}
+
+.pad {
+    position: relative;
+    isolation: isolate;
+    aspect-ratio: 1;
+    display: grid;
+    place-content: center;
+    gap: 2px;
+    background: var(--pad);
+    border: 1px solid rgb(255 255 255 / 0.12);
+    transition: transform 0.08s;
+}
+
+.pad::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--pad-lit);
+    opacity: 0;
+    transition: opacity 0.08s;
+}
+
+.pad.lit::before {
+    opacity: 1;
+}
+
+.pad.lit {
+    transform: scale(1.02);
+}
+
+.pad:disabled {
+    cursor: default;
+}
+
+.pad:not(:disabled):hover {
+    border-color: #fff;
+}
+
+.key {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+}
+
+.name {
+    font-size: var(--fs-caption);
+    letter-spacing: var(--tr-label);
+    font-weight: 600;
+}
+
+.pad span {
+    color: #fff;
+    text-align: center;
+}
+
+.pad.lit span {
+    color: #0b0b0e;
+}
+
+.pad0 {
+    --pad: #6a0018;
+    --pad-lit: #ee566d;
+}
+
+.pad1 {
+    --pad: #1f3a73;
+    --pad-lit: #7aa2ff;
+}
+
+.pad2 {
+    --pad: #1d5535;
+    --pad-lit: #6fdca0;
+}
+
+.pad3 {
+    --pad: #6e5818;
+    --pad-lit: #f2cd52;
+}
+
+@media (max-width: 900px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+}

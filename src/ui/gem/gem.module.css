@@ -1,0 +1,77 @@
+.gem {
+    position: relative;
+    display: inline-block;
+    flex: none;
+    line-height: 0;
+}
+
+.svg {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.halo {
+    position: absolute;
+    inset: -38%;
+    pointer-events: none;
+    animation: halo 3.6s ease-in-out infinite;
+}
+
+@keyframes halo {
+    0%,
+    100% {
+        opacity: 0.55;
+        transform: scale(0.94);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.06);
+    }
+}
+
+.twinkle {
+    fill: #fff;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: twinkle 3.4s ease-in-out infinite;
+    animation-delay: var(--td, 0s);
+}
+
+@keyframes twinkle {
+    0%,
+    62%,
+    100% {
+        opacity: 0;
+        transform: scale(0.2) rotate(0deg);
+    }
+    80% {
+        opacity: 1;
+        transform: scale(1) rotate(45deg);
+    }
+}
+
+.socketFill {
+    fill: rgb(0 0 0 / 0.5);
+    stroke: rgb(255 170 190 / 0.14);
+    stroke-width: 0.8;
+    stroke-linejoin: round;
+}
+
+.socketEdge {
+    fill: none;
+    stroke: rgb(0 0 0 / 0.65);
+    stroke-width: 1.2;
+    stroke-linejoin: round;
+}
+
+.ghost {
+    fill: none;
+    stroke: var(--c-dim, #8d939f);
+    stroke-width: 3;
+    stroke-dasharray: 6 5;
+    stroke-linejoin: round;
+    opacity: 0.7;
+}
