@@ -1,6 +1,6 @@
 import { useGameStore } from "@/store/gameStore";
 import { useUiStore } from "@/store/uiStore";
-import { getNode, getNextNodeId } from "./nodes";
+import { getNode, getNextNodeId, levelsOfAct } from "./nodes";
 import { consoleScript } from "./transitions";
 import { TIMING } from "./timing";
 
@@ -39,7 +39,7 @@ function finish(run) {
     useUiStore.getState().endTransition();
 }
 
-export function navigate(toId) {
+export function navigate(toId, { respawn = false } = {}) {
     const ui = useUiStore.getState();
     const game = useGameStore.getState();
     const to = getNode(toId);
@@ -67,28 +67,30 @@ export function navigate(toId) {
     }
 
     const T = TIMING[kind];
-    const run = { kind, swapped: false, endTimer: null };
+    const run = { kind };
+
     active = run;
     ui.beginTransition({ kind, card: cardFor(kind, getNode(game.nodeId), to) });
 
     setTimeout(() => {
         useUiStore.getState().clearMessages();
         useUiStore.getState().setMood(null);
-        useGameStore.getState().setNode(toId);
-        if (to.tip) useUiStore.getState().pushMessage(to.tip, "dim");
+        if (respawn) {
+            useGameStore.getState().respawnTo(toId);
+        } else {
+            useGameStore.getState().setNode(toId);
+        }
 
-        run.swapped = true;
+        if (to.tip) useUiStore.getState().pushMessage(to.tip, "dim");
     }, T.cover);
 
-    run.endTimer = setTimeout(() => finish(run), T.cover + T.hold);
+    setTimeout(() => finish(run), T.cover + T.hold);
 }
 
-export function skipTransition() {
-    const run = active;
-    if (!run || run.kind !== "act" || !run.swapped) return;
-
-    clearTimeout(run.endTimer);
-    finish(run);
+export function respawn() {
+    const from = getNode(useGameStore.getState().nodeId);
+    const first = levelsOfAct(from.act)[0] ?? from;
+    navigate(first.id, { respawn: true });
 }
 
 export function advance() {

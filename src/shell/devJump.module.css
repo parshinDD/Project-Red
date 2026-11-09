@@ -1,0 +1,84 @@
+.dev {
+    position: fixed;
+    left: 0;
+    top: 38%;
+    z-index: 90;
+    font-family: var(--font-mono);
+    font-size: 12px;
+}
+
+.toggle {
+    padding: 4px 8px;
+    border: 1px solid #555;
+    background: rgb(0 0 0 / 0.75);
+    color: #9ad;
+    letter-spacing: 0.1em;
+}
+
+.toggle:hover {
+    color: #fff;
+    border-color: #9ad;
+}
+
+.panel {
+    position: absolute;
+    left: 0;
+    top: 28px;
+    width: 20rem;
+    max-height: min(34rem, 75vh);
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    border: 1px solid #555;
+    background: rgb(8 8 12 / 0.97);
+    color: #cde;
+}
+
+.opts {
+    display: grid;
+    gap: 4px;
+    padding: 8px 10px;
+    border-bottom: 1px solid #333;
+}
+
+.opts label {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.list {
+    overflow: auto;
+    padding: 4px 0;
+}
+
+.list h3 {
+    margin: 8px 10px 2px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: #789;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 2.2rem 1fr;
+    width: 100%;
+    padding: 4px 10px;
+    text-align: left;
+    color: #cde;
+}
+
+.row:hover {
+    background: #1b2a3c;
+}
+
+.row[data-current] {
+    color: #fff;
+    background: #3a1018;
+}
+
+.note {
+    padding: 6px 10px;
+    border-top: 1px solid #333;
+    color: #789;
+}

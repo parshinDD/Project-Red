@@ -75,9 +75,27 @@ export const NODES = [
         title: "ACT COMPLETE",
     },
 
-    level(4, 2, "industrial", "RED LIGHT, GREEN LIGHT"),
-    level(5, 2, "arena", "GLASS BRIDGE"),
-    level(6, 2, "dossier", "LIAR VOTE"),
+    level(
+        4,
+        2,
+        "industrial",
+        "RED LIGHT, GREEN LIGHT",
+        "Hold SPACE to move. Let go on red: moving on red costs 1 HP.",
+    ),
+    level(
+        5,
+        2,
+        "arena",
+        "GLASS BRIDGE",
+        "Read the rules. A wrong crossing costs 1 HP. Hints are free.",
+    ),
+    level(
+        6,
+        2,
+        "dossier",
+        "LIAR VOTE",
+        "Wrong reports cost nothing. Hints are free.",
+    ),
     {
         id: "act.2.complete",
         kind: "actComplete",

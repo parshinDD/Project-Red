@@ -6,7 +6,7 @@ import {
     START_HP,
     STORAGE_KEY,
 } from "@/game/constants";
-import { getNode } from "@/game/flow/nodes";
+import { getNode, levelsOfAct } from "@/game/flow/nodes";
 
 const initialData = () => ({
     playerId: "",
@@ -23,7 +23,7 @@ const initialData = () => ({
     hintsUsed: {},
     actHpLost: {},
     flags: {},
-    finale: "LOCKED",
+    finale: "LOCKED", // LOCKED | ASSEMBLY | ARCHIVE_READY | COMPLETE
     muted: false,
 });
 
@@ -74,18 +74,23 @@ export const useGameStore = create(
 
                 return hp;
             },
-
-            respawn: () =>
+            respawnTo: (nodeId) =>
                 set((s) => {
-                    const lvl = getNode(s.nodeId)?.level;
+                    const node = getNode(nodeId);
+                    const actLevels = levelsOfAct(node.act).map((n) => n.level);
                     const levelProgress = { ...s.levelProgress };
-                    delete levelProgress[lvl];
+
+                    actLevels.forEach((l) => delete levelProgress[l]);
 
                     return {
+                        nodeId,
+                        phase: phaseFor(node),
                         hp: START_HP,
-                        phase: "LEVEL_ACTIVE",
                         attempt: s.attempt + 1,
                         levelProgress,
+                        completedLevels: s.completedLevels.filter(
+                            (l) => !actLevels.includes(l),
+                        ),
                     };
                 }),
 

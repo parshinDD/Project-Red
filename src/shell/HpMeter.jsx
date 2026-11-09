@@ -1,6 +1,8 @@
 import { useGameStore } from "@/store/gameStore";
 import { useUiStore } from "@/store/uiStore";
 import { START_HP } from "@/game/constants";
+import { swapsFor } from "@/game/data/glitchText";
+import Glitchable from "@/ui/Glitchable";
 import s from "./shell.module.css";
 
 export default function HpMeter() {
@@ -13,7 +15,8 @@ export default function HpMeter() {
             role="img"
             aria-label={`Health ${hp} of ${START_HP}`}
         >
-            <span aria-hidden="true">HP</span>
+            <Glitchable swaps={swapsFor("hp")}>HP</Glitchable>
+
             <span
                 key={hit}
                 className={`${s.cells} ${hit ? s.hit : ""}`}

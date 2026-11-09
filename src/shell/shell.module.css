@@ -7,6 +7,12 @@
     transition: background-color 0.4s;
 }
 
+.shell[data-glitch="on"] {
+    text-shadow:
+        2px 0 rgb(255 45 77 / 0.55),
+        -2px 0 rgb(80 200 255 / 0.35);
+}
+
 .inner {
     width: 100%;
     max-width: var(--shell-max);
@@ -199,6 +205,13 @@
 .stage {
     height: 100%;
     overflow: auto;
+}
+
+.stageContent {
+    position: relative;
+    min-height: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
 }
 
 .scene {

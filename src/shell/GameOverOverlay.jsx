@@ -3,7 +3,8 @@ import { AnimatePresence, motion } from "motion/react";
 import { useGameStore } from "@/store/gameStore";
 import { useFocusTrap } from "@/game/hooks/useFocusTrap";
 import { GAME_OVER_SECONDS, START_HP } from "@/game/constants";
-import { getNode, pad2 } from "@/game/flow/nodes";
+import { getNode, levelsOfAct, pad2 } from "@/game/flow/nodes";
+import { respawn as respawnToActStart } from "@/game/flow/navigator";
 import { play } from "@/audio/audioEngine";
 import TerminalButton from "@/ui/TerminalButton";
 import s from "./shell.module.css";
@@ -15,9 +16,9 @@ function Panel() {
     const nodeId = useGameStore((st) => st.nodeId);
 
     const [left, setLeft] = useState(GAME_OVER_SECONDS);
-    const level = getNode(nodeId)?.level;
-
-    const respawn = () => useGameStore.getState().respawn();
+    const node = getNode(nodeId);
+    const start = levelsOfAct(node?.act)[0];
+    const respawn = () => respawnToActStart();
 
     useEffect(() => {
         play("error");
@@ -46,11 +47,13 @@ function Panel() {
         >
             <h2 className={s.gameoverTitle}>GAME OVER</h2>
             <p className="tnum">
-                HP: 0/{START_HP} · Recovery point: level {pad2(level ?? 0)}
+                HP: 0/{START_HP} · Recovery point: level{" "}
+                {pad2(start?.level ?? node?.level ?? 0)} (start of the act)
             </p>
             <p className={s.note}>
-                Completed levels, journal and shards are preserved. Only the
-                current level is repeated.
+                Journal, shards and achievements are preserved. You are sent
+                back to the start of the act: its levels have to be played
+                again.
             </p>
             <p className={s.countdown}>
                 Respawn in <span className="tnum">{left}</span> s

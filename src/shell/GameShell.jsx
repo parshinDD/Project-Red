@@ -17,6 +17,11 @@ import MenuOverlay from "./MenuOverlay";
 import GameOverOverlay from "./GameOverOverlay";
 import ToastStack from "./ToastStack";
 import TransitionLayer from "./TransitionLayer";
+import DevJump from "./DevJump";
+import DecayLayer from "./DecayLayer";
+import CrackLayer from "./CrackLayer";
+import { decayOf } from "@/game/flow/decay";
+import { useDecay } from "@/game/hooks/useDecay";
 import ShardVault from "./ShardVault";
 import TransitionConsole from "@/scenes/TransitionConsole";
 import CrtRoom from "@/crt/CrtRoom";
@@ -35,7 +40,11 @@ export default function GameShell() {
     const typing = useUiStore((st) => st.typing > 0);
     const ledFlash = useUiStore((st) => st.ledFlash?.mode ?? null);
 
+    const glitch = useUiStore((st) => st.glitch);
+
     const node = getNode(nodeId);
+    const decay = decayOf(node);
+    useDecay(decay);
     const Scene = getScene(nodeId) ?? ComingSoon;
 
     const crt = node.surface === "crt";
@@ -79,14 +88,24 @@ export default function GameShell() {
             const ui = useUiStore.getState();
             if (useGameStore.getState().phase === "LEVEL_FAILED") return;
 
-            if (ui.journalOpen) ui.setJournalOpen(false);
-            else if (ui.vaultOpen) ui.setVaultOpen(false);
-            else ui.setMenuOpen(!ui.menuOpen);
+            if (ui.journalOpen) {
+                ui.setJournalOpen(false);
+            } else if (ui.vaultOpen) {
+                ui.setVaultOpen(false);
+            } else {
+                ui.setMenuOpen(!ui.menuOpen);
+            }
         },
     });
 
     return (
-        <div className={s.shell} data-theme={node.theme} data-phase={phase}>
+        <div
+            className={s.shell}
+            data-theme={node.theme}
+            data-phase={phase}
+            data-decay={decay > 0 ? decay : undefined}
+            data-glitch={glitch ? "on" : undefined}
+        >
             <TopBar node={node} />
 
             <div className={s.stageWrap}>
@@ -102,7 +121,10 @@ export default function GameShell() {
                 ) : (
                     <>
                         <main className={s.stage} id="stage" inert={blocked}>
-                            {sceneEl}
+                            <div className={s.stageContent}>
+                                {sceneEl}
+                                <CrackLayer />
+                            </div>
                         </main>
                         <div className={s.fx} aria-hidden="true" />
                     </>
@@ -116,7 +138,9 @@ export default function GameShell() {
             <GameOverOverlay />
             <ShardDrop />
             <ToastStack />
+            <DecayLayer />
             <TransitionLayer />
+            <DevJump />
         </div>
     );
 }

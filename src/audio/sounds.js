@@ -1,6 +1,8 @@
 import { tone, noise } from "./synthKit";
 import { ROOM_SFX } from "./soundsRoom";
 import { TRANSITION_SFX } from "./soundsTransition";
+import { ACT2_SFX } from "./soundsAct2";
+import { DECAY_SFX } from "./soundsDecay";
 
 const PAD_FREQ = [262, 330, 392, 523];
 
@@ -143,4 +145,10 @@ const UI_SFX = {
         }),
 };
 
-export const SYNTH = { ...UI_SFX, ...ROOM_SFX, ...TRANSITION_SFX };
+export const SYNTH = {
+    ...UI_SFX,
+    ...ROOM_SFX,
+    ...TRANSITION_SFX,
+    ...ACT2_SFX,
+    ...DECAY_SFX,
+};

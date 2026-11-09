@@ -1,6 +1,8 @@
 import { useRef } from "react";
 import { useUiStore } from "@/store/uiStore";
 import { nodeLabel } from "@/game/flow/nodes";
+import { swapsFor } from "@/game/data/glitchText";
+import Glitchable from "@/ui/Glitchable";
 import { grantAchievement, grantJournal } from "@/game/rewards";
 import HpMeter from "./HpMeter";
 import ShardMeter from "./ShardMeter";
@@ -48,10 +50,14 @@ export default function TopBar({ node }) {
                     <span className={s.buildName}>
                         PROJECT <b>RED</b>
                     </span>
-                    <span className={s.buildId}>BUILD_02-12</span>
+                    <Glitchable className={s.buildId} swaps={swapsFor("build")}>
+                        BUILD_02-12
+                    </Glitchable>
                 </button>
                 <p className={s.where} aria-live="polite">
-                    {label}
+                    <Glitchable swaps={swapsFor("where", node)}>
+                        {label}
+                    </Glitchable>
                 </p>
                 <div className={s.hud} data-hidden={intro} inert={intro}>
                     <HpMeter />
@@ -62,7 +68,10 @@ export default function TopBar({ node }) {
                         onClick={toggleJournal}
                         aria-expanded={journalOpen}
                     >
-                        Journal<kbd>[J]</kbd>
+                        <Glitchable swaps={swapsFor("journal")}>
+                            Journal
+                        </Glitchable>
+                        <kbd>[J]</kbd>
                     </button>
                 </div>
             </div>

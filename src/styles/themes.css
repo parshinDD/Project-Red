@@ -44,3 +44,31 @@
     --c-surface-2: #0a0a0c;
     --c-edge: #1d1e24;
 }
+
+[data-theme="industrial"] {
+    --c-bg: #0c0b0a;
+    --c-surface: #14120f;
+    --c-surface-2: #1b1814;
+    --c-edge: #2e2922;
+    --c-edge-strong: #4a4237;
+    --c-dim: #9d958a;
+}
+
+[data-theme="arena"] {
+    --c-bg: #060505;
+    --c-surface: #0b0a0a;
+    --c-surface-2: #121010;
+    --c-edge: #211d1b;
+    --c-edge-strong: #373029;
+    --c-dim: #9a908a;
+}
+
+[data-theme="dossier"] {
+    --c-bg: #0d0c09;
+    --c-surface: #17150f;
+    --c-surface-2: #1f1c14;
+    --c-edge: #342f22;
+    --c-edge-strong: #4f4834;
+    --c-fg: #ece6d4;
+    --c-dim: #a59d86;
+}

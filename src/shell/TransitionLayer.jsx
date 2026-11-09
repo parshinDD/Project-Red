@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useUiStore } from "@/store/uiStore";
-import { skipTransition } from "@/game/flow/navigator";
 import Doors from "./transition/Doors";
 import LevelCard from "./transition/LevelCard";
 import ActCard from "./transition/ActCard";
@@ -14,7 +13,6 @@ export default function TransitionLayer() {
     const previous = useRef(null);
 
     const shows = transition && transition.kind !== "crt" ? transition : null;
-    const skippable = shows?.kind === "act";
 
     useEffect(() => {
         if (shows) return cueTransition(shows);
@@ -29,20 +27,6 @@ export default function TransitionLayer() {
         if (was && !shows) cueTransitionExit(was);
     }, [shows]);
 
-    useEffect(() => {
-        if (!skippable) return undefined;
-
-        const onKey = (e) => {
-            if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                skipTransition();
-            }
-        };
-
-        window.addEventListener("keydown", onKey);
-        return () => window.removeEventListener("keydown", onKey);
-    }, [skippable]);
-
     return (
         <AnimatePresence>
             {shows && (
@@ -51,7 +35,6 @@ export default function TransitionLayer() {
                     className={s.root}
                     data-kind={shows.kind}
                     role="status"
-                    onPointerDown={skippable ? skipTransition : undefined}
                 >
                     <Doors kind={shows.kind} reduce={reduce} />
                     {shows.kind === "level" && (

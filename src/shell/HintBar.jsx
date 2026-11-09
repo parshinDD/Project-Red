@@ -2,6 +2,8 @@ import { useGameStore } from "@/store/gameStore";
 import { useUiStore } from "@/store/uiStore";
 import { requestHint, levelHasHints } from "@/game/hints";
 import TerminalButton from "@/ui/TerminalButton";
+import { swapsFor } from "@/game/data/glitchText";
+import Glitchable from "@/ui/Glitchable";
 import s from "./shell.module.css";
 
 export default function HintBar({ node }) {
@@ -21,7 +23,8 @@ export default function HintBar({ node }) {
                     sound={null}
                     aria-keyshortcuts="H"
                 >
-                    Hint [H]{used > 0 ? ` · ${used}` : ""}
+                    <Glitchable swaps={swapsFor("hint")}>Hint</Glitchable> [H]
+                    {used > 0 ? ` · ${used}` : ""}
                 </TerminalButton>
                 <div className={s.log} role="log" aria-live="polite">
                     {messages.map((m) => (
@@ -35,7 +38,7 @@ export default function HintBar({ node }) {
                     onClick={() => setMenuOpen(true)}
                     aria-keyshortcuts="Escape"
                 >
-                    Menu [Esc]
+                    <Glitchable swaps={swapsFor("menu")}>Menu</Glitchable> [Esc]
                 </TerminalButton>
             </div>
         </footer>

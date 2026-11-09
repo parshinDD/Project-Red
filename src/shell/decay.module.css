@@ -1,0 +1,145 @@
+.layer {
+    position: fixed;
+    inset: 0;
+    z-index: 24;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.wear {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        120% 100% at 50% 42%,
+        transparent 52%,
+        rgb(90 0 15 / calc(var(--d) * 0.5)) 100%
+    );
+}
+
+.cracks {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.web {
+    position: absolute;
+    width: min(30vmin, 19rem);
+    aspect-ratio: 1;
+    user-select: none;
+    --reach: clamp(0%, calc(14% + (var(--d) - var(--min)) * var(--k)), 100%);
+    opacity: calc(clamp(0, (var(--d) - var(--min)) * 10, 1) * 0.8);
+    -webkit-mask-image: radial-gradient(
+        farthest-corner at var(--ox) var(--oy),
+        #000 calc(var(--reach) - 14%),
+        transparent var(--reach)
+    );
+    mask-image: radial-gradient(
+        farthest-corner at var(--ox) var(--oy),
+        #000 calc(var(--reach) - 14%),
+        transparent var(--reach)
+    );
+}
+
+.web[data-pos="tl"] {
+    left: 0;
+    top: 0;
+}
+
+.web[data-pos="tr"] {
+    right: 0;
+    top: 0;
+}
+
+.web[data-pos="bl"] {
+    left: 0;
+    bottom: 0;
+}
+
+.web[data-pos="br"] {
+    right: 0;
+    bottom: 0;
+}
+
+.ghost {
+    position: absolute;
+    font-size: clamp(3rem, 9vw, 8rem);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    white-space: nowrap;
+    color: rgb(238 86 109);
+    opacity: calc(var(--d) * 0.09);
+    animation: ghostIn 3s ease-out both;
+}
+
+.ghost[data-spot="tr"] {
+    right: 3vw;
+    top: 22%;
+}
+
+.ghost[data-spot="bl"] {
+    left: 3vw;
+    bottom: 22%;
+}
+
+.ghost[data-spot="br"] {
+    right: 3vw;
+    bottom: 22%;
+}
+
+.ghost[data-spot="tl"] {
+    left: 3vw;
+    top: 22%;
+}
+
+@keyframes ghostIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: calc(var(--d) * 0.09);
+    }
+}
+
+.flash {
+    position: absolute;
+    inset: 0;
+    background: rgb(255 45 77 / 0.05);
+}
+
+.tear {
+    position: absolute;
+    left: 0;
+    right: 0;
+    background: rgb(255 45 77 / 0.4);
+    mix-blend-mode: screen;
+    animation: tear 0.14s steps(2, end) infinite;
+}
+
+@keyframes tear {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(var(--dx));
+    }
+}
+
+.tile {
+    position: absolute;
+    width: 2.2rem;
+    aspect-ratio: 1;
+    border: 2px solid #ff2d4d;
+    background: repeating-conic-gradient(#ff2d4d 0 25%, #0a0a0c 0 50%) 0 0 /
+        1.1rem 1.1rem;
+    animation: tileBlink 0.18s steps(1, end) infinite;
+}
+
+@keyframes tileBlink {
+    50% {
+        opacity: 0.35;
+    }
+}

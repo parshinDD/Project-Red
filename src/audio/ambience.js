@@ -1,5 +1,4 @@
 import { noiseBuffer } from "./synthKit";
-import { SYNTH } from "./sounds";
 
 const BASE = { hum: 0.05, whine: 0.0022, hiss: 0.0055, room: 0.03, lamp: 0.03 };
 const LAMP_REST = 0.55;
@@ -15,7 +14,7 @@ const num = (t) =>
           ? t.to("ms").value
           : null;
 
-export function createAmbience(ctx, dest) {
+export function createAmbience(ctx, dest, playOn) {
     const now = () => ctx.currentTime;
 
     const out = ctx.createGain();
@@ -23,8 +22,12 @@ export function createAmbience(ctx, dest) {
     out.gain.value = 0;
     out.connect(dest);
     out.gain.setTargetAtTime(1, now(), 0.9);
+
+    const drop = ctx.createGain();
+    drop.connect(out);
+
     const bus = ctx.createGain();
-    bus.connect(out);
+    bus.connect(drop);
 
     const gainNode = (v, to = bus) => {
         const g = ctx.createGain();
@@ -94,7 +97,7 @@ export function createAmbience(ctx, dest) {
     osc("sawtooth", 100, gainNode(1, lampBand));
     osc("sawtooth", 200.3, gainNode(0.4, lampBand));
 
-    const state = { screen: 0, lamp: 0 };
+    const state = { screen: 0, lamp: 0, decay: 0 };
 
     function set(profile, tc = 0.8) {
         const screen = profile.screen ?? 0;
@@ -217,7 +220,7 @@ export function createAmbience(ctx, dest) {
                 const step = keys[i].v - keys[i - 1].v;
                 const ms = (keys[i].o - keys[i - 1].o) * T;
                 if (Math.abs(step) >= POP_MIN_STEP && ms <= POP_MAX_MS) {
-                    SYNTH.lampPop(ctx, bus, {
+                    playOn(bus, "lampPop", {
                         kind: step > 0 ? "strike" : "drop",
                         amt:
                             Math.min(1, Math.abs(step)) *
@@ -231,14 +234,30 @@ export function createAmbience(ctx, dest) {
         lamp.until = horizon;
     }
 
+    function dropout() {
+        const t = now();
+        const len = 0.08 + Math.random() * 0.16;
+
+        drop.gain.cancelScheduledValues(t);
+        drop.gain.setValueAtTime(1, t);
+        drop.gain.linearRampToValueAtTime(0.12, t + 0.03);
+        drop.gain.setValueAtTime(0.12, t + 0.03 + len);
+        drop.gain.linearRampToValueAtTime(1, t + 0.1 + len);
+    }
+
+    function setDecay(v) {
+        state.decay = v;
+    }
+
     function tick() {
         lampTick();
+        if (state.decay > 0 && Math.random() < 0.09 * state.decay) dropout();
 
         if (state.screen > 0.25 && Math.random() < 0.07)
-            SYNTH.crackle(ctx, bus, { delay: Math.random() * 0.4 });
+            playOn(bus, "crackle", { delay: Math.random() * 0.4 });
     }
 
     setInterval(tick, TICK_MS);
 
-    return { set, duck, attachLamp, detachLamp };
+    return { set, duck, attachLamp, detachLamp, setDecay };
 }

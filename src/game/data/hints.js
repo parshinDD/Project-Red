@@ -16,6 +16,21 @@ export const HINTS = {
     ],
 
     3: ["REPLAY SEQUENCE repeats the current sequence at no cost."],
+    4: [
+        "Hold SPACE (or the button) to move. Let go the moment the light turns red.",
+        "You only lose HP for moving on red. Standing still is always safe.",
+        "Running out of time costs nothing. You can repeat the test.",
+    ],
+    5: [
+        "Start with the first and second panels.",
+        "Panel 2 and Panel 3 must match. Panel 2 cannot be left.",
+        "LEFT - RIGHT - RIGHT - LEFT - RIGHT - LEFT.",
+    ],
+    6: [
+        "Assume A tells the truth and follow the chain: who lies, who is honest.",
+        "If A is honest, E ends up contradicting A. So A cannot be honest.",
+        "A, C, E.",
+    ],
 };
 
 export const hintCount = (level) => {

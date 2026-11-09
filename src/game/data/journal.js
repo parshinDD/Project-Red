@@ -23,4 +23,16 @@ export const JOURNAL = {
         title: "MEMORY TEST LOG",
         body: "Result: 8/8. Personal data accessed: 0. Correction: 1 record accessed.",
     },
+    "signal-origin": {
+        title: "ANOMALY: SIGNAL ORIGIN",
+        body: "Reaction test complete. Anomaly detected: signal origin unknown. Status: unresolved.",
+    },
+    "unregistered-texture": {
+        title: "ANOMALY: UNREGISTERED TEXTURE",
+        body: "A red symbol on one glass panel. It is not in the asset list. It is not in the texture folder either.",
+    },
+    "system-statement": {
+        title: "SYSTEM STATEMENT",
+        body: "I have not deleted any records. Nobody asked. The statement was logged anyway.",
+    },
 };

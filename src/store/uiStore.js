@@ -13,6 +13,8 @@ export const useUiStore = create((set, get) => ({
     typing: 0,
     ledFlash: null,
     transition: null,
+    decay: 0,
+    glitch: null,
     messages: [],
     toasts: [],
     hpHit: 0,
@@ -59,6 +61,10 @@ export const useUiStore = create((set, get) => ({
             if (get().ledFlash?.id === id) set({ ledFlash: null });
         }, ms);
     },
+
+    setDecay: (decay) => set({ decay }),
+
+    setGlitch: (glitch) => set({ glitch }),
 
     beginTransition: (transition) => set({ transition }),
 
