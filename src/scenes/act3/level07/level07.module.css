@@ -1,0 +1,320 @@
+.layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 28rem);
+    gap: var(--sp-6);
+    align-items: start;
+}
+
+.info {
+    display: grid;
+    gap: var(--sp-4);
+    align-content: start;
+}
+
+.actions {
+    display: flex;
+    gap: var(--sp-3);
+    flex-wrap: wrap;
+}
+
+.warn {
+    color: var(--c-hi);
+}
+
+.sheet {
+    --gold: #d6b25e;
+    position: relative;
+    display: grid;
+    gap: var(--sp-5);
+    padding: var(--sp-6) var(--sp-5);
+    border: 1px solid var(--c-edge-strong);
+    outline: 1px solid rgb(214 178 94 / 0.35);
+    outline-offset: 4px;
+    background:
+        radial-gradient(
+            70% 55% at 50% 22%,
+            rgb(120 90 200 / 0.14),
+            transparent 70%
+        ),
+        var(--c-surface);
+}
+
+.hero {
+    width: min(100%, 14rem);
+    justify-self: center;
+    overflow: visible;
+}
+
+.aura {
+    fill: rgb(255 60 60 / calc(0.08 + var(--total, 0) * 0.2));
+    stroke: rgb(255 90 70 / calc(0.2 + var(--total, 0) * 0.5));
+    stroke-width: 1;
+    transition:
+        fill 0.3s,
+        stroke 0.3s;
+}
+
+.cloak {
+    fill: #241c36;
+    stroke: #4b3d66;
+    stroke-width: 1.5;
+}
+
+.face {
+    fill: #0a0810;
+}
+
+.eye {
+    fill: #f6d98a;
+    filter: drop-shadow(0 0 3px #f6d98a);
+}
+
+.sigil {
+    transition:
+        opacity 0.25s,
+        filter 0.25s;
+    filter: drop-shadow(0 0 calc(var(--t, 0) * 7px) var(--heat, transparent));
+}
+
+.sigil path,
+.sigil circle {
+    fill: none;
+    stroke: var(--heat, var(--gold));
+    stroke-width: 1.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: stroke 0.25s;
+}
+
+.sigil .sigilRing {
+    stroke: var(--heat, rgb(214 178 94 / 0.5));
+    stroke-opacity: 0.6;
+}
+
+.power {
+    --heat: rgb(214 178 94);
+}
+
+.beam {
+    fill: none;
+    stroke: var(--heat);
+    stroke-linecap: round;
+    stroke-dasharray: 4 5;
+    animation: flow 0.7s linear infinite;
+}
+
+.beamGlow {
+    fill: none;
+    stroke: var(--heat);
+    stroke-linecap: round;
+    filter: blur(2px);
+}
+
+@keyframes flow {
+    to {
+        stroke-dashoffset: -9;
+    }
+}
+
+.tongue {
+    fill: #e8321e;
+    fill-opacity: 0.9;
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+    animation: flicker 0.75s ease-in-out infinite alternate;
+    filter: drop-shadow(0 0 3px #ff4a2a);
+}
+
+.tongueCore {
+    fill: #ffc04a;
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+    animation: flicker 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes flicker {
+    from {
+        transform: scale(0.9, 0.82) skewX(-4deg);
+    }
+    to {
+        transform: scale(1.06, 1.12) skewX(4deg);
+    }
+}
+
+.core {
+    transition:
+        r 0.3s,
+        opacity 0.3s;
+    animation: pulse 2.2s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
+@keyframes pulse {
+    50% {
+        transform: scale(1.08);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .beam,
+    .tongue,
+    .tongueCore,
+    .core {
+        animation: none;
+    }
+}
+
+.stats {
+    display: grid;
+    gap: var(--sp-3);
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 1.6rem minmax(7rem, 1fr) auto 1.6ch auto auto;
+    gap: var(--sp-3);
+    align-items: center;
+}
+
+.rune {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: none;
+    stroke: var(--gold);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.name {
+    letter-spacing: var(--tr-label);
+    text-transform: uppercase;
+    font-size: var(--fs-sm);
+}
+
+.pips {
+    display: flex;
+    gap: 4px;
+}
+
+.pips i {
+    width: 0.8rem;
+    height: 0.8rem;
+    transform: rotate(45deg) scale(0.8);
+    border: 1px solid var(--c-edge-strong);
+    background: transparent;
+    transition:
+        background-color 0.12s,
+        border-color 0.12s;
+}
+
+.pips i[data-on] {
+    background: var(--gold);
+    border-color: var(--gold);
+}
+
+.value {
+    font-size: var(--fs-lead);
+    text-align: right;
+}
+
+.step {
+    width: 2.25rem;
+    height: 2.25rem;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--c-edge-strong);
+    border-radius: 50%;
+    background: var(--c-surface-2);
+    color: var(--c-fg);
+    font-size: 1.2rem;
+    line-height: 1;
+    transition:
+        border-color 0.1s,
+        background-color 0.1s;
+}
+
+.step:not(:disabled):hover {
+    border-color: var(--gold);
+    background: rgb(214 178 94 / 0.12);
+}
+
+.step:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.points {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-top: var(--sp-3);
+    border-top: 1px solid var(--c-edge-strong);
+    letter-spacing: var(--tr-label);
+    text-transform: uppercase;
+    font-size: var(--fs-sm);
+    color: var(--c-dim);
+}
+
+.pointsNo {
+    font-size: var(--fs-h2);
+    color: var(--gold);
+    letter-spacing: 0;
+}
+
+.trials {
+    display: grid;
+    gap: var(--sp-3);
+}
+
+.trial {
+    padding: var(--sp-3) var(--sp-4);
+    border: 1px solid var(--c-edge-strong);
+    border-left-width: 3px;
+    background: var(--c-surface);
+}
+
+.trial h3 {
+    font-size: var(--fs-sm);
+    letter-spacing: var(--tr-label);
+    text-transform: uppercase;
+}
+
+.blurb {
+    color: var(--c-dim);
+    font-size: var(--fs-sm);
+}
+
+.verdict {
+    margin-top: var(--sp-2);
+    display: grid;
+    gap: 2px;
+    font-size: var(--fs-sm);
+}
+
+.trial[data-state="fail"] {
+    border-left-color: var(--c-accent);
+}
+
+.trial[data-state="fail"] .verdict {
+    color: var(--c-hi);
+}
+
+.trial[data-state="pass"] {
+    border-left-color: #6fdca0;
+}
+
+.trial[data-state="pass"] .verdict {
+    color: #6fdca0;
+}
+
+@media (max-width: 900px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+
+    .row {
+        grid-template-columns: 1.6rem 1fr auto 1.6ch auto auto;
+    }
+}

@@ -8,9 +8,37 @@
 }
 
 .shell[data-glitch="on"] {
-    text-shadow:
-        2px 0 rgb(255 45 77 / 0.55),
-        -2px 0 rgb(80 200 255 / 0.35);
+    animation: chroma var(--gdur, 500ms) ease-in-out both;
+}
+
+@keyframes chroma {
+    0%,
+    100% {
+        text-shadow:
+            0 0 rgb(255 45 77 / 0),
+            0 0 rgb(80 200 255 / 0);
+    }
+    14% {
+        text-shadow:
+            2.2px 0 rgb(255 45 77 / 0.6),
+            -2.2px 0 rgb(80 200 255 / 0.32);
+    }
+    40% {
+        text-shadow:
+            -1.2px 0 rgb(255 45 77 / 0.4),
+            1.2px 0 rgb(80 200 255 / 0.22);
+    }
+    64% {
+        text-shadow:
+            1.6px 0 rgb(255 45 77 / 0.5),
+            -1.6px 0 rgb(80 200 255 / 0.26);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .shell[data-glitch="on"] {
+        animation: none;
+    }
 }
 
 .inner {
@@ -388,6 +416,7 @@
 .entry p {
     text-wrap: pretty;
     max-width: 60ch;
+    white-space: pre-line;
 }
 
 .locked {

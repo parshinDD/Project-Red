@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 import os
 import subprocess
 import sys
@@ -8,8 +7,10 @@ import numpy as np
 from scipy.io import wavfile
 
 import dsp
-from dsp import (SR, Track, bell, bp, click, env, finish, glass, hp, lp, modal, musicbox, n_, reseed, reverb, saturate,
-                 shape, sweep_noise, sweep_sine, thump, tt, white)
+from dsp import (
+    SR, Track, bell, bp, click, env, finish, glass, hp, lp, modal, musicbox, n_, reseed, reverb, saturate,
+    shape, sweep_noise, sweep_sine, thump, tt, white
+)
 
 OUT = os.path.normpath(os.path.join(os.path.dirname(__file__), '..', '..', 'public', 'audio'))
 SOUNDS = {}
@@ -19,7 +20,6 @@ def sound(name, peak, variants=1):
     def deco(fn):
         SOUNDS[name] = (fn, peak, variants)
         return fn
-
     return deco
 
 
@@ -148,6 +148,7 @@ def boot(i):
 def glitch(i):
     seeded(i, 220)
     t = Track(0.3)
+
     for k in range(4):
         d = dsp.rng.uniform(0.02, 0.05)
         x = white(d)
@@ -155,8 +156,8 @@ def glitch(i):
         x = np.repeat(x[::hold], hold)[: len(x)]
         x = np.round(x * 3) / 3
         t.add(hp(x, 600) * 0.4, dsp.rng.uniform(0, 0.2))
-
     t.add(sweep_sine(2000, 120, 0.14, (1, 0.5)) * shape(0.14, 0.003, 0.03, 0.1) * 0.2)
+
     return reverb(lp(t.get(), 7000), 0.2, 0.08)
 
 
@@ -174,6 +175,7 @@ def success(i):
 def achieve(i):
     seeded(i, 240)
     t = Track(1.4)
+
     for k, f in enumerate((784, 988, 1175, 1568)):
         t.add(bell(f, 0.8, 0.35), k * 0.09)
 
@@ -203,6 +205,7 @@ def pad(i):
 
     return reverb(t.get(), 0.4, 0.12)
 
+
 @sound('lampPopDrop', 0.5, 2)
 def lamp_drop(i):
     seeded(i, 300)
@@ -230,6 +233,7 @@ def crackle(i):
     seeded(i, 320)
     t = Track(0.12)
     t.add(click(0.008, 3000, 9000, 0.001) * 0.6)
+
     if i:
         t.add(click(0.006, 3500, 9000, 0.001) * 0.4, 0.03 * i)
 
@@ -275,6 +279,7 @@ def power_on(i):
     t = Track(1.6)
     t.add(_degauss())
     t.add(sweep_noise(1500, 9000, 0.24, 1.5) * shape(0.24, 0.01, 0.12, 0.1) * 0.5, 0.42)
+
     for at in (0.45, 0.52, 0.6):
         t.add(click(0.006, 3000, 9000, 0.001) * 0.4, at)
 
@@ -355,6 +360,7 @@ def doors_open(i):
 def ratchet(i):
     seeded(i, 420)
     t = Track(0.6)
+
     for k, at in enumerate((0, 0.04, 0.085, 0.135, 0.195, 0.268, 0.36)):
         t.add(click(0.01, 1800 - k * 60, 7000, 0.0015) * 0.8, at)
         t.add(modal([1600 - k * 60, 3100 - k * 100], [0.006, 0.004], [0.5, 0.3], 0.03), at)
@@ -418,6 +424,7 @@ def _soft(f, sec, tau, attack):
 def sting3(i):
     seeded(i, 470)
     t = Track(3.2)
+
     for k, f in enumerate((392, 587, 784, 1175)):
         t.add(_soft(f, 1.8, 0.7, 0.28), k * 0.12, 0.7)
 
@@ -431,6 +438,7 @@ def sting4(i):
     t = Track(1.0)
     t.add(bp(white(0.35), 300, 3400) * shape(0.35, 0.01, 0.25, 0.09) * 0.5)
     t.add(sweep_noise(800, 3500, 0.3, 1.5) * shape(0.3, 0.02, 0.2, 0.08) * 0.3)
+
     for at in (0.4, 0.55):
         beep = np.sin(2 * np.pi * 1000 * tt(0.07)) * shape(0.07, 0.004, 0.05, 0.016)
         t.add(saturate(bp(beep, 300, 3400), 1.5) * 0.4, at)
@@ -438,7 +446,6 @@ def sting4(i):
     return reverb(t.get(), 0.3, 0.1)
 
 
-# ----------------------------------------------------------------------------------------------- act II
 @sound('lightGreen', 0.5)
 def light_green(i):
     seeded(i, 500)
@@ -456,7 +463,6 @@ def light_red(i):
     t.add(_relay(1, 511))
     t.add(thump(100, 60, 0.12, 0.04) * 0.5, 0.02)
     t.add(modal([140, 310], [0.1, 0.05], [0.6, 0.3], 0.25) * 0.5, 0.02)
-
     return reverb(t.get(), 0.25, 0.1)
 
 
@@ -508,6 +514,7 @@ def glass_crack(i):
     seeded(i, 560)
     t = Track(1.1)
     t.add(hp(white(0.06), 2500) * env(0.06, 0.012))
+
     for _ in range(10):
         at = dsp.rng.uniform(0.04, 0.45)
         t.add(click(0.008, 2500, 9000, 0.0012) * dsp.rng.uniform(0.2, 0.6), at)
@@ -572,6 +579,78 @@ def decay_burst(i):
     return reverb(t.get(), 0.2, 0.08)
 
 
+@sound('statUp', 0.5, 2)
+def stat_up(i):
+    seeded(i, 700)
+    t = Track(0.2)
+    t.add(modal([520 + i * 40, 1050], [0.06, 0.03], [1, 0.3], 0.15))
+    t.add(click(0.008, 1500, 6000, 0.002) * 0.4)
+
+    return reverb(t.get(), 0.2, 0.1)
+
+
+@sound('statDown', 0.5, 2)
+def stat_down(i):
+    seeded(i, 710)
+    t = Track(0.2)
+    t.add(modal([340 + i * 30, 700], [0.06, 0.03], [1, 0.3], 0.15))
+    t.add(click(0.008, 1000, 4500, 0.002) * 0.4)
+
+    return reverb(t.get(), 0.2, 0.1)
+
+
+@sound('trialPass', 0.5)
+def trial_pass(i):
+    seeded(i, 720)
+    t = Track(0.8)
+    t.add(bell(784, 0.6, 0.3))
+    t.add(bell(1175, 0.6, 0.35), 0.1, 0.6)
+
+    return reverb(t.get(), 0.7, 0.25)
+
+
+@sound('trialFail', 0.7)
+def trial_fail(i):
+    seeded(i, 730)
+    t = Track(1.2)
+    t.add(modal([110, 165, 243, 331], [0.7, 0.5, 0.35, 0.2], [1, 0.6, 0.4, 0.25], 1.0))
+    t.add(thump(110, 48, 0.2, 0.06) * 0.8)
+    t.add(lp(white(0.08), 1200) * env(0.08, 0.03) * 0.4)
+
+    return reverb(t.get(), 0.8, 0.2)
+
+
+@sound('cardFlip', 0.4, 2)
+def card_flip(i):
+    seeded(i, 740)
+    t = Track(0.25)
+    t.add(sweep_noise(1500, 5500, 0.12, 0.9) * shape(0.12, 0.01, 0.04, 0.07) * 0.5)
+    t.add(thump(180, 100, 0.05, 0.02) * 0.3, 0.1)
+
+    return t.get()
+
+
+@sound('mugClink', 0.5, 2)
+def mug_clink(i):
+    seeded(i, 750)
+    t = Track(0.4)
+    t.add(click(0.006, 3000, 9000, 0.0012) * 0.5)
+    t.add(modal([2300 + i * 150, 3300, 5200], [0.14, 0.09, 0.05], [1, 0.5, 0.25], 0.3))
+
+    return reverb(t.get(), 0.25, 0.1)
+
+
+@sound('memoryIndex', 0.5)
+def memory_index(i):
+    seeded(i, 760)
+    t = Track(1.4)
+
+    for k, f in enumerate((988, 1319, 1760)):
+        t.add(glass(f, 1.0, 0.45), k * 0.11, 0.7)
+
+    return reverb(t.get(), 1.1, 0.3)
+
+
 BPM = 96
 BEAT = 60 / BPM
 BARS = 8
@@ -599,6 +678,7 @@ def render_music():
     reseed(777)
     tail = 3.5
     t = Track(LENGTH + tail)
+
     for bar, notes in enumerate(MELODY):
         at = bar * 4 * BEAT
 
@@ -648,6 +728,102 @@ def render_music():
     return folded / np.max(np.abs(folded)) * 0.8
 
 
+TAV_BPM = 80
+TAV_BAR = 4 * 60 / TAV_BPM
+TAV_LEN = 8 * TAV_BAR
+
+
+def pluck(freq, sec, g=0.997, bright=0.5):
+    from scipy.signal import lfilter
+
+    N = max(2, int(round(SR / freq - 0.5)))
+    n = n_(sec)
+    x = np.zeros(n)
+    burst = lp(dsp.rng.uniform(-1, 1, N), 1800 + bright * 5000, 1)
+    x[:N] = burst
+    a = np.zeros(N + 2)
+    a[0] = 1.0
+    a[N] = -0.5 * g
+    a[N + 1] = -0.5 * g
+    y = lfilter([1.0], a, x)
+    y = y + bp(y, 150, 520) * 0.35
+
+    return y * np.minimum(1.0, tt(sec) / 0.002)
+
+
+def _bed_loop(make, length, xf=1.0):
+    x = make(length + xf)
+    n, m = n_(length), n_(xf)
+    out = x[:n].copy()
+    k = np.linspace(0, 1, m)
+    out[:m] = out[:m] * np.sin(k * np.pi / 2) + x[n:n + m] * np.cos(k * np.pi / 2)
+
+    return out
+
+
+def _fire(sec):
+    brown = np.cumsum(white(sec))
+    brown = hp(lp(brown / np.max(np.abs(brown)), 500, 2), 40, 1) * 0.5
+    t = Track(sec)
+    rate = 9.0
+
+    for _ in range(int(sec * rate)):
+        at = dsp.rng.uniform(0, sec - 0.05)
+        amp = dsp.rng.uniform(0.1, 0.7) ** 2
+        t.add(click(0.008, 1500, 8000, 0.0012) * amp, at)
+
+        if dsp.rng.random() < 0.08:
+            t.add(thump(140, 70, 0.08, 0.03) * 0.5, at)
+            t.add(click(0.02, 800, 4000) * 0.3, at)
+
+    return brown + t.get() * 0.8
+
+
+def _murmur(sec):
+    out = np.zeros(n_(sec))
+
+    for v in range(4):
+        carrier = bp(white(sec), 300 + v * 260, 1500 + v * 500, 2)
+        syl = np.abs(lp(white(sec), 5 + v, 1))
+        syl = syl / np.max(syl)
+        gate = np.abs(lp(white(sec), 0.25, 1))
+        gate = np.clip(gate / np.max(gate) * 1.6 - 0.3, 0, 1)
+        out += carrier * syl ** 1.5 * gate
+
+    return out / np.max(np.abs(out))
+
+
+def render_tavern():
+    reseed(888)
+    tail = 2.5
+    chords = [(146.83, 174.61, 220.0), (116.54, 146.83, 174.61), (130.81, 164.81, 196.0), (110.0, 130.81, 164.81)] * 2
+    pattern = [0, 2, 1, 2, 0, 2, 1, 2]
+    melody = {4: [(392.0, 0), (349.23, 1.5)], 5: [(293.66, 0), (349.23, 1.5)], 6: [(329.63, 0), (392.0, 1.5)], 7: [(440.0, 0), (329.63, 1.5)]}
+    lute = Track(TAV_LEN + tail)
+
+    for bar, chord in enumerate(chords):
+        for i, idx in enumerate(pattern):
+            at = bar * TAV_BAR + i * (TAV_BAR / 8) + dsp.rng.normal(0, 0.006)
+            f = chord[idx] * (0.5 if idx == 0 else 1.0)
+            lute.add(pluck(f, 2.4, 0.9975), max(0, at), dsp.rng.uniform(0.35, 0.5))
+
+        for f, off in melody.get(bar, []):
+            lute.add(pluck(f * 1.0, 2.8, 0.998, 0.7), bar * TAV_BAR + off, 0.7)
+
+    wet = reverb(lute.get(), 1.0, 0.3)
+    n = n_(TAV_LEN)
+    folded = wet[:n].copy()
+    over = wet[n:]
+    folded[: len(over)] += over[:n]
+    folded = folded / (np.max(np.abs(folded)) or 1)
+    fire = _bed_loop(_fire, TAV_LEN)
+    murmur = _bed_loop(_murmur, TAV_LEN)
+    mix = folded * 0.55 + fire / (np.max(np.abs(fire)) or 1) * 0.35 + murmur * 0.2
+    mix -= mix.mean()
+
+    return mix / np.max(np.abs(mix)) * 0.75
+
+
 def write_ogg(name, x):
     x = np.asarray(x)
     pcm = np.clip(x * 32767, -32768, 32767).astype(np.int16)
@@ -669,15 +845,18 @@ def main():
     for name, (fn, peak, variants) in SOUNDS.items():
         for i in range(variants):
             file = name if variants == 1 else f'{name}{i}' if name in ('pad', 'rackOn', 'glassStep') else f'{name}{i + 1}'
+
             if only and not any(w in file.lower() for w in only):
                 continue
 
             write_ogg(file, finish(fn(i), peak))
             count += 1
-
     if not only or any(w in 'musredlight' for w in only):
-        music = render_music()
-        write_ogg('musRedLight', music)
+        write_ogg('musRedLight', render_music())
+        count += 1
+
+    if not only or any(w in 'ambtavern' for w in only):
+        write_ogg('ambTavern', render_tavern())
         count += 1
 
     print(f'{count} files written to {OUT}')

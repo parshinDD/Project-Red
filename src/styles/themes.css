@@ -72,3 +72,23 @@
     --c-fg: #ece6d4;
     --c-dim: #a59d86;
 }
+
+[data-theme="fantasy"] {
+    --c-bg: #0b0a10;
+    --c-surface: #131019;
+    --c-surface-2: #1b1624;
+    --c-edge: #2e2640;
+    --c-edge-strong: #4b3d66;
+    --c-fg: #eee8f4;
+    --c-dim: #a99cc0;
+}
+
+[data-theme="tavern"] {
+    --c-bg: #110b07;
+    --c-surface: #1b120b;
+    --c-surface-2: #271910;
+    --c-edge: #46301f;
+    --c-edge-strong: #6a4a2e;
+    --c-fg: #f3e5cc;
+    --c-dim: #b79c7a;
+}

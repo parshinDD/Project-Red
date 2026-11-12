@@ -31,6 +31,21 @@ export const HINTS = {
         "If A is honest, E ends up contradicting A. So A cannot be honest.",
         "A, C, E.",
     ],
+    7: [
+        "You have 12 points in total, and every one of them has to be spent. Each stat is between 0 and 5.",
+        "Whatever ties the four stats together is written down in your journal. Pick one stat and follow it through: Dexterity and Luck add up to 4, so once one is chosen, the other is fixed.",
+        "Try Luck = 2 and follow the conditions from there.",
+    ],
+    8: [
+        "Read both entries. Each describes one of the two familiars, and not the same one.",
+        "One entry is about a creature that avoids contact and hides the traces of its visits. The other is confident, but sometimes falls.",
+        "The observation question needs nothing but the two descriptions: which one prefers evasion?",
+    ],
+    9: [
+        "You can visit the three characters in any order. An answer is a word or a short phrase, in English or in Russian.",
+        "Each question is personal: a place, a habit, a plan.",
+        "The place is not a dungeon and not a tavern. The habit is not gold and not a legendary weapon. The plan has been mentioned more than once.",
+    ],
 };
 
 export const hintCount = (level) => {

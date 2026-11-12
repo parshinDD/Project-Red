@@ -104,9 +104,27 @@ export const NODES = [
         title: "ACT COMPLETE",
     },
 
-    level(7, 3, "fantasy", "CHARACTER CREATION"),
-    level(8, 3, "fantasy", "FAMILIARS"),
-    level(9, 3, "tavern", "TAVERN"),
+    level(
+        7,
+        3,
+        "fantasy",
+        "CHARACTER CREATION",
+        "A scroll has been added to your journal [J]. Wrong builds cost nothing.",
+    ),
+    level(
+        8,
+        3,
+        "fantasy",
+        "FAMILIARS",
+        "Wrong answers cost nothing. Hints are free.",
+    ),
+    level(
+        9,
+        3,
+        "tavern",
+        "TAVERN",
+        "Visit them in any order. Wrong answers cost nothing.",
+    ),
     {
         id: "act.3.complete",
         kind: "actComplete",

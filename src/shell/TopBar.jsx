@@ -50,12 +50,16 @@ export default function TopBar({ node }) {
                     <span className={s.buildName}>
                         PROJECT <b>RED</b>
                     </span>
-                    <Glitchable className={s.buildId} swaps={swapsFor("build")}>
+                    <Glitchable
+                        className={s.buildId}
+                        swaps={swapsFor("build")}
+                        skinKey="build"
+                    >
                         BUILD_02-12
                     </Glitchable>
                 </button>
                 <p className={s.where} aria-live="polite">
-                    <Glitchable swaps={swapsFor("where", node)}>
+                    <Glitchable swaps={swapsFor("where", node)} skinKey="where">
                         {label}
                     </Glitchable>
                 </p>
@@ -68,7 +72,10 @@ export default function TopBar({ node }) {
                         onClick={toggleJournal}
                         aria-expanded={journalOpen}
                     >
-                        <Glitchable swaps={swapsFor("journal")}>
+                        <Glitchable
+                            swaps={swapsFor("journal")}
+                            skinKey="journal"
+                        >
                             Journal
                         </Glitchable>
                         <kbd>[J]</kbd>

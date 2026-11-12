@@ -55,10 +55,19 @@ export const SAMPLES = {
     unstamp: { files: one("unstamp") },
     paper: { files: f("paper", 3), detune: 0.05 },
     decayBurst: { files: f("decayBurst", 3), amt: true },
+
+    statUp: { files: f("statUp", 2), detune: 0.03 },
+    statDown: { files: f("statDown", 2), detune: 0.03 },
+    trialPass: { files: one("trialPass") },
+    trialFail: { files: one("trialFail") },
+    cardFlip: { files: f("cardFlip", 2), detune: 0.04 },
+    mugClink: { files: f("mugClink", 2), detune: 0.03 },
+    memoryIndex: { files: one("memoryIndex") },
 };
 
 export const MUSIC = {
     redLight: "/audio/musRedLight.ogg",
+    tavern: "/audio/ambTavern.ogg",
 };
 
 export const AUDIO_FILES = {};

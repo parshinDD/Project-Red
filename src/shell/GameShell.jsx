@@ -105,6 +105,7 @@ export default function GameShell() {
             data-phase={phase}
             data-decay={decay > 0 ? decay : undefined}
             data-glitch={glitch ? "on" : undefined}
+            style={glitch?.dur ? { "--gdur": `${glitch.dur}ms` } : undefined}
         >
             <TopBar node={node} />
 

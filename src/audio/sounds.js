@@ -3,6 +3,7 @@ import { ROOM_SFX } from "./soundsRoom";
 import { TRANSITION_SFX } from "./soundsTransition";
 import { ACT2_SFX } from "./soundsAct2";
 import { DECAY_SFX } from "./soundsDecay";
+import { ACT3_SFX } from "./soundsAct3";
 
 const PAD_FREQ = [262, 330, 392, 523];
 
@@ -151,4 +152,5 @@ export const SYNTH = {
     ...TRANSITION_SFX,
     ...ACT2_SFX,
     ...DECAY_SFX,
+    ...ACT3_SFX,
 };

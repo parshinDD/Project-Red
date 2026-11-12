@@ -9,8 +9,10 @@ import s from "./shell.module.css";
 export default function HintBar({ node }) {
     const messages = useUiStore((st) => st.messages);
     const setMenuOpen = useUiStore((st) => st.setMenuOpen);
+
     const phase = useGameStore((st) => st.phase);
     const used = useGameStore((st) => st.hintsUsed[node.level] ?? 0);
+
     const canHint = levelHasHints(node) && phase === "LEVEL_ACTIVE";
 
     return (
@@ -23,8 +25,10 @@ export default function HintBar({ node }) {
                     sound={null}
                     aria-keyshortcuts="H"
                 >
-                    <Glitchable swaps={swapsFor("hint")}>Hint</Glitchable> [H]
-                    {used > 0 ? ` · ${used}` : ""}
+                    <Glitchable swaps={swapsFor("hint")} skinKey="hint">
+                        Hint
+                    </Glitchable>{" "}
+                    [H]{used > 0 ? ` · ${used}` : ""}
                 </TerminalButton>
                 <div className={s.log} role="log" aria-live="polite">
                     {messages.map((m) => (
@@ -38,7 +42,10 @@ export default function HintBar({ node }) {
                     onClick={() => setMenuOpen(true)}
                     aria-keyshortcuts="Escape"
                 >
-                    <Glitchable swaps={swapsFor("menu")}>Menu</Glitchable> [Esc]
+                    <Glitchable swaps={swapsFor("menu")} skinKey="menu">
+                        Menu
+                    </Glitchable>{" "}
+                    [Esc]
                 </TerminalButton>
             </div>
         </footer>

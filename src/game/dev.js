@@ -24,6 +24,9 @@ const EXTRAS = {
     4: () => grantJournal("signal-origin"),
     5: () => {},
     6: () => grantJournal("system-statement"),
+    7: () => grantJournal("character-origin"),
+    8: () => grantJournal("things-worth-remembering"),
+    9: () => grantJournal("developer-identity"),
 };
 
 export function devSolve() {

@@ -1,5 +1,8 @@
 import { useId, useMemo } from "react";
 import { useUiStore } from "@/store/uiStore";
+import { useGameStore } from "@/store/gameStore";
+import { getNode } from "@/game/flow/nodes";
+import { skinOf } from "@/game/data/glitchText";
 
 const fit = (to, n) => (to.length >= n ? to.slice(0, n) : to.padEnd(n));
 
@@ -14,6 +17,7 @@ function roll(key) {
 export default function Glitchable({
     children,
     swaps = [],
+    skinKey,
     className,
     as: Tag = "span",
 }) {
@@ -22,10 +26,26 @@ export default function Glitchable({
     const decay = useUiStore((st) => st.decay);
     const glitch = useUiStore((st) => st.glitch);
 
-    const shown = useMemo(() => {
-        if (!glitch || decay <= 0) return text;
+    const act = useGameStore((st) => getNode(st.nodeId)?.act);
+    const skin = skinKey ? skinOf(act, skinKey) : [];
 
+    const base = useMemo(() => {
         let out = text;
+        for (const [from, to] of skin)
+            out = out.replace(from, fit(to, from.length));
+
+        return out;
+    }, [text, skin]);
+
+    const shown = useMemo(() => {
+        if (!glitch || decay <= 0) return base;
+
+        let out = base;
+        for (const [from, to] of skin) {
+            if (roll(`${id}:${glitch.id}:skin:${from}`) < 0.35 + 0.5 * decay)
+                out = out.replace(fit(to, from.length), from);
+        }
+
         for (const [from, to] of swaps) {
             if (
                 out.includes(from) &&
@@ -35,13 +55,14 @@ export default function Glitchable({
         }
 
         return out;
-    }, [text, swaps, glitch, decay, id]);
+    }, [base, skin, swaps, glitch, decay, id]);
 
-    if (decay <= 0) return <Tag className={className}>{text}</Tag>;
+    if (decay <= 0 && skin.length === 0)
+        return <Tag className={className}>{text}</Tag>;
 
     return (
         <Tag className={className}>
-            <span className="srOnly">{text}</span>
+            <span className="srOnly">{base}</span>
             <span aria-hidden="true" style={{ whiteSpace: "pre" }}>
                 {shown}
             </span>

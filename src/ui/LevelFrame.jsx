@@ -16,6 +16,7 @@ export default function LevelFrame({ objective, children }) {
                         <Glitchable
                             className={s.label}
                             swaps={swapsFor("objective")}
+                            skinKey="objective"
                         >
                             Objective
                         </Glitchable>

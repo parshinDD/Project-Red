@@ -10,7 +10,7 @@ export function fireGlitch(kind = "idle") {
     if (ui.decay <= 0 || ui.glitch) return;
 
     const dur = Math.round(240 + 420 * ui.decay + Math.random() * 160);
-    ui.setGlitch({ id: ++seq, kind });
+    ui.setGlitch({ id: ++seq, kind, dur });
     play("decayBurst", { amt: ui.decay });
 
     setTimeout(() => useUiStore.getState().setGlitch(null), dur);
