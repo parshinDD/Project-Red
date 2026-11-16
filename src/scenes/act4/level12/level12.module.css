@@ -1,0 +1,154 @@
+.layout {
+    display: grid;
+    gap: var(--sp-5);
+    max-width: 44rem;
+}
+
+.panel {
+    position: relative;
+    display: grid;
+    gap: var(--sp-4);
+    padding: var(--sp-5);
+    border: 1px solid var(--c-edge-strong);
+    background:
+        repeating-linear-gradient(
+            0deg,
+            rgb(255 45 77 / 0.05) 0 1px,
+            transparent 1px 3px
+        ),
+        radial-gradient(
+            120% 90% at 50% 0%,
+            rgb(144 0 32 / 0.22),
+            transparent 70%
+        ),
+        var(--c-surface);
+    box-shadow: inset 0 0 0 1px rgb(255 45 77 / 0.08);
+}
+
+.head {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+    font-size: var(--fs-caption);
+    letter-spacing: 0.24em;
+    color: var(--c-hi);
+    padding-bottom: var(--sp-3);
+    border-bottom: 1px solid var(--c-edge-strong);
+}
+
+.live {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: var(--c-hi);
+    box-shadow: 0 0 8px var(--c-hi);
+    animation: blink 1.6s ease-in-out infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0.25;
+    }
+}
+
+.meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+    gap: var(--sp-3);
+    margin: 0;
+}
+
+.meta div {
+    display: grid;
+    gap: 0.15rem;
+}
+
+.meta dt {
+    font-size: var(--fs-caption);
+    letter-spacing: var(--tr-label);
+    text-transform: uppercase;
+    color: var(--c-dim);
+}
+
+.meta dd {
+    margin: 0;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+}
+
+.noise {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 3.2rem;
+    padding: var(--sp-2) 0;
+    border-block: 1px dashed var(--c-edge-strong);
+}
+
+.noise i {
+    flex: 1;
+    height: 8%;
+    background: rgb(255 80 100 / 0.35);
+    transform-origin: bottom;
+    transition: height 0.3s;
+}
+
+.noise[data-on] i {
+    height: calc(var(--h) * 100%);
+    background: rgb(255 80 100 / 0.8);
+    animation: wobble var(--d) ease-in-out var(--o) infinite alternate;
+}
+
+@keyframes wobble {
+    from {
+        transform: scaleY(0.25);
+    }
+    to {
+        transform: scaleY(1);
+    }
+}
+
+.status {
+    margin: 0;
+    color: var(--c-dim);
+    line-height: 1.55;
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+}
+
+.answer,
+.command {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    gap: var(--sp-3);
+}
+
+.answer > :first-child,
+.command > :first-child {
+    flex: 1;
+    min-width: 12rem;
+    max-width: 18rem;
+}
+
+.command input {
+    letter-spacing: 0.3em;
+    font-weight: 700;
+    color: var(--c-hi);
+}
+
+.note {
+    margin: 0;
+    color: var(--c-hi);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .live,
+    .noise[data-on] i {
+        animation: none;
+    }
+}

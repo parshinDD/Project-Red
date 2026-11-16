@@ -220,6 +220,26 @@ export function detachLamp() {
     ambience?.detachLamp();
 }
 
+export function duckAudio(ms) {
+    if (!ctx || !master || muted) return;
+
+    const now = ctx.currentTime;
+
+    master.gain.setTargetAtTime(MASTER_GAIN * 0.1, now, 0.01);
+    setTimeout(() => {
+        if (master && ctx)
+            master.gain.setTargetAtTime(
+                muted ? 0 : MASTER_GAIN,
+                ctx.currentTime,
+                0.03,
+            );
+    }, ms);
+}
+
+export function getAudioNodes() {
+    return ctx && master ? { ctx, master } : null;
+}
+
 export function setAudioDecay(level) {
     wantedDecay = level;
     ambience?.setDecay(level);

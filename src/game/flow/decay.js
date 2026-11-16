@@ -1,6 +1,16 @@
 import { levelsOfAct } from "./nodes";
 
-export const DECAY = { 4: 0.3, 5: 0.45, 6: 0.6, 7: 0.66, 8: 0.72, 9: 0.78 };
+export const DECAY = {
+    4: 0.3,
+    5: 0.45,
+    6: 0.6,
+    7: 0.66,
+    8: 0.72,
+    9: 0.78,
+    10: 0.84,
+    11: 0.9,
+    12: 0.96,
+};
 
 export function decayOf(node) {
     if (!node) return 0;

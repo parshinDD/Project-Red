@@ -18,6 +18,9 @@ const WHERE_BY_LEVEL = {
     7: [["CREATION", "DELETION"]],
     8: [["FAMILIARS", "RELATIVES"]],
     9: [["TAVERN", "SERVER"]],
+    10: [["CIPHER", "SILENCE"]],
+    11: [["PROTOCOL", "PAYLOAD"]],
+    12: [["SIGNAL", "STATIC"]],
 };
 
 const SKIN = {

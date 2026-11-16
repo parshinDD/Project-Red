@@ -1,0 +1,128 @@
+.layout {
+    --olive: #9fb98a;
+    --amber: #e0b04a;
+    display: grid;
+    gap: var(--sp-5);
+    max-width: 52rem;
+}
+
+.dispatch {
+    position: relative;
+    display: grid;
+    gap: var(--sp-5);
+    padding: var(--sp-5);
+    border: 1px solid var(--c-edge-strong);
+    background:
+        repeating-linear-gradient(
+            0deg,
+            rgb(159 185 138 / 0.04) 0 1px,
+            transparent 1px 4px
+        ),
+        var(--c-surface);
+}
+
+.dispatch::before,
+.dispatch::after {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--olive);
+    pointer-events: none;
+}
+
+.dispatch::before {
+    top: -1px;
+    left: -1px;
+    border-right: 0;
+    border-bottom: 0;
+}
+
+.dispatch::after {
+    right: -1px;
+    bottom: -1px;
+    border-left: 0;
+    border-top: 0;
+}
+
+.head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--sp-3);
+    font-size: var(--fs-caption);
+    letter-spacing: 0.22em;
+    color: var(--olive);
+    border-bottom: 1px dashed var(--c-edge-strong);
+    padding-bottom: var(--sp-3);
+}
+
+.cipher {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--sp-3);
+}
+
+.col {
+    display: grid;
+    justify-items: center;
+    gap: var(--sp-1);
+}
+
+.sent,
+.slot {
+    display: grid;
+    place-items: center;
+    width: 3.1rem;
+    height: 3.6rem;
+    font-size: 1.9rem;
+    font-weight: 700;
+    border: 1px solid var(--c-edge-strong);
+}
+
+.sent {
+    color: var(--c-hi);
+    background: rgb(144 0 32 / 0.18);
+    border-color: rgb(238 86 109 / 0.5);
+}
+
+.slot {
+    padding: 0;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: inherit;
+    color: var(--olive);
+    background: var(--c-bg);
+    caret-color: var(--amber);
+    transition:
+        border-color 0.15s,
+        box-shadow 0.15s;
+}
+
+.slot:focus-visible {
+    outline: none;
+    border-color: var(--amber);
+    box-shadow: 0 0 0 1px var(--amber);
+}
+
+.quote {
+    margin: 0;
+    display: grid;
+    gap: 0.2rem;
+    justify-items: center;
+    text-align: center;
+    font-style: italic;
+    color: var(--c-fg);
+    line-height: 1.5;
+}
+
+.actions {
+    display: flex;
+    gap: var(--sp-3);
+}
+
+.note {
+    margin: 0;
+    color: var(--c-hi);
+}

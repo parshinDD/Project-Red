@@ -1,0 +1,231 @@
+.screen {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: var(--sp-5);
+    overflow: hidden;
+    z-index: 1;
+}
+
+.stage {
+    --k: 0.05;
+    position: relative;
+    display: grid;
+    gap: var(--sp-5);
+    padding: var(--sp-6) var(--sp-5);
+    width: min(100%, 42rem);
+    max-height: 100%;
+    box-sizing: border-box;
+    min-height: (26rem, 100%);
+    border: 1px solid rgb(255 45 77 / calc(0.15 + var(--k) * 0.6));
+    background:
+        radial-gradient(
+            120% 90% at 50% 0%,
+            rgb(144 0 32 / calc(0.15 + var(--k) * 0.4)),
+            transparent 70%
+        ),
+        var(--c-surface);
+    box-shadow:
+        inset 0 0 calc(var(--k) * 90px) rgb(255 45 77 / calc(var(--k) * 0.35)),
+        0 0 calc(var(--k) * 60px) rgb(255 45 77 / calc(var(--k) * 0.3));
+    will-change: transform;
+}
+
+.head {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+    font-size: var(--fs-caption);
+    letter-spacing: 0.24em;
+    color: var(--c-hi);
+    padding-bottom: var(--sp-3);
+    border-bottom: 1px solid var(--c-edge-strong);
+}
+
+.live {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: var(--c-hi);
+    box-shadow: 0 0 8px var(--c-hi);
+    animation: blink calc(1.6s - var(--k) * 1.2s) ease-in-out infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0.2;
+    }
+}
+
+.status {
+    margin: 0;
+    font-size: var(--fs-caption);
+    letter-spacing: 0.3em;
+    color: var(--c-dim);
+}
+
+.word {
+    display: flex;
+    justify-content: center;
+    gap: clamp(0.6rem, 3vw, 1.6rem);
+}
+
+.cell {
+    display: grid;
+    place-items: center;
+    width: clamp(3.4rem, 14vw, 6rem);
+    height: clamp(4.4rem, 18vw, 7.5rem);
+    font-size: clamp(2.8rem, 11vw, 5.2rem);
+    font-weight: 700;
+    color: var(--c-hi);
+    border-bottom: 3px solid var(--c-edge-strong);
+}
+
+.cell[data-next] {
+    border-bottom-color: var(--c-hi);
+    animation: caret 0.9s steps(2, start) infinite;
+}
+
+@keyframes caret {
+    50% {
+        border-bottom-color: transparent;
+    }
+}
+
+.cell[data-on] {
+    border-bottom-color: var(--c-hi);
+    animation: appear 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    text-shadow:
+        0 0 calc(10px + var(--k) * 34px)
+            rgb(255 45 77 / calc(0.45 + var(--k) * 0.5)),
+        calc(var(--k) * 6px) 0 rgb(255 0 60 / calc(var(--k) * 0.9)),
+        calc(var(--k) * -6px) 0 rgb(0 220 255 / calc(var(--k) * 0.55));
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+        transform: scale(1.35);
+        filter: blur(10px);
+    }
+    40% {
+        opacity: 1;
+    }
+    100% {
+        transform: none;
+        filter: none;
+    }
+}
+
+.log {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 12rem;
+    overflow: hidden;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    color: var(--c-dim);
+    -webkit-mask-image: linear-gradient(180deg, transparent, #000 40%);
+    mask-image: linear-gradient(180deg, transparent, #000 40%);
+}
+
+.log p {
+    margin: 0;
+    white-space: nowrap;
+}
+
+.log p:last-child {
+    color: var(--c-fg);
+}
+
+.log [data-noise] {
+    color: rgb(255 80 100 / 0.55);
+}
+
+.log [data-hot] {
+    color: var(--c-hi);
+    font-weight: 700;
+    animation: blink 0.25s steps(2, start) infinite;
+}
+
+.fx {
+    --k: 0.05;
+    position: fixed;
+    inset: 0;
+    z-index: 9000;
+    pointer-events: none;
+}
+
+.wash,
+.vignette {
+    position: absolute;
+    inset: 0;
+}
+
+.wash {
+    background: rgb(255 30 60 / calc(var(--k) * var(--k) * 0.35));
+    mix-blend-mode: screen;
+    animation: flicker 0.16s steps(2, end) infinite;
+}
+
+@keyframes flicker {
+    50% {
+        opacity: 0.55;
+    }
+}
+
+.vignette {
+    background: radial-gradient(
+        120% 100% at 50% 50%,
+        transparent calc(70% - var(--k) * 35%),
+        rgb(0 0 0 / calc(0.1 + var(--k) * 0.7)) 100%
+    );
+}
+
+.boot {
+    position: absolute;
+    left: clamp(1rem, 6vw, 4rem);
+    bottom: clamp(1rem, 8vh, 4rem);
+    display: grid;
+    gap: 0.35rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    color: #aab2ba;
+}
+
+.boot p {
+    margin: 0;
+}
+
+.boot p:last-child {
+    color: #dfe6ec;
+}
+
+.fx[data-phase="black"],
+.fx[data-phase="boot"] {
+    background: #000;
+    z-index: 99999;
+    pointer-events: auto;
+}
+
+.fx[data-phase="black"] .wash,
+.fx[data-phase="black"] .vignette,
+.fx[data-phase="boot"] .wash,
+.fx[data-phase="boot"] .vignette {
+    display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .wash,
+    .live,
+    .cell[data-next],
+    .log [data-hot] {
+        animation: none;
+    }
+
+    .cell[data-on] {
+        animation: none;
+    }
+}

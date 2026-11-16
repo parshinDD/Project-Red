@@ -15,6 +15,7 @@ export const useUiStore = create((set, get) => ({
     transition: null,
     decay: 0,
     glitch: null,
+    lag: null,
     messages: [],
     toasts: [],
     hpHit: 0,
@@ -65,6 +66,8 @@ export const useUiStore = create((set, get) => ({
     setDecay: (decay) => set({ decay }),
 
     setGlitch: (glitch) => set({ glitch }),
+
+    setLag: (lag) => set({ lag }),
 
     beginTransition: (transition) => set({ transition }),
 

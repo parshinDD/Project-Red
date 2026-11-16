@@ -7,6 +7,17 @@
     transition: background-color 0.4s;
 }
 
+.shell[data-lag="on"],
+.shell[data-lag="on"] * {
+    cursor: progress !important;
+}
+
+.shell[data-lag="on"] *,
+.shell[data-lag="on"] *::before,
+.shell[data-lag="on"] *::after {
+    animation-play-state: paused !important;
+}
+
 .shell[data-glitch="on"] {
     animation: chroma var(--gdur, 500ms) ease-in-out both;
 }

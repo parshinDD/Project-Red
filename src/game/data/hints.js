@@ -46,6 +46,19 @@ export const HINTS = {
         "Each question is personal: a place, a habit, a plan.",
         "The place is not a dungeon and not a tavern. The habit is not gold and not a legendary weapon. The plan has been mentioned more than once.",
     ],
+    10: [
+        "Every letter of the message was changed in exactly the same way.",
+        "Think of the alphabet as a line: each letter moved along it by the same number of steps. Three walls, three steps.",
+        "Move every letter three steps back along the alphabet.",
+    ],
+    11: [
+        "There is no report about the wall: it is not a titan. Only three objects are described.",
+        "Match the reports by their signs first: steam, plates, crystal.",
+    ],
+    12: [
+        "The signal is Morse code. It can be replayed as often as you need.",
+        "You will need a Morse table. Your journal may already hold one.",
+    ],
 };
 
 export const hintCount = (level) => {

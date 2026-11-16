@@ -109,6 +109,7 @@ function Burst({ decay, dur }) {
 export default function DecayLayer() {
     const decay = useUiStore((st) => st.decay);
     const glitch = useUiStore((st) => st.glitch);
+    const lag = useUiStore((st) => st.lag);
 
     if (decay <= 0) return null;
 
@@ -116,6 +117,7 @@ export default function DecayLayer() {
         <div className={s.layer} style={{ "--d": decay }} aria-hidden="true">
             <i className={s.wear} />
             <Ghost />
+            {lag && <i key={lag.id} className={s.lagVeil} />}
             {glitch && (
                 <Burst key={glitch.id} decay={decay} dur={glitch.dur ?? 500} />
             )}

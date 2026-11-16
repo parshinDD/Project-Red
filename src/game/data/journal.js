@@ -1,3 +1,5 @@
+import { MORSE_TABLE_TEXT } from "./morse";
+
 export const JOURNAL = {
     agreement: {
         title: "PLAYER TEST AGREEMENT",
@@ -62,5 +64,9 @@ export const JOURNAL = {
     "developer-identity": {
         title: "DEVELOPER IDENTITY: REDACTED",
         body: "The developer requested this test. The developer requested this route. The developer requested that you reach the end. Identity: redacted.",
+    },
+    "morse-table": {
+        title: "INTERCEPT REFERENCE: MORSE",
+        body: MORSE_TABLE_TEXT,
     },
 };

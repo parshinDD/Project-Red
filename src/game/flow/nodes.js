@@ -133,9 +133,27 @@ export const NODES = [
         title: "ACT COMPLETE",
     },
 
-    level(10, 4, "military", "SCOUT CIPHER"),
-    level(11, 4, "tactical", "TITAN PROTOCOL"),
-    level(12, 4, "signal", "RED MAGIC SIGNAL"),
+    level(
+        10,
+        4,
+        "military",
+        "SCOUT CIPHER",
+        "Wrong answers cost nothing. Hints are free.",
+    ),
+    level(
+        11,
+        4,
+        "tactical",
+        "TITAN PROTOCOL",
+        "No HP is lost here. Hints are free.",
+    ),
+    level(
+        12,
+        4,
+        "signal",
+        "RED MAGIC SIGNAL",
+        "The signal can be replayed. Hints are free.",
+    ),
 
     {
         id: "final.assembly",

@@ -27,6 +27,7 @@ const EXTRAS = {
     7: () => grantJournal("character-origin"),
     8: () => grantJournal("things-worth-remembering"),
     9: () => grantJournal("developer-identity"),
+    10: () => grantJournal("morse-table"),
 };
 
 export function devSolve() {

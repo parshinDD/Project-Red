@@ -320,3 +320,23 @@
         display: none;
     }
 }
+
+.lagVeil {
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(0.7px) saturate(0.88);
+    background:
+        radial-gradient(
+            110% 90% at 50% 50%,
+            transparent 55%,
+            rgb(0 0 0 / calc(0.1 + var(--d) * 0.2)) 100%
+        ),
+        rgb(0 0 0 / 0.04);
+    animation: lagIn 0.06s ease-out both;
+}
+
+@keyframes lagIn {
+    from {
+        opacity: 0;
+    }
+}

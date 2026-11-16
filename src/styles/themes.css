@@ -92,3 +92,34 @@
     --c-fg: #f3e5cc;
     --c-dim: #b79c7a;
 }
+
+[data-theme="military"] {
+    --c-bg: #070a07;
+    --c-surface: #0d120c;
+    --c-surface-2: #131a11;
+    --c-edge: #243020;
+    --c-edge-strong: #3b4d34;
+    --c-fg: #e3ead9;
+    --c-dim: #96a58a;
+}
+
+[data-theme="tactical"] {
+    --c-bg: #05080c;
+    --c-surface: #0a1017;
+    --c-surface-2: #101822;
+    --c-edge: #1f2d3d;
+    --c-edge-strong: #33495f;
+    --c-fg: #e1e9f2;
+    --c-dim: #8ea0b4;
+}
+
+[data-theme="signal"] {
+    --c-bg: #060203;
+    --c-surface: #0d0507;
+    --c-surface-2: #14080b;
+    --c-edge: #34121a;
+    --c-edge-strong: #5a1c28;
+    --c-fg: #f4e4e6;
+    --c-dim: #b38d93;
+    --c-hi: #ff6b80;
+}

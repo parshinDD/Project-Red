@@ -21,7 +21,7 @@ import DevJump from "./DevJump";
 import DecayLayer from "./DecayLayer";
 import CrackLayer from "./CrackLayer";
 import { decayOf } from "@/game/flow/decay";
-import { useDecay } from "@/game/hooks/useDecay";
+import { useDecay, useLag } from "@/game/hooks/useDecay";
 import ShardVault from "./ShardVault";
 import TransitionConsole from "@/scenes/TransitionConsole";
 import CrtRoom from "@/crt/CrtRoom";
@@ -41,10 +41,12 @@ export default function GameShell() {
     const ledFlash = useUiStore((st) => st.ledFlash?.mode ?? null);
 
     const glitch = useUiStore((st) => st.glitch);
+    const lag = useUiStore((st) => st.lag);
 
     const node = getNode(nodeId);
     const decay = decayOf(node);
     useDecay(decay);
+    useLag(decay);
     const Scene = getScene(nodeId) ?? ComingSoon;
 
     const crt = node.surface === "crt";
@@ -105,6 +107,7 @@ export default function GameShell() {
             data-phase={phase}
             data-decay={decay > 0 ? decay : undefined}
             data-glitch={glitch ? "on" : undefined}
+            data-lag={lag ? "on" : undefined}
             style={glitch?.dur ? { "--gdur": `${glitch.dur}ms` } : undefined}
         >
             <TopBar node={node} />
