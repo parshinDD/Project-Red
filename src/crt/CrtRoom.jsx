@@ -89,6 +89,8 @@ const MOOD_LED = {
     online: "idle",
     alarm: "alert",
     final: "idle",
+    message: "idle",
+    dead: "off",
     blackout: "off",
 };
 let lastPowerOn = -1e9;

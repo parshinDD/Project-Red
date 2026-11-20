@@ -65,6 +65,10 @@ export const JOURNAL = {
         title: "DEVELOPER IDENTITY: REDACTED",
         body: "The developer requested this test. The developer requested this route. The developer requested that you reach the end. Identity: redacted.",
     },
+    "archive-key": {
+        title: "ARCHIVE KEY",
+        body: "Assembled from twelve recovered fragments: RED-TESTER-SF2.\nThis key opens nothing inside the build. Whatever it opens is not digital. Keep it.",
+    },
     "morse-table": {
         title: "INTERCEPT REFERENCE: MORSE",
         body: MORSE_TABLE_TEXT,

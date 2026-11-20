@@ -86,6 +86,52 @@
     --lamp: 0.4;
 }
 
+.room[data-mood="message"] {
+    --wall: 0.13;
+    --bloom: 0.46;
+    --desk: 0.19;
+    --haze: 0.25;
+    --sglow: 0.56;
+    --flick: 0.3;
+    --lamp: 0;
+}
+
+.room[data-mood="message"] .lampFlick {
+    animation: none;
+    opacity: 0;
+}
+
+.room[data-mood="dead"] {
+    --wall: 0.02;
+    --bloom: 0.02;
+    --desk: 0.02;
+    --haze: 0.05;
+    --sglow: 0;
+    --flick: 0;
+    --lamp: 0;
+}
+
+.room[data-mood="dead"] .lampFlick {
+    animation: none;
+    opacity: 0;
+}
+
+.room[data-mood="dead"] .wallDark,
+.room[data-mood="dead"] .wallLight,
+.room[data-mood="dead"] .lampWrap,
+.room[data-mood="dead"] .deskLight,
+.room[data-mood="dead"] .deskSheen,
+.room[data-mood="dead"] .deskReflect,
+.room[data-mood="dead"] .keyboard i,
+.room[data-mood="dead"] .haze,
+.room[data-mood="dead"] .dust,
+.room[data-mood="dead"] .bloom,
+.room[data-mood="dead"] .spill,
+.room[data-mood="dead"] .glassGlow,
+.room[data-mood="dead"] .flickWrap {
+    transition-duration: 0.28s;
+}
+
 .room[data-mood="blackout"] {
     --wall: 0;
     --bloom: 0.04;

@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { getAudioNodes, play } from "@/audio/audioEngine";
+import { getAudioNodes, play, setAudioDecay } from "@/audio/audioEngine";
 import { createDrone } from "@/audio/soundsAct4";
-import { fireGlitch, fireLag } from "@/game/hooks/useDecay";
+import { fireGlitch, setLagBlocked } from "@/game/hooks/useDecay";
 import { useUiStore } from "@/store/uiStore";
 import { COMMAND } from "./signal";
 import s from "./reboot.module.css";
@@ -47,21 +47,15 @@ export default function RebootSequence({ onDone }) {
     doneRef.current = onDone;
 
     useEffect(() => {
-        const html = document.documentElement;
-        const body = document.body;
-        const prevHtml = html.style.overflow;
-        const prevBody = html.style.overflow;
-        const prevTouch = body.style.touchAction;
-
-        html.style.overflow = "hidden";
-        body.style.overflow = "hidden";
-        body.style.touchAction = "none";
-
         const timers = [];
         const at = (ms, fn) => timers.push(setTimeout(fn, ms));
         const reduce = window.matchMedia?.(
             "(prefers-reduced-motion: reduce)",
         ).matches;
+
+        setAudioDecay(0);
+        setLagBlocked(true);
+
         const nodes = getAudioNodes();
         const drone = nodes ? createDrone(nodes) : null;
         const t0 = performance.now();
@@ -109,7 +103,7 @@ export default function RebootSequence({ onDone }) {
         TIMELINE.letters.forEach((ms, i) =>
             at(ms, () => {
                 setShown(i + 1);
-                play("thud");
+                play("keyTap");
             }),
         );
 
@@ -127,8 +121,6 @@ export default function RebootSequence({ onDone }) {
         };
 
         at(TIMELINE.swell, glitchLoop);
-        at(TIMELINE.swell + span * 0.35, () => fireLag(240));
-        at(TIMELINE.swell + span * 0.7, () => fireLag(300));
 
         let tl = TIMELINE.swell + 300;
 
@@ -199,9 +191,7 @@ export default function RebootSequence({ onDone }) {
             timers.forEach(clearTimeout);
             drone?.cut();
 
-            html.style.oveflow = prevHtml;
-            body.style.overflow = prevBody;
-            body.style.touchAction = prevTouch;
+            setLagBlocked(false);
         };
     }, []);
 
@@ -214,50 +204,48 @@ export default function RebootSequence({ onDone }) {
 
     return (
         <>
-            <div className={s.screen}>
-                <section
-                    ref={stageRef}
-                    className={s.stage}
-                    aria-label="Recovery command"
+            <section
+                ref={stageRef}
+                className={s.stage}
+                aria-label="Recovery command"
+            >
+                <header className={s.head}>
+                    <span className={s.live} aria-hidden="true" />
+                    <span>RECOVERY COMMAND REQUIRED</span>
+                </header>
+
+                <p className={s.status} aria-live="polite">
+                    {status}
+                </p>
+
+                <div
+                    className={s.word}
+                    aria-label={`Command: ${COMMAND.slice(0, shown)}`}
                 >
-                    <header className={s.head}>
-                        <span className={s.live} aria-hidden="true" />
-                        <span>RECOVERY COMMAND REQUIRED</span>
-                    </header>
+                    {Array.from(COMMAND).map((ch, i) => (
+                        <span
+                            key={i}
+                            className={s.cell}
+                            data-on={i < shown || undefined}
+                            data-next={i === shown || undefined}
+                        >
+                            {i < shown ? ch : ""}
+                        </span>
+                    ))}
+                </div>
 
-                    <p className={s.status} aria-live="polite">
-                        {status}
-                    </p>
-
-                    <div
-                        className={s.word}
-                        aria-label={`Command: ${COMMAND.slice(0, shown)}`}
-                    >
-                        {Array.from(COMMAND).map((ch, i) => (
-                            <span
-                                key={i}
-                                className={s.cell}
-                                data-on={i < shown || undefined}
-                                data-next={i === shown || undefined}
-                            >
-                                {i < shown ? ch : ""}
-                            </span>
-                        ))}
-                    </div>
-
-                    <div className={s.log} aria-hidden="true">
-                        {logs.map((l, i) => (
-                            <p
-                                key={`${i}:${l.t}`}
-                                data-noise={l.noise || undefined}
-                                data-hot={l.hot || undefined}
-                            >
-                                {l.t}
-                            </p>
-                        ))}
-                    </div>
-                </section>
-            </div>
+                <div className={s.log} aria-hidden="true">
+                    {logs.map((l, i) => (
+                        <p
+                            key={`${i}:${l.t}`}
+                            data-noise={l.noise || undefined}
+                            data-hot={l.hot || undefined}
+                        >
+                            {l.t}
+                        </p>
+                    ))}
+                </div>
+            </section>
 
             {createPortal(
                 <div

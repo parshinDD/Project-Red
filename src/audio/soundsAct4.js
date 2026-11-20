@@ -130,6 +130,41 @@ export const ACT4_SFX = {
         o.stop(t + 0.75);
     },
 
+    keyTap: (c, d) => {
+        const t = c.currentTime;
+        const buf = c.createBuffer(1, c.sampleRate * 0.04, c.sampleRate);
+        const data = buf.getChannelData(0);
+
+        for (let i = 0; i < data.length; i++)
+            data[i] = (Math.random() * 2 - 1) * (1 - i / data.length);
+
+        const src = c.createBufferSource();
+        const hp = c.createBiquadFilter();
+        const g = c.createGain();
+
+        src.buffer = buf;
+        hp.type = "highpass";
+        hp.frequency.value = 2400;
+        g.gain.setValueAtTime(0.16, t);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + 0.035);
+        src.connect(hp).connect(g).connect(d);
+        src.start(t);
+
+        const o = c.createOscillator();
+        const og = c.createGain();
+
+        o.type = "sine";
+        o.frequency.setValueAtTime(150, t);
+        o.frequency.exponentialRampToValueAtTime(64, t + 0.08);
+
+        og.gain.setValueAtTime(0.12, t);
+        og.gain.exponentialRampToValueAtTime(0.0001, t + 0.1);
+
+        o.connect(og).connect(d);
+        o.start(t);
+        o.stop(t + 0.12);
+    },
+
     bootChime: (c, d) => {
         const t = c.currentTime;
 

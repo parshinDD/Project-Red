@@ -140,6 +140,11 @@ export const useGameStore = create(
             setFlag: (key, value = true) =>
                 set((s) => ({ flags: { ...s.flags, [key]: value } })),
 
+            setFinale: (finale) => set({ finale }),
+
+            completeGame: () =>
+                set({ finale: "COMPLETE", phase: "GAME_COMPLETE" }),
+
             setMuted: (muted) => set({ muted }),
 
             resetAll: () => set({ ...initialData(), muted: get().muted }),

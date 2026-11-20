@@ -163,6 +163,7 @@ export const NODES = [
         surface: "crt",
         mood: "alarm",
         title: "ASSEMBLY",
+        tip: "Twelve fragments. Twelve positions. One key.",
     },
     {
         id: "final.verify",

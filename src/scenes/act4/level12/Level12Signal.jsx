@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useSceneApi } from "@/game/hooks/useSceneApi";
+import { navigate } from "@/game/flow/navigator";
 import { play } from "@/audio/audioEngine";
 import { morseDuration } from "@/audio/soundsAct4";
 import { TerminalWindow } from "@/ui/Terminal";
@@ -43,7 +44,7 @@ const ACCEPTED = [
 const BARS = 28;
 
 export default function Level12Signal() {
-    const { completed, complete, next } = useSceneApi(12);
+    const { completed, complete } = useSceneApi(12);
 
     const [stage, setStage] = useState(completed ? "done" : "signal");
     const [playing, setPlaying] = useState(false);
@@ -89,15 +90,15 @@ export default function Level12Signal() {
         }
     };
 
-    const finish = () => {
+    const finishRecovery = () => {
         complete();
-        next();
+        navigate("final.assembly");
     };
 
     return (
         <LevelFrame objective="Recover the transmitted word.">
             <div className={s.layout}>
-                {stage === "signal" && (
+                {stage === "signal" && !completed && (
                     <>
                         <section
                             className={s.panel}
@@ -205,7 +206,7 @@ export default function Level12Signal() {
                             <div className={s.actions}>
                                 <TerminalButton
                                     variant="primary"
-                                    onClick={() => setStage("command")}
+                                    onClick={() => setStage("reboot")}
                                 >
                                     Continue
                                 </TerminalButton>
@@ -214,14 +215,16 @@ export default function Level12Signal() {
                     </>
                 )}
 
-                {stage === "command" && <RebootSequence onDone={finish} />}
+                {stage === "reboot" && (
+                    <RebootSequence onDone={finishRecovery} />
+                )}
 
-                {stage === "done" && (
+                {(stage === "done" || completed) && (
                     <CompletePanel
                         title="Recovery"
                         lines={ACCEPTED}
                         shard={12}
-                        onContinue={next}
+                        onContinue={() => navigate("final.assembly")}
                     />
                 )}
             </div>

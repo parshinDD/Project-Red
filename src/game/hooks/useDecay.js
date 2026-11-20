@@ -5,14 +5,19 @@ import { duckAudio, play, setAudioDecay } from "@/audio/audioEngine";
 
 let seq = 0;
 let lagSeq = 0;
+let lagBlocked = false;
 
 export const LAG_FROM = 0.4;
 export const LAG_INPUT_FROM = 0.72;
 
+export const setLagBlocked = (v) => {
+    lagBlocked = v;
+};
+
 export function fireLag(ms) {
     const ui = useUiStore.getState();
 
-    if (ui.decay < LAG_FROM || ui.lag) return 0;
+    if (lagBlocked || ui.decay < LAG_FROM || ui.lag) return 0;
 
     const dur =
         ms ?? Math.round(140 + 520 * ui.decay * (0.5 + Math.random() * 0.5));

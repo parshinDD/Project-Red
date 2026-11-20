@@ -574,6 +574,19 @@
     background: rgb(0 0 0 / 0.9);
 }
 
+.shell[data-phase="GAME_COMPLETE"] .backdrop {
+    z-index: 100000;
+}
+
+.shell[data-phase="GAME_COMPLETE"] .drawer,
+.shell[data-phase="GAME_COMPLETE"] .modal {
+    z-index: 100001;
+}
+
+.shell[data-phase="GAME_COMPLETE"] .toasts {
+    z-index: 100002;
+}
+
 .gameoverTitle {
     font-size: clamp(2.5rem, 7vw, 4.5rem);
     line-height: var(--lh-display);

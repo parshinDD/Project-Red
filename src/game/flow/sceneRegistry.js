@@ -21,6 +21,9 @@ const scenes = {
     "act.1.complete": lazy(() => import("@/scenes/ActComplete")),
     "act.2.complete": lazy(() => import("@/scenes/ActComplete")),
     "act.3.complete": lazy(() => import("@/scenes/ActComplete")),
+    "final.assembly": lazy(() => import("@/scenes/final/FinalAssembly")),
+    "final.verify": lazy(() => import("@/scenes/final/FinalVerify")),
+    "final.report": lazy(() => import("@/scenes/final/FinalReport")),
 };
 
 export const getScene = (nodeId) => scenes[nodeId] ?? null;

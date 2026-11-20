@@ -1,0 +1,42 @@
+.gate {
+    height: 100dvh;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: var(--sp-5);
+    padding: var(--sp-5);
+    background:
+        radial-gradient(
+            120% 90% at 50% 0%,
+            rgb(144 0 32 / 0.14),
+            transparent 70%
+        ),
+        #030203;
+    color: var(--c-fg);
+    font-family: var(--font-mono);
+}
+
+.led {
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 50%;
+    background: var(--red-400);
+    box-shadow: 0 0 12px 2px rgb(238 86 109 / 0.55);
+    animation: breathe 2.4s ease-in-out infinite;
+}
+
+@keyframes breathe {
+    50% {
+        opacity: 0.35;
+    }
+}
+
+.win {
+    width: min(30rem, 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .led {
+        animation: none;
+    }
+}

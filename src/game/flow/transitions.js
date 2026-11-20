@@ -39,6 +39,20 @@ const SCRIPTS = {
         out("allocating memory", "OK"),
         cmd("exec welcome.sh", 350),
     ],
+    "final.assembly>final.verify": () => [
+        cmd("cd /recovery/archive", 450),
+        cmd("verify --fragments 12/12"),
+        bar(1.0),
+        out("integrity check", "PASSED"),
+        cmd("exec archive_check.sh", 350),
+    ],
+    "final.verify>final.report": () => [
+        cmd("cd /archive", 450),
+        cmd("unlock --with recovered-key"),
+        bar(0.9),
+        out("final_message.dat", "READY"),
+        cmd("exec final_report.sh", 350),
+    ],
 };
 
 export function consoleScript(from, to, ctx = {}) {
