@@ -49,27 +49,27 @@ export function keySlots(letters) {
 }
 
 export const FINAL_LINES = [
-    { text: "I could have just given you the package.", pause: 900 },
+    { text: "Можно было просто отдать тебе посылку.", pause: 900 },
     {
-        text: "I could have put everything into a box and called it a gift.",
+        text: "Можно было сложить все в коробку и назвать это подарком.",
         pause: 900,
     },
     {
-        text: "Instead, I built an entire game and made you work for it.",
+        text: "Вместо этого появилась целая игра - и потрудиться пришлось тебе.",
         pause: 900,
     },
     {
-        text: "In my defense, the original plan was considerably shorter.",
+        text: "В свое оправдание скажу: изначальный план был заметно короче.",
         pause: 1250,
     },
-    { text: "Thank you for playing.", pause: 1500, beat: "thanks" },
+    { text: "Спасибо за игру.", pause: 1500, beat: "thanks" },
     {
-        text: "You were the only player this build was ever meant for.",
+        text: "Ты - единственный игрок, для которого эта сборка когда-либо предназначалась.",
         pause: 1600,
         beat: "only",
     },
-    { text: "END OF TEST.", pause: 1100, tone: "system" },
-    { text: "There is no next level.", pause: 2400, tone: "system" },
+    { text: "КОНЕЦ ТЕСТА.", pause: 1100, tone: "system" },
+    { text: "Следующего уровня нет.", pause: 2400, tone: "system" },
 ];
 
-export const PACKAGE_LINE = "There is, however, a package waiting for you.";
+export const PACKAGE_LINE = "Осталось найти посылку";

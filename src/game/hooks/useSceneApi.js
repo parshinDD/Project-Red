@@ -25,7 +25,7 @@ export function useSceneApi(level) {
         useUiStore
             .getState()
             .pushMessage(
-                hp > 0 ? `-1 HP — ${hp} remaining` : "HP DEPLETED",
+                hp > 0 ? `-1 HP - осталось: ${hp}` : "HP ИСЧЕРПАНЫ",
                 "err",
             );
         play("hit");

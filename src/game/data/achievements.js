@@ -1,36 +1,36 @@
 export const ACHIEVEMENTS = {
     "bug-hunter": {
-        name: "Bug Hunter",
-        desc: "Find all five bugs on level 1.",
+        name: "Охотник за багами",
+        desc: "Найти все пять багов на уровне 1.",
     },
     "perfect-recall": {
-        name: "Perfect Recall",
-        desc: "Complete the memory test without a single mistake.",
+        name: "Идеальная память",
+        desc: "Пройти тест памяти без единой ошибки.",
     },
     "texture-not-found": {
-        name: "Texture Not Found",
-        desc: "Spot the red symbol on the glass bridge.",
+        name: "Текстура не найдена",
+        desc: "Заметить красный символ на стеклянном мосту.",
     },
     "familiar-collector": {
-        name: "Familiar Collector",
-        desc: "Restore every familiar record.",
+        name: "Коллекционер фамильяров",
+        desc: "Восстановить все записи о фамильярах.",
     },
     "read-the-fine-print": {
-        name: "Read the Fine Print",
-        desc: "Find the hidden clause in the agreement.",
+        name: "Внимание к мелкому шрифту",
+        desc: "Найти скрытый пункт в соглашении.",
         hidden: true,
     },
     "backdoor-tourist": {
-        name: "Backdoor Tourist",
-        desc: "Find the extra record in the interface.",
+        name: "Турист по черным ходам",
+        desc: "Найти лишнюю запись в интерфейсе.",
         hidden: true,
     },
     "clean-run": {
-        name: "Clean Run",
-        desc: "Complete an act without losing HP.",
+        name: "Чистое прохождение",
+        desc: "Пройти акт, не потеряв ни одного HP.",
     },
     "the-only-player": {
-        name: "The Only Player",
-        desc: "Complete the entire build.",
+        name: "Единственный игрок",
+        desc: "Пройти всю сборку до конца.",
     },
 };

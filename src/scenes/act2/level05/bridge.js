@@ -6,37 +6,37 @@ const lefts = (p) => p.filter((x) => x === "L").length;
 export const RULES = [
     {
         id: "p2-not-left",
-        text: "Panel 2 cannot be LEFT.",
+        text: "Панель 2 не может быть левой.",
         panels: [2],
         ok: (p) => p[1] !== "L",
     },
     {
         id: "p2-eq-p3",
-        text: "Panel 2 must match Panel 3.",
+        text: "Панель 2 должна совпадать с панелью 3.",
         panels: [2, 3],
         ok: (p) => p[1] === p[2],
     },
     {
         id: "p1-ne-p2",
-        text: "Panel 1 must differ from Panel 2.",
+        text: "Панель 1 должна отличаться от панели 2.",
         panels: [1, 2],
         ok: (p) => p[0] !== p[1],
     },
     {
         id: "three-left",
-        text: "Exactly three panels are LEFT.",
+        text: "Ровно три панели - левые.",
         panels: [1, 2, 3, 4, 5, 6],
         ok: (p) => lefts(p) === 3,
     },
     {
         id: "no-adjacent",
-        text: "No two LEFT panels are adjacent.",
+        text: "Никакие две левые панели не стоят рядом.",
         panels: [1, 2, 3, 4, 5, 6],
         ok: (p) => p.every((x, i) => !(x === "L" && p[i + 1] === "L")),
     },
     {
         id: "p4-eq-p6",
-        text: "Panel 4 must match Panel 6.",
+        text: "Панель 4 должна совпадать с панелью 6.",
         panels: [4, 6],
         ok: (p) => p[3] === p[5],
     },

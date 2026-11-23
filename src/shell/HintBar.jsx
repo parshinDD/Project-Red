@@ -26,7 +26,7 @@ export default function HintBar({ node }) {
                     aria-keyshortcuts="H"
                 >
                     <Glitchable swaps={swapsFor("hint")} skinKey="hint">
-                        Hint
+                        Подсказка
                     </Glitchable>{" "}
                     [H]{used > 0 ? ` · ${used}` : ""}
                 </TerminalButton>
@@ -43,7 +43,7 @@ export default function HintBar({ node }) {
                     aria-keyshortcuts="Escape"
                 >
                     <Glitchable swaps={swapsFor("menu")} skinKey="menu">
-                        Menu
+                        Меню
                     </Glitchable>{" "}
                     [Esc]
                 </TerminalButton>

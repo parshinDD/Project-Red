@@ -17,11 +17,11 @@ export const TIMELINE = {
 };
 
 const BOOT = [
-    "SYSTEM RESTART",
-    "MEMORY CHECK .......... OK",
-    "FRAGMENTS ............. 12 / 12",
-    "BUILD_02-12 ........... LOADED",
-    "ALL SYSTEMS NOMINAL",
+    "ПЕРЕЗАПУСК СИСТЕМЫ",
+    "ПРОВЕРКА ПАМЯТИ .......... OK",
+    "ФРАГМЕНТЫ ............. 12 / 12",
+    "BUILD_02-12 ........... ЗАГРУЖЕН",
+    "ВСЕ СИСТЕМЫ В НОРМЕ",
 ];
 
 const pad2 = (n) => String(n).padStart(2, "0");
@@ -131,7 +131,7 @@ export default function RebootSequence({ onDone }) {
                 setLogs((cur) =>
                     [
                         ...cur,
-                        { t: `VERIFY FRAGMENT ${pad2(n)} / 12 ........ OK` },
+                        { t: `ПРОВЕРКА ФРАГМЕНТА ${pad2(n)} / 12 ........ OK` },
                     ].slice(-16),
                 ),
             );
@@ -140,9 +140,9 @@ export default function RebootSequence({ onDone }) {
         }
 
         [
-            ["ALL REQUIRED FRAGMENTS VERIFIED", false],
+            ["ВСЕ НЕОБХОДИМЫЕ ФРАГМЕНТЫ ПРОВЕРЕНЫ", false],
             ["BUILD_02-12", false],
-            ["FINAL RECOVERY READY", true],
+            ["ФИНАЛЬНОЕ ВОССТАНОВЛЕНИЕ ГОТОВО", true],
         ].forEach(([text, hot]) => {
             tl += 320;
             at(tl, () =>
@@ -197,21 +197,21 @@ export default function RebootSequence({ onDone }) {
 
     const status =
         shown === 0
-            ? "AWAITING COMMAND"
+            ? "ОЖИДАНИЕ КОМАНДЫ"
             : shown < COMMAND.length
-              ? "RECEIVING"
-              : "COMMAND RECEIVED";
+              ? "ПРИЕМ"
+              : "КОМАНДА ПОЛУЧЕНА";
 
     return (
         <>
             <section
                 ref={stageRef}
                 className={s.stage}
-                aria-label="Recovery command"
+                aria-label="Команда восстановления"
             >
                 <header className={s.head}>
                     <span className={s.live} aria-hidden="true" />
-                    <span>RECOVERY COMMAND REQUIRED</span>
+                    <span>ТРЕБУЕТСЯ КОМАНДА ВОССТАНОВЛЕНИЯ</span>
                 </header>
 
                 <p className={s.status} aria-live="polite">
@@ -220,7 +220,7 @@ export default function RebootSequence({ onDone }) {
 
                 <div
                     className={s.word}
-                    aria-label={`Command: ${COMMAND.slice(0, shown)}`}
+                    aria-label={`Команда: ${COMMAND.slice(0, shown)}`}
                 >
                     {Array.from(COMMAND).map((ch, i) => (
                         <span

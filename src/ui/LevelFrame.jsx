@@ -18,7 +18,7 @@ export default function LevelFrame({ objective, children }) {
                             swaps={swapsFor("objective")}
                             skinKey="objective"
                         >
-                            Objective
+                            Задача
                         </Glitchable>
                         {objective}
                     </p>

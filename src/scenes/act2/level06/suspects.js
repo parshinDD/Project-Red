@@ -1,11 +1,11 @@
 export const SUSPECTS = [
-    { id: "A", says: "B is lying.", holds: (liar) => liar.B },
-    { id: "B", says: "C is lying.", holds: (liar) => liar.C },
-    { id: "C", says: "D is lying.", holds: (liar) => liar.D },
-    { id: "D", says: "E is lying.", holds: (liar) => liar.E },
+    { id: "A", says: "B лжет.", holds: (liar) => liar.B },
+    { id: "B", says: "C лжет.", holds: (liar) => liar.C },
+    { id: "C", says: "D лжет.", holds: (liar) => liar.D },
+    { id: "D", says: "E лжет.", holds: (liar) => liar.E },
     {
         id: "E",
-        says: "A and B are both liars.",
+        says: "A и B оба лжецы.",
         holds: (liar) => liar.A && liar.B,
     },
 ];

@@ -33,7 +33,7 @@ const WALL_TEXT = [
         y: 8,
         size: 1.35,
         rot: -4,
-        text: "FIX LAMP - TODO",
+        text: "ПОЧИНИТЬ ЛАМПУ - TODO",
     },
     {
         kind: "pencil",
@@ -41,7 +41,7 @@ const WALL_TEXT = [
         y: 30,
         size: 1.05,
         rot: -2,
-        text: "HAVE YOU TRIED\nTURNING IT OFF\nAND ON AGAIN?",
+        text: "ПОПРОБУЙ\nВЫКЛЮЧИТЬ\nИ ВКЛЮЧИТЬ",
     },
     {
         kind: "chalk",
@@ -49,7 +49,7 @@ const WALL_TEXT = [
         y: 62,
         size: 1.2,
         rot: 3,
-        text: "THE CAT WAS\nHERE FIRST",
+        text: "КОШКА БЫЛА\nЗДЕСЬ РАНЬШЕ",
     },
     {
         kind: "pencil",
@@ -57,16 +57,16 @@ const WALL_TEXT = [
         y: 78,
         size: 0.85,
         rot: -1.5,
-        text: "NO ONE REMEMBERS WHO\nLOGGED IN FIRST",
+        text: "НИКТО НЕ ПОМНИТ, КТО\nВОШЕЛ В СИСТЕМУ ПЕРВЫМ",
     },
-    { kind: "carved", x: 80.5, y: 12, size: 2.1, rot: 1.5, text: "NOT A BUG" },
+    { kind: "carved", x: 80.5, y: 12, size: 2.1, rot: 1.5, text: "НЕ БАГ" },
     {
         kind: "carved",
         x: 82,
         y: 19.5,
         size: 0.9,
         rot: 1.5,
-        text: "(A FEATURE)",
+        text: "(А ФИЧА)",
     },
     { kind: "carved", x: 80, y: 68, size: 2.6, rot: -2, text: "02-12" },
     {
@@ -75,7 +75,7 @@ const WALL_TEXT = [
         y: 79,
         size: 0.85,
         rot: 1,
-        text: "build number: not random",
+        text: "номер сборки: не случаен",
     },
 ];
 const CRACKS = wallCracks();

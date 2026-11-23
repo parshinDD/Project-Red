@@ -15,7 +15,7 @@ export function completeLevelEffects(level) {
 
     play("shard");
     ui.pushMessage(
-        `SHARD ${pad2(level)} RECOVERED — ${GEMS[level]?.name ?? ""}`.trim(),
+        `ОСКОЛОК ${pad2(level)} ВОССТАНОВЛЕН - ${GEMS[level]?.name ?? ""}`.trim(),
         "hint",
     );
 

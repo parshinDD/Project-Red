@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import App from "./App";
 import { initAudio, preloadAudio, setMuted } from "@/audio/audioEngine";
 import { useGameStore } from "@/store/gameStore";
+import "./styles/fonts.css";
 import "./styles/tokens.css";
 import "./styles/themes.css";
 import "./styles/base.css";

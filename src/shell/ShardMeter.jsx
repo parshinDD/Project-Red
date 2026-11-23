@@ -21,7 +21,7 @@ export default function ShardMeter() {
             onClick={toggle}
             aria-expanded={open}
             aria-keyshortcuts="I"
-            aria-label={`Shard box, ${have.length} of ${TOTAL_SHARDS} recovered`}
+            aria-label={`Хранилище осколков, восстановлено: ${have.length} из ${TOTAL_SHARDS}`}
             data-shard-target
         >
             <span

@@ -32,7 +32,7 @@ function Panel() {
             className={v.panel}
             role="dialog"
             aria-modal="true"
-            aria-label="Shard box"
+            aria-label="Хранилище осколков"
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 14 }}
@@ -40,14 +40,14 @@ function Panel() {
         >
             <div className={v.head}>
                 <div>
-                    <h2 className={v.title}>Recovery module</h2>
+                    <h2 className={v.title}>Модуль восстановления</h2>
                     <p className={v.count}>
                         {pad2(shards.filter((n) => n !== drop).length)}/
-                        {TOTAL_SHARDS} recovered
+                        {TOTAL_SHARDS} восстановлено
                     </p>
                 </div>
                 <TerminalButton size="small" onClick={close}>
-                    Close [I]
+                    Закрыть [I]
                 </TerminalButton>
             </div>
 
@@ -61,23 +61,26 @@ function Panel() {
 
             <div className={v.detail} aria-live="polite">
                 {sel == null ? (
-                    <p className={v.detailText}>Select a seat to inspect it.</p>
+                    <p className={v.detailText}>
+                        Выберите гнездо, чтобы осмотреть его.
+                    </p>
                 ) : has(sel) ? (
                     <>
                         <p className={cx(v.detailTitle, v.got)}>
-                            Shard {pad2(sel)} - {GEMS[sel].name}
+                            Осколок {pad2(sel)} - {GEMS[sel].name}
                         </p>
                         <p className={v.detailText}>
-                            Recovered by clearing level {pad2(sel)}.
+                            Получен за прохождение уровня {pad2(sel)}.
                         </p>
                     </>
                 ) : (
                     <>
                         <p className={v.detailTitle}>
-                            Seat {pad2(sel)} - empty
+                            Гнездо {pad2(sel)} - пусто
                         </p>
                         <p className={v.detailText}>
-                            Clear level {pad2(sel)} to place the stone here.
+                            Пройдите уровень {pad2(sel)}, чтобы положить камень
+                            сюда.
                         </p>
                     </>
                 )}

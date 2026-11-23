@@ -11,12 +11,12 @@ import { SUSPECTS, ANSWER, firstContradiction } from "./suspects";
 import s from "./level06.module.css";
 
 const COMPLETE_LINES = [
-    { text: "ALL LIARS IDENTIFIED", tone: "title" },
-    { text: "REPORT ACCEPTED" },
+    { text: "ВСЕ ЛЖЕЦЫ ВЫЯВЛЕНЫ", tone: "title" },
+    { text: "ОТЧЕТ ПРИНЯТ" },
     { text: "", delay: 700 },
-    { text: "SYSTEM STATEMENT:", tone: "dim", delay: 600 },
+    { text: "ЗАЯВЛЕНИЕ СИСТЕМЫ:", tone: "dim", delay: 600 },
     {
-        text: "I HAVE NOT DELETED ANY RECORDS.",
+        text: "Я НЕ УДАЛЯЛ НИКАКИХ ЗАПИСЕЙ.",
         tone: "err",
         glitch: true,
         delay: 600,
@@ -48,7 +48,7 @@ export default function Level06LiarVote() {
             setFlag(bad.id);
             play("error");
             say(
-                `REPORT REJECTED: Suspect ${bad.id}'s statement does not match the marked set. No HP is lost.`,
+                `ОТЧЕТ ОТКЛОНЕН: показание подозреваемого ${bad.id} не согласуется с отмеченным набором. HP не списывается.`,
                 "err",
             );
 
@@ -64,9 +64,9 @@ export default function Level06LiarVote() {
     const shown = solved ? ANSWER : marked;
 
     return (
-        <LevelFrame objective="Mark every liar. A liar's statement is always false. Everyone else tells the truth.">
+        <LevelFrame objective="Отметьте каждого лжеца. Высказывание лжеца всегда ложно. Все остальные говорят правду.">
             <div className={s.layout}>
-                <section className={s.folder} aria-label="Suspect files">
+                <section className={s.folder} aria-label="Досье подозреваемых">
                     <ul className={s.files}>
                         {SUSPECTS.map((p) => {
                             const liar = shown.includes(p.id);
@@ -80,7 +80,7 @@ export default function Level06LiarVote() {
                                     )}
                                 >
                                     <header className={s.tab}>
-                                        <span>FILE</span>
+                                        <span>ДЕЛО</span>
                                         <b className={s.id}>{p.id}</b>
                                     </header>
                                     <div className={s.photo} aria-hidden="true">
@@ -88,9 +88,9 @@ export default function Level06LiarVote() {
                                     </div>
                                     <blockquote className={s.says}>
                                         <span className={s.label}>
-                                            Statement
+                                            Показание
                                         </span>
-                                        “{p.says}”
+                                        "{p.says}"
                                     </blockquote>
                                     <button
                                         type="button"
@@ -100,14 +100,14 @@ export default function Level06LiarVote() {
                                         onClick={() => toggle(p.id)}
                                     >
                                         {liar
-                                            ? "Marked as liar"
-                                            : "Mark as liar"}
+                                            ? "Отмечен как лжец"
+                                            : "Отметить как лжеца"}
                                     </button>
                                     <span
                                         className={s.stamp}
                                         aria-hidden="true"
                                     >
-                                        LIAR
+                                        ЛЖЕЦ
                                     </span>
                                 </li>
                             );
@@ -118,26 +118,26 @@ export default function Level06LiarVote() {
                 <div className={s.info}>
                     {solved ? (
                         <CompletePanel
-                            title="Report"
+                            title="Отчет"
                             lines={COMPLETE_LINES}
                             shard={6}
                             onContinue={next}
                         />
                     ) : (
                         <>
-                            <TerminalWindow title="Vote report">
+                            <TerminalWindow title="Отчет голосования">
                                 <p className={s.text}>
-                                    Marked as liars:{" "}
+                                    Отмечены как лжецы:{" "}
                                     <b className={s.count}>
                                         {marked.length
                                             ? [...marked].sort().join(", ")
-                                            : "none"}
+                                            : "никто"}
                                     </b>
                                 </p>
                                 <p className={s.text}>
                                     {flag
-                                        ? `REPORT REJECTED - the statement of suspect ${flag} does not match the marked set.`
-                                        : "Wrong reports cost nothing. Hints are free."}
+                                        ? `ОТЧЕТ ОТКЛОНЕН - показание подозреваемого ${flag} не согласуется с отмеченным набором.`
+                                        : "Ошибочные отчеты ничего не стоят."}
                                 </p>
                             </TerminalWindow>
                             <div className={s.actions}>
@@ -147,7 +147,7 @@ export default function Level06LiarVote() {
                                     disabled={marked.length === 0}
                                     sound={null}
                                 >
-                                    File report
+                                    Подать отчет
                                 </TerminalButton>
                                 <TerminalButton
                                     onClick={() => {
@@ -157,7 +157,7 @@ export default function Level06LiarVote() {
                                     }}
                                     disabled={marked.length === 0}
                                 >
-                                    Clear
+                                    Очистить
                                 </TerminalButton>
                             </div>
                         </>

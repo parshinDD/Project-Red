@@ -9,27 +9,26 @@ import { FRAGMENTS } from "./data";
 import s from "./final.module.css";
 
 const LINES = [
-    { k: "text", text: "BUILD COMPLETED", tone: "title", delay: 520 },
+    { k: "text", text: "СБОРКА ЗАВЕРШЕНА", tone: "title", delay: 520 },
     { k: "gap", delay: 100 },
-    { k: "leader", label: "Integrity check", status: "PASSED", delay: 500 },
     {
         k: "leader",
-        label: "All required fragments",
-        status: "RESTORED",
+        label: "Проверка целостности",
+        status: "ПРОЙДЕНА",
+        delay: 500,
+    },
+    {
+        k: "leader",
+        label: "Все необходимые фрагменты",
+        status: "ВОССТАНОВЛЕНЫ",
         delay: 440,
     },
     { k: "gap", delay: 120 },
-    { k: "text", text: "One final operation remains.", delay: 560 },
+    { k: "text", text: "Осталась одна финальная операция.", delay: 560 },
     {
         k: "text",
-        text: "The package cannot be delivered through this interface.",
+        text: "Посылку нельзя доставить через этот интерфейс.",
         delay: 620,
-    },
-    {
-        k: "text",
-        text: "Please locate the physical box.",
-        tone: "hint",
-        delay: 760,
     },
 ];
 
@@ -47,7 +46,7 @@ export default function FinalVerify() {
 
     return (
         <div className={s.screen}>
-            <TerminalWindow title="Archive check">
+            <TerminalWindow title="Проверка архива">
                 <TypedBlock
                     items={LINES}
                     onItem={(i) => {
@@ -59,10 +58,10 @@ export default function FinalVerify() {
                 {stage >= 1 && (
                     <section
                         className={s.vaultStrip}
-                        aria-label="All twelve fragments restored"
+                        aria-label="Все двенадцать фрагментов восстановлены"
                     >
                         <p className={s.manifestTitle}>
-                            ALL FRAGMENTS RESTORED
+                            ВСЕ ФРАГМЕНТЫ ВОССТАНОВЛЕНЫ
                         </p>
                         <ul className={s.strip}>
                             {FRAGMENTS.map((f, i) => (

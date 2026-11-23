@@ -55,7 +55,7 @@ const LETTERS = Object.keys(MORSE).filter((k) => /[A-Z]/.test(k));
 const DIGITS = Object.keys(MORSE).filter((k) => /[0-9]/.test(k));
 
 export const MORSE_TABLE_TEXT = [
-    "Dot: a short signal. Dash: a long signal, three times longer. A pause separates the letters.",
+    "Точка - короткий сигнал. Тире - длинный сигнал, в три раза длиннее. Пауза разделяет буквы.",
     rows(LETTERS, 4),
     rows(DIGITS, 5),
 ].join("\n\n");

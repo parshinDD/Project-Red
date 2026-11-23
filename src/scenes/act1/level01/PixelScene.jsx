@@ -10,7 +10,7 @@ export default function PixelScene({ found, pings, cursor }) {
             viewBox={`0 0 ${SCENE_W} ${SCENE_H}`}
             shapeRendering="crispEdges"
             role="img"
-            aria-label="A small pixel-art game screen with a house, a tree, a hero and an inventory bar"
+            aria-label="Небольшой пиксельный игровой экран: дом, дерево, герой и панель инвентаря"
         >
             <rect width={SCENE_W} height={SCENE_H} fill="#0f1522" />
             {[
@@ -96,24 +96,24 @@ export default function PixelScene({ found, pings, cursor }) {
             </g>
 
             <text className={s.debug} x="214" y="50">
-                DEBUG MODE ON
+                ОТЛАДКА ВКЛ
             </text>
 
             <rect width={SCENE_W} height="18" fill="#0b0e15" />
             <rect y="18" width={SCENE_W} height="1" fill="#273044" />
             <PixelSprite rows={SPRITES.heart} x={6} y={5} />
             <text className={s.hud} x="9" y="12">
-                LIVES x3
+                ЖИЗНИ x3
             </text>
             <PixelSprite rows={SPRITES.coin} x={70} y={6} />
             <text className={s.hud} x="80" y="12">
                 x07
             </text>
             <text className={s.hud} x="120" y="12">
-                WORLD 1-1
+                МИР 1-1
             </text>
             <text className={s.hud} x="246" y="12">
-                TIME 2B4
+                ВРЕМЯ 2B4
             </text>
 
             <rect y="160" width={SCENE_W} height="20" fill="#0b0e15" />

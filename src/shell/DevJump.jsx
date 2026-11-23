@@ -8,10 +8,10 @@ const groups = [...new Set(NODES.map((n) => n.act))].map((act) => ({
     act,
     title:
         act === 0
-            ? "PROLOGUE"
+            ? "ПРОЛОГ"
             : act === 5
-              ? "FINAL"
-              : `ACT ${ACTS[act].roman} · ${ACTS[act].name}`,
+              ? "ФИНАЛ"
+              : `АКТ ${ACTS[act].roman} · ${ACTS[act].name}`,
     nodes: NODES.filter((n) => n.act === act),
 }));
 
@@ -59,7 +59,7 @@ function Panel() {
                 <div
                     className={s.panel}
                     role="dialog"
-                    aria-label="Dev: jump to any screen"
+                    aria-label="Dev: переход к любому экрану"
                 >
                     <div className={s.opts}>
                         <label>
@@ -70,7 +70,7 @@ function Panel() {
                                     setCompleteBefore(e.target.checked)
                                 }
                             />{" "}
-                            mark earlier levels solved
+                            отметить предыдущие уровни решенными
                         </label>
                         <label>
                             <input
@@ -78,7 +78,7 @@ function Panel() {
                                 checked={restoreHp}
                                 onChange={(e) => setRestoreHp(e.target.checked)}
                             />{" "}
-                            restore HP
+                            восстановить HP
                         </label>
                         <label>
                             <input
@@ -86,7 +86,7 @@ function Panel() {
                                 checked={instant}
                                 onChange={(e) => setInstant(e.target.checked)}
                             />{" "}
-                            no transition
+                            без перехода
                         </label>
                     </div>
                     <div className={s.list}>
@@ -118,7 +118,7 @@ function Panel() {
                         ))}
                     </div>
                     <p className={s.note}>
-                        Alt+Shift+S solves the current level.
+                        Alt+Shift+S решает текущий уровень.
                     </p>
                 </div>
             )}

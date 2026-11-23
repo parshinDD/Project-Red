@@ -11,15 +11,15 @@ import { ENTRIES, OBSERVATION, matches } from "./familiars";
 import s from "./level08.module.css";
 
 const COMPLETE_LINES = [
-    { text: "FAMILIAR DATA RESTORED", tone: "title" },
+    { text: "ДАННЫЕ ФАМИЛЬЯРОВ ВОССТАНОВЛЕНЫ", tone: "title" },
     { text: "" },
-    { text: "Entry 001: ELSA" },
-    { text: "Entry 002: EMI" },
-    { text: "Behavioral classification: VERIFIED", delay: 400 },
+    { text: "Запись 001: ELSA" },
+    { text: "Запись 002: EMI" },
+    { text: "Поведенческая классификация: ПОДТВЕРЖДЕНА", delay: 400 },
     { text: "", delay: 500 },
-    { text: "Archive entry unlocked:", tone: "dim", delay: 400 },
+    { text: "Открыта запись архива:", tone: "dim", delay: 400 },
     {
-        text: "THE THINGS WORTH REMEMBERING",
+        text: "ТО, ЧТО СТОИТ ПОМНИТЬ",
         tone: "err",
         glitch: true,
         delay: 500,
@@ -65,13 +65,13 @@ export default function Level08Familiars() {
             setNote("");
             setStage("observe");
             say(
-                "Entries restored. An additional entry has been unlocked.",
+                "Записи восстановлены. Открыта дополнительная запись.",
                 "dim",
             );
         } else {
             play("error");
             setNote(
-                "RESTORATION FAILED: at least one entry is matched to the wrong familiar.",
+                "СБОЙ ВОССТАНОВЛЕНИЯ: как минимум одна запись сопоставлена не с тем фамильяром.",
             );
         }
     };
@@ -85,20 +85,20 @@ export default function Level08Familiars() {
             complete();
         } else {
             play("error");
-            setNote("OBSERVATION CHECK FAILED: read the entries again.");
+            setNote("ПРОВЕРКА НАБЛЮДАТЕЛЬНОСТИ ПРОВАЛЕНА: перечитайте записи.");
         }
     };
 
     return (
-        <LevelFrame objective="Restore the damaged entries of the familiar database.">
+        <LevelFrame objective="Восстановите поврежденные записи базы фамильяров.">
             <div className={s.layout}>
                 {stage !== "done" && !completed ? (
                     <>
                         <p className={s.banner}>
-                            FAMILIAR DATABASE /{" "}
+                            БАЗА ФАМИЛЬЯРОВ /{" "}
                             {stage === "match"
-                                ? "DAMAGED ENTRIES"
-                                : "ADDITIONAL ENTRY"}
+                                ? "ПОВРЕЖДЕННЫЕ ЗАПИСИ"
+                                : "ДОПОЛНИТЕЛЬНАЯ ЗАПИСЬ"}
                         </p>
 
                         {stage === "match" && (
@@ -108,22 +108,22 @@ export default function Level08Familiars() {
                                         <article key={e.no} className={s.page}>
                                             <Paw />
                                             <header className={s.head}>
-                                                <span>Entry No. {e.no}</span>
+                                                <span>Запись № {e.no}</span>
                                                 <span
                                                     className={s.redacted}
-                                                    aria-label="name hidden"
+                                                    aria-label="имя скрыто"
                                                 >
                                                     ████████
                                                 </span>
                                             </header>
                                             <p className={s.text}>
-                                                “<Damaged text={e.text} />”
+                                                «<Damaged text={e.text} />»
                                             </p>
                                             <p className={s.ask}>
-                                                Who does the entry describe?
+                                                Кого описывает эта запись?
                                             </p>
                                             <TerminalField
-                                                label="Familiar name"
+                                                label="Имя фамильяра"
                                                 value={picks[e.no]}
                                                 onChange={(ev) => {
                                                     setNote("");
@@ -155,7 +155,7 @@ export default function Level08Familiars() {
                                         }
                                         sound={null}
                                     >
-                                        Restore entries
+                                        Восстановить записи
                                     </TerminalButton>
                                 </div>
                             </>
@@ -166,8 +166,8 @@ export default function Level08Familiars() {
                                 <article className={cx(s.page, s.single)}>
                                     <Paw />
                                     <header className={s.head}>
-                                        <span>Entry No. 003</span>
-                                        <span>Observation</span>
+                                        <span>Запись № 003</span>
+                                        <span>Наблюдение</span>
                                     </header>
                                     <p className={s.text}>
                                         {OBSERVATION.lines.map((l) => (
@@ -180,7 +180,7 @@ export default function Level08Familiars() {
                                         {OBSERVATION.question}
                                     </p>
                                     <TerminalField
-                                        label="Familiar name"
+                                        label="Имя фамильяра"
                                         value={observed}
                                         onChange={(ev) => {
                                             setNote("");
@@ -200,7 +200,7 @@ export default function Level08Familiars() {
                                         disabled={!observed.trim()}
                                         sound={null}
                                     >
-                                        Confirm
+                                        Подтвердить
                                     </TerminalButton>
                                 </div>
                             </>
@@ -214,7 +214,7 @@ export default function Level08Familiars() {
                     </>
                 ) : (
                     <CompletePanel
-                        title="Familiar database"
+                        title="База фамильяров"
                         lines={COMPLETE_LINES}
                         shard={8}
                         onContinue={next}

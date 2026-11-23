@@ -32,42 +32,42 @@ function Panel() {
             className={s.modal}
             role="dialog"
             aria-modal="true"
-            aria-label="Menu"
+            aria-label="Меню"
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 12 }}
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
         >
-            <h2 className={s.modalTitle}>Menu</h2>
+            <h2 className={s.modalTitle}>Меню</h2>
             <div className={s.stack}>
                 <TerminalButton variant="primary" onClick={close}>
-                    Resume
+                    Продолжить
                 </TerminalButton>
                 <TerminalButton onClick={toggleSound} aria-pressed={!muted}>
-                    Sound: {muted ? "off" : "on"}
+                    Звук: {muted ? "выкл" : "вкл"}
                 </TerminalButton>
             </div>
 
             <div className={s.zone}>
-                <p className={s.zoneLabel}>Danger zone</p>
+                <p className={s.zoneLabel}>Опасная зона</p>
                 {!confirm ? (
                     <TerminalButton
                         variant="danger"
                         onClick={() => setConfirm(true)}
                     >
-                        Start over...
+                        Начать заново...
                     </TerminalButton>
                 ) : (
                     <>
                         <p className={s.note}>
-                            This erases all local progress: levels, shards,
-                            journal and achievements.
+                            Это сотрет весь локальный прогресс: уровни, осколки,
+                            журнал и достижения.
                         </p>
                         <TerminalButton variant="danger" onClick={reset}>
-                            Yes, erase everything
+                            Да, стереть все
                         </TerminalButton>
                         <TerminalButton onClick={() => setConfirm(false)}>
-                            Cancel
+                            Отмена
                         </TerminalButton>
                     </>
                 )}

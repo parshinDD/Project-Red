@@ -24,41 +24,41 @@ import {
 import s from "./level11.module.css";
 
 const FINAL_LINES = [
-    { text: "FINAL REPORT / ACCESS GRANTED", tone: "title" },
+    { text: "ФИНАЛЬНЫЙ ОТЧЕТ / ДОСТУП РАЗРЕШЕН", tone: "title" },
     { text: "" },
-    { text: "Sequence: S - E - A" },
-    { text: "SYSTEM NOTE:", tone: "dim", delay: 500 },
+    { text: "Последовательность: S - E - A" },
+    { text: "ПРИМЕЧАНИЕ СИСТЕМЫ:", tone: "dim", delay: 500 },
     {
-        text: "Walls are still taller than most of our problems.",
+        text: "Стены все еще выше большинства наших проблем.",
         delay: 450,
     },
     { text: "" },
-    { text: "FRAGMENT 11 RECOVERED", tone: "err", glitch: true, delay: 500 },
+    { text: "ФРАГМЕНТ 11 ВОССТАНОВЛЕН", tone: "err", glitch: true, delay: 500 },
 ];
 
 const RECONSTRUCTION = [
-    { k: "text", text: "RECONSTRUCTION COMPLETE", tone: "title", delay: 300 },
+    { k: "text", text: "РЕКОНСТРУКЦИЯ ЗАВЕРШЕНА", tone: "title", delay: 300 },
     { k: "gap", delay: 100 },
-    { k: "text", text: "Three records restored.", delay: 350 },
+    { k: "text", text: "Три записи восстановлены.", delay: 350 },
     {
         k: "text",
-        text: "One sequence remains incomplete.",
+        text: "Одна последовательность остается незавершенной.",
         tone: "dim",
         delay: 450,
     },
     {
         k: "text",
-        text: "Enter the sequence to open the final report.",
+        text: "Введите последовательность, чтобы открыть финальный отчет.",
         tone: "dim",
         delay: 400,
     },
 ];
 
 const STAGE_LABEL = {
-    scale: "A · SCALE CHECK",
-    identify: "B · REPORT MATCHING",
-    order: "B · REPORT MATCHING",
-    code: "C · CODE EXTRACTION",
+    scale: "A · ПРОВЕРКА МАСШТАБА",
+    identify: "B · СОПОСТАВЛЕНИЕ ОТЧЕТОВ",
+    order: "B · СОПОСТАВЛЕНИЕ ОТЧЕТОВ",
+    code: "C · ИЗВЛЕЧЕНИЕ КОДА",
 };
 
 function Damaged({ text }) {
@@ -94,7 +94,7 @@ export default function Level11Titans() {
             setStage("identify");
         } else {
             play("error");
-            setNote("SCALE MISMATCH: recheck the table.");
+            setNote("НЕСОВПАДЕНИЕ МАСШТАБА: сверьтесь с таблицей.");
         }
     };
 
@@ -152,17 +152,19 @@ export default function Level11Titans() {
             complete();
         } else {
             play("error");
-            setNote("CODE REJECTED.");
+            setNote("КОД ОТКЛОНЕН.");
         }
     };
 
     return (
-        <LevelFrame objective="Restore the damaged intelligence reports.">
+        <LevelFrame objective="Восстановите поврежденные разведотчеты.">
             <div className={s.layout}>
                 {stageOpen ? (
                     <>
                         <p className={s.banner}>
-                            <span>SURVEY CORPS / FIELD ARCHIVE RECOVERY</span>
+                            <span>
+                                РАЗВЕДКОРПУС / ВОССТАНОВЛЕНИЕ ПОЛЕВОГО АРХИВА
+                            </span>
                             <span>{STAGE_LABEL[stage]}</span>
                         </p>
 
@@ -187,7 +189,7 @@ export default function Level11Titans() {
                                     <th scope="col">Данные</th>
                                     <th scope="col">Признаки наблюдения</th>
                                 </tr>
-                            </thead>
+                            </thead>{" "}
                             <tbody>
                                 {OBJECTS.map((o) => (
                                     <tr key={o.id}>
@@ -245,14 +247,14 @@ export default function Level11Titans() {
                                                 РАЗВЕДКОРПУС · ПОЛЕВОЙ ОТЧЕТ
                                             </p>
                                             <header className={s.rhead}>
-                                                <span>RECON REPORT {r.no}</span>
+                                                <span>РАЗВЕДОТЧЕТ {r.no}</span>
                                                 <span className="tnum">
-                                                    TIME: {r.time}
+                                                    ВРЕМЯ: {r.time}
                                                 </span>
                                             </header>
                                             <p className={s.meta}>
-                                                SECTOR: <Damaged text="▓▓▓▓▓" />{" "}
-                                                / OBSERVER:{" "}
+                                                СЕКТОР: <Damaged text="▓▓▓▓▓" />{" "}
+                                                / НАБЛЮДАТЕЛЬ:{" "}
                                                 <Damaged text="▓▓▓▓▓▓" />
                                             </p>
                                             {r.body.map((l) => (
@@ -278,7 +280,7 @@ export default function Level11Titans() {
                                             {stage === "identify" ? (
                                                 <label className={s.pick}>
                                                     <span>
-                                                        Report {r.no} is
+                                                        Отчет {r.no} - это
                                                     </span>
                                                     <select
                                                         value={map[r.no]}
@@ -326,7 +328,7 @@ export default function Level11Titans() {
                                             )}
                                             sound={null}
                                         >
-                                            Confirm identification
+                                            Подтвердить сопоставление
                                         </TerminalButton>
                                     </div>
                                 )}
@@ -345,16 +347,16 @@ export default function Level11Titans() {
                                                     onClick={() => unplace(i)}
                                                     aria-label={
                                                         no
-                                                            ? `Slot ${i + 1}: Report ${no}. Click to remove`
-                                                            : `Slot ${i + 1} is empty`
+                                                            ? `Слот ${i + 1}: отчет ${no}. Нажмите, чтобы убрать`
+                                                            : `Слот ${i + 1} пуст`
                                                     }
                                                 >
                                                     <span className={s.slotNo}>
-                                                        SLOT {i + 1}
+                                                        СЛОТ {i + 1}
                                                     </span>
                                                     <strong>
                                                         {no
-                                                            ? `Report ${no}`
+                                                            ? `Отчет ${no}`
                                                             : "-"}
                                                     </strong>
                                                 </button>
@@ -368,7 +370,7 @@ export default function Level11Titans() {
                                                     onClick={() => place(r.no)}
                                                     sound={null}
                                                 >
-                                                    Report {r.no}
+                                                    Отчет {r.no}
                                                 </TerminalButton>
                                             ))}
                                         </div>
@@ -380,7 +382,7 @@ export default function Level11Titans() {
                                                 disabled={placed.length < 3}
                                                 sound={null}
                                             >
-                                                Submit order
+                                                Отправить порядок
                                             </TerminalButton>
                                         </div>
                                     </>
@@ -390,7 +392,7 @@ export default function Level11Titans() {
 
                         {stage === "code" && (
                             <section className={s.step}>
-                                <TerminalWindow title="Reconstruction">
+                                <TerminalWindow title="Реконструкция">
                                     <TypedBlock
                                         items={RECONSTRUCTION}
                                         onDone={() => setCodeReady(true)}
@@ -401,7 +403,7 @@ export default function Level11Titans() {
                                     <div className={s.restored}>
                                         {slots.map((no) => (
                                             <div key={no} className={s.slip}>
-                                                <span>Report {no}</span>
+                                                <span>Отчет {no}</span>
                                                 <strong>
                                                     CHK: {REPORT[no].chk}
                                                 </strong>
@@ -413,7 +415,7 @@ export default function Level11Titans() {
                                 {codeReady && (
                                     <div className={s.codeRow}>
                                         <TerminalField
-                                            label="Sequence"
+                                            label="Последовательность"
                                             value={code}
                                             onChange={(e) => {
                                                 setNote("");
@@ -431,7 +433,7 @@ export default function Level11Titans() {
                                             disabled={!code.trim()}
                                             sound={null}
                                         >
-                                            Submit
+                                            Отправить
                                         </TerminalButton>
                                     </div>
                                 )}
@@ -446,7 +448,7 @@ export default function Level11Titans() {
                     </>
                 ) : (
                     <CompletePanel
-                        title="Final report"
+                        title="Финальный отчет"
                         lines={FINAL_LINES}
                         shard={11}
                         onContinue={next}

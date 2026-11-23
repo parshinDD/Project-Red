@@ -73,7 +73,7 @@ export default function ActCard({ card, reduce }) {
             </div>
 
             <div className={s.actCol}>
-                <p className="srOnly">{`Act ${act.roman}: ${act.name}. Levels ${pad2(first)} to ${pad2(last)}.`}</p>
+                <p className="srOnly">{`Акт ${act.roman}: ${act.name}. Уровни ${pad2(first)}-${pad2(last)}.`}</p>
 
                 <motion.p
                     className={s.actKicker}
@@ -83,7 +83,7 @@ export default function ActCard({ card, reduce }) {
                     {info.kicker}
                 </motion.p>
                 <h2 className={s.actRoman} ref={roman} aria-hidden="true">
-                    ACT {act.roman}
+                    АКТ {act.roman}
                 </h2>
                 <motion.p className={s.actName} aria-hidden="true" {...wipe}>
                     {act.name}
@@ -102,7 +102,7 @@ export default function ActCard({ card, reduce }) {
                             <span className="tnum">{pad2(l.level)}</span>
                             <span>{l.title}</span>
                             <span className={s.rowState}>
-                                {i === 0 ? "READY" : "LOCKED"}
+                                {i === 0 ? "ГОТОВ" : "ЗАКРЫТ"}
                             </span>
                         </motion.li>
                     ))}
@@ -113,7 +113,7 @@ export default function ActCard({ card, reduce }) {
                     lightAct={card.act}
                     delay={cover + ACT_CUES.roster}
                     step={ACT_CUES.rosterStep}
-                    caption={`LEVELS ${pad2(first)}–${pad2(last)}`}
+                    caption={`УРОВНИ ${pad2(first)}-${pad2(last)}`}
                 />
 
                 <div className={s.log} aria-hidden="true">
@@ -152,7 +152,7 @@ export default function ActCard({ card, reduce }) {
                     },
                 }}
             >
-                ENTER - SKIP
+                ENTER - ПРОПУСТИТЬ
             </motion.p>
         </motion.div>
     );

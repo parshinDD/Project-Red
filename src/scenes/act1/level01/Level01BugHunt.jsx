@@ -13,10 +13,10 @@ import { BUGS, ANSWER, SCENE_W, SCENE_H } from "./bugs";
 import s from "./level01.module.css";
 
 const COMPLETE_LINES = [
-    { text: "5/5 ANOMALIES FOUND", tone: "title" },
-    { text: "Generated report: PATCH" },
+    { text: "НАЙДЕНО АНОМАЛИЙ: 5/5", tone: "title" },
+    { text: "Сформированный отчет: PATCH" },
     { text: "" },
-    { text: "RECOVERY MODE: 1%", tone: "hint" },
+    { text: "РЕЖИМ ВОССТАНОВЛЕНИЯ: 1%", tone: "hint" },
 ];
 
 const STEP = 6;
@@ -64,17 +64,23 @@ export default function Level01BugHunt() {
             }
 
             if (already.includes(bug.id)) {
-                say(`Anomaly #${bug.number} is already logged.`, "dim");
+                say(`Аномалия #${bug.number} уже записана.`, "dim");
                 return;
             }
 
             const list = [...already, bug.id];
             setProgress({ found: list });
             play("found");
-            say(`ANOMALY #${bug.number} LOGGED — tag “${bug.letter}”`, "hint");
+            say(
+                `АНОМАЛИЯ #${bug.number} ЗАПИСАНА - тег "${bug.letter}"`,
+                "hint",
+            );
 
             if (list.length === BUGS.length) {
-                say("5/5 ANOMALIES FOUND. Enter the generated report.", "hint");
+                say(
+                    "НАЙДЕНО 5/5 АНОМАЛИЙ. Введите сформированный отчет.",
+                    "hint",
+                );
                 grantAchievement("bug-hunter");
             }
         },
@@ -126,15 +132,18 @@ export default function Level01BugHunt() {
             complete();
         } else {
             setCodeError(
-                "REPORT REJECTED: the tags do not form a valid report.",
+                "ОТЧЕТ ОТКЛОНЕН: теги не складываются в корректный отчет.",
             );
-            say("Tags are ordered by defect number, not by discovery.", "dim");
+            say(
+                "Теги упорядочены по номеру дефекта, а не по порядку обнаружения.",
+                "dim",
+            );
             play("error");
         }
     };
 
     return (
-        <LevelFrame objective="Find the five anomalies hidden in the build. Each one leaves a tag.">
+        <LevelFrame objective="Найдите пять аномалий, спрятанных в сборке. Каждая оставляет тег.">
             <div className={s.layout}>
                 <div className={s.board}>
                     <div
@@ -142,7 +151,7 @@ export default function Level01BugHunt() {
                         className={s.sceneWrap}
                         tabIndex={0}
                         role="group"
-                        aria-label="Game scene"
+                        aria-label="Игровая сцена"
                         aria-describedby="scene-help"
                         onPointerDown={onPointerDown}
                         onKeyDown={onKeyDown}
@@ -155,36 +164,35 @@ export default function Level01BugHunt() {
                         />
                     </div>
                     <p id="scene-help" className={s.caption}>
-                        Click to inspect · or arrow keys to aim, Enter to
-                        inspect
+                        Клик - осмотр · или стрелки для наведения
                     </p>
                 </div>
 
                 <aside>
                     {completed ? (
                         <CompletePanel
-                            title="Report"
+                            title="Отчет"
                             lines={COMPLETE_LINES}
                             shard={1}
                             onContinue={next}
                         />
                     ) : (
-                        <TerminalWindow title="Bug report">
+                        <TerminalWindow title="Отчет об ошибках">
                             <div className={s.report}>
                                 <p className={s.count}>
-                                    Anomalies found:{" "}
+                                    Найдено аномалий:{" "}
                                     <b>
                                         {found.length}/{BUGS.length}
                                     </b>
                                 </p>
                                 {found.length === 0 ? (
                                     <p className={s.none}>
-                                        Nothing logged yet.
+                                        Пока ничего не записано.
                                     </p>
                                 ) : (
                                     <ol
                                         className={s.found}
-                                        aria-label="Logged anomalies, in order of discovery"
+                                        aria-label="Записанные аномалии, в порядке обнаружения"
                                     >
                                         {found.map((id) => {
                                             const b = BUGS.find(
@@ -198,7 +206,7 @@ export default function Level01BugHunt() {
                                                     <span>{b.label}</span>
                                                     <span
                                                         className={s.tagLetter}
-                                                        aria-label={`tag ${b.letter}`}
+                                                        aria-label={`тег ${b.letter}`}
                                                     >
                                                         {b.letter}
                                                     </span>
@@ -213,11 +221,11 @@ export default function Level01BugHunt() {
                                     noValidate
                                 >
                                     <TerminalField
-                                        label="Generated report"
+                                        label="Сформированный отчет"
                                         helper={
                                             allFound
-                                                ? "Tags are ordered by defect number, not by discovery."
-                                                : `Locked: ${BUGS.length - found.length} anomalies unresolved.`
+                                                ? "Теги упорядочены по номеру дефекта, а не по порядку обнаружения."
+                                                : `Заблокировано: осталось найти аномалий - ${BUGS.length - found.length}.`
                                         }
                                         value={code}
                                         onChange={(e) => {
@@ -233,7 +241,7 @@ export default function Level01BugHunt() {
                                         sound={null}
                                         disabled={!allFound}
                                     >
-                                        Submit report
+                                        Отправить отчет
                                     </TerminalButton>
                                 </form>
                             </div>

@@ -8,11 +8,11 @@ import { pad2 } from "@/game/flow/nodes";
 import { TOTAL_SHARDS } from "@/game/constants";
 
 export default function CompletePanel({
-    title = "RESULT",
+    title = "РЕЗУЛЬТАТ",
     lines,
     shard,
     onContinue,
-    continueLabel = "CONTINUE",
+    continueLabel = "ДАЛЕЕ",
 }) {
     const [done, setDone] = useState(false);
 
@@ -39,8 +39,8 @@ export default function CompletePanel({
                 <p className={t.reward}>
                     <Gem n={shard} size="2rem" glow={false} />
                     <span className="tnum">
-                        Shard {pad2(shard)} / {TOTAL_SHARDS} ·{" "}
-                        {GEMS[shard]?.name} recovered
+                        Осколок {pad2(shard)} / {TOTAL_SHARDS} ·{" "}
+                        {GEMS[shard]?.name} восстановлен
                     </span>
                 </p>
             )}

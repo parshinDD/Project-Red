@@ -12,21 +12,21 @@ import { FINAL_LINES, PACKAGE_LINE } from "./data";
 import s from "./final.module.css";
 
 const REPORT = [
-    { k: "text", text: "FINAL REPORT", tone: "title", delay: 520 },
+    { k: "text", text: "ФИНАЛЬНЫЙ ОТЧЕТ", tone: "title", delay: 520 },
     { k: "gap", delay: 100 },
-    { k: "leader", label: "Test scenarios", status: "COMPLETED", delay: 480 },
-    { k: "leader", label: "Memory integrity", status: "RESTORED", delay: 440 },
-    { k: "leader", label: "Player identity", status: "CONFIRMED", delay: 440 },
+    { k: "leader", label: "Тестовые сценарии", status: "ЗАВЕРШЕНЫ", delay: 480 },
+    { k: "leader", label: "Целостность памяти", status: "ВОССТАНОВЛЕНА", delay: 440 },
+    { k: "leader", label: "Личность игрока", status: "ПОДТВЕРЖДЕНА", delay: 440 },
     {
         k: "leader",
-        label: "Archive fragments",
-        status: "SYNCHRONIZED",
+        label: "Фрагменты архива",
+        status: "СИНХРОНИЗИРОВАНЫ",
         delay: 480,
     },
     { k: "gap", delay: 180 },
-    { k: "text", text: "One file remains.", delay: 560 },
+    { k: "text", text: "Остался один файл.", delay: 560 },
     { k: "text", text: "FINAL_MESSAGE.dat", tone: "hint", delay: 640 },
-    { k: "leader", label: "Status", status: "READY", delay: 520 },
+    { k: "leader", label: "Статус", status: "ГОТОВ", delay: 520 },
 ];
 
 const TYPE_MS = 55;
@@ -176,7 +176,7 @@ export default function FinalReport() {
         <div className={s.reportScreen}>
             {stage === "report" && (
                 <div className={s.screen}>
-                    <TerminalWindow title="Final report">
+                    <TerminalWindow title="Финальный отчет">
                         <TypedBlock
                             items={REPORT}
                             onDone={() => setReportDone(true)}
@@ -189,7 +189,7 @@ export default function FinalReport() {
                                     sound="mode"
                                     autoFocus
                                 >
-                                    Run FINAL_MESSAGE.dat
+                                    Запустить FINAL_MESSAGE.dat
                                 </TerminalButton>
                             </div>
                         )}
@@ -201,7 +201,7 @@ export default function FinalReport() {
                 <section
                     className={s.message}
                     data-snap={stage === "snap" || undefined}
-                    aria-label="Final message"
+                    aria-label="Финальное послание"
                 >
                     <p className={s.messageFile} aria-hidden="true">
                         FINAL_MESSAGE.dat

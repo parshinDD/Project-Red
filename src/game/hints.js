@@ -20,7 +20,7 @@ export function requestHint() {
     const n = game.bumpHint(node.level);
 
     play("blip");
-    useUiStore.getState().pushMessage(`HINT ${n}: ${text}`, "hint");
+    useUiStore.getState().pushMessage(`ПОДСКАЗКА ${n}: ${text}`, "hint");
 }
 
 export const levelHasHints = (node) =>

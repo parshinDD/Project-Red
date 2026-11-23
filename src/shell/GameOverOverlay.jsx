@@ -39,7 +39,7 @@ function Panel() {
             className={s.gameover}
             role="alertdialog"
             aria-modal="true"
-            aria-label="Game over"
+            aria-label="Игра окончена"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -47,19 +47,18 @@ function Panel() {
         >
             <h2 className={s.gameoverTitle}>GAME OVER</h2>
             <p className="tnum">
-                HP: 0/{START_HP} · Recovery point: level{" "}
-                {pad2(start?.level ?? node?.level ?? 0)} (start of the act)
+                HP: 0/{START_HP} · Точка восстановления: уровень{" "}
+                {pad2(start?.level ?? node?.level ?? 0)} (начало акта)
             </p>
             <p className={s.note}>
-                Journal, shards and achievements are preserved. You are sent
-                back to the start of the act: its levels have to be played
-                again.
+                Журнал, осколки и достижения сохраняются. Вы возвращаетесь в
+                начало акта: его уровни придется пройти заново.
             </p>
             <p className={s.countdown}>
-                Respawn in <span className="tnum">{left}</span> s
+                RESPAWN через <span className="tnum">{left}</span> с
             </p>
             <TerminalButton variant="primary" onClick={respawn}>
-                Respawn now
+                RESPAWN сейчас
             </TerminalButton>
         </motion.div>
     );

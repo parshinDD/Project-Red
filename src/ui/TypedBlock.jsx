@@ -97,7 +97,7 @@ export default function TypedBlock({ items, instant = false, onDone, onItem }) {
                     skip={instant}
                     restAt={100}
                     onDone={next}
-                    label="Working"
+                    label="Выполнение"
                 />
             );
         }

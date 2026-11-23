@@ -81,10 +81,10 @@ const height = (map, no) => OBJECT[map[no]].m;
 
 export function checkIdentification(map) {
     if (height(map, "03") - height(map, "01") !== 1)
-        return "IDENTIFICATION CONFLICT: Report 01 and Report 03 cannot describe the same height class.";
+        return "КОНФЛИКТ СОПОСТАВЛЕНИЯ: отчеты 01 и 03 не могут описывать один класс высоты.";
 
     if (height(map, "02") <= WALL)
-        return "IDENTIFICATION CONFLICT: Report 02 does not rise above the wall.";
+        return "КОНФЛИКТ СОПОСТАВЛЕНИЯ: объект отчета 02 не возвышается над стеной.";
 
     return null;
 }
@@ -92,7 +92,7 @@ export function checkIdentification(map) {
 export function checkOrder(slots, map) {
     for (let i = 0; i < slots.length - 1; i++)
         if (height(map, slots[i]) <= height(map, slots[i + 1]))
-            return `ORDER REJECTED: Report ${slots[i]} is not taller than Report ${slots[i + 1]}`;
+            return `ПОРЯДОК ОТКЛОНЕН: отчет ${slots[i]} не выше отчета ${slots[i + 1]}`;
 
     return null;
 }

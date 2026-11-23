@@ -18,34 +18,34 @@ import {
 import s from "./final.module.css";
 
 const HEAD = [
-    { k: "text", text: "RECOVERY MODULE ACTIVE", tone: "title", delay: 520 },
+    { k: "text", text: "МОДУЛЬ ВОССТАНОВЛЕНИЯ АКТИВЕН", tone: "title", delay: 520 },
     { k: "gap", delay: 100 },
-    { k: "leader", label: "Fragments recovered", status: "12", delay: 460 },
-    { k: "leader", label: "Required data", status: "VERIFIED", delay: 420 },
+    { k: "leader", label: "Восстановлено фрагментов", status: "12", delay: 460 },
+    { k: "leader", label: "Необходимые данные", status: "ПРОВЕРЕНЫ", delay: 420 },
     {
         k: "leader",
-        label: "Archive key",
-        status: "INCOMPLETE",
+        label: "Ключ архива",
+        status: "НЕПОЛНЫЙ",
         tone: "warn",
         delay: 560,
     },
 ];
 
 const HEAD_DONE = HEAD.map((item) =>
-    item.label === "Archive key"
-        ? { ...item, status: "COMPLETE", tone: undefined, delay: 0 }
+    item.label === "Ключ архива"
+        ? { ...item, status: "СОБРАН", tone: undefined, delay: 0 }
         : { ...item, delay: 0 },
 );
 
 const ACCEPTED = [
-    { k: "text", text: "ARCHIVE KEY ACCEPTED", tone: "title", delay: 480 },
+    { k: "text", text: "КЛЮЧ АРХИВА ПРИНЯТ", tone: "title", delay: 480 },
     { k: "gap", delay: 100 },
-    { k: "leader", label: "Key format", status: "VALID", delay: 440 },
-    { k: "leader", label: "Archive", status: "READY", delay: 440 },
+    { k: "leader", label: "Формат ключа", status: "ВЕРНЫЙ", delay: 440 },
+    { k: "leader", label: "Архив", status: "ГОТОВ", delay: 440 },
     { k: "gap", delay: 160 },
     {
         k: "text",
-        text: "A copy of the key has been filed to your journal.",
+        text: "Копия ключа добавлена в ваш журнал.",
         tone: "dim",
         delay: 520,
     },
@@ -125,14 +125,14 @@ export default function FinalAssembly() {
 
         play("error");
         setError(
-            "KEY REJECTED: the fragments do not assemble into this sequence.",
+            "КЛЮЧ ОТКЛОНЕН: фрагменты не складываются в эту последовательность.",
         );
         setAttempts((n) => n + 1);
     };
 
     return (
         <div className={s.screen}>
-            <TerminalWindow title="Recovery / assembly">
+            <TerminalWindow title="Восстановление / сборка">
                 {phase !== "accepted" ? (
                     <TypedBlock
                         items={HEAD}
@@ -148,9 +148,9 @@ export default function FinalAssembly() {
                 {phase !== "head" && (
                     <section
                         className={s.manifest}
-                        aria-label="Fragment manifest"
+                        aria-label="Манифест фрагментов"
                     >
-                        <p className={s.manifestTitle}>FRAGMENT MANIFEST</p>
+                        <p className={s.manifestTitle}>МАНИФЕСТ ФРАГМЕНТОВ</p>
                         <ul className={s.cards}>
                             {FRAGMENTS.map((f, i) => (
                                 <li
@@ -159,17 +159,17 @@ export default function FinalAssembly() {
                                     style={{ "--i": i }}
                                     onMouseEnter={() => setHoverPos(f.pos)}
                                     onMouseLeave={() => setHoverPos(null)}
-                                    aria-label={`Level ${f.level}: symbol ${f.symbol}, position ${f.pos}`}
+                                    aria-label={`Уровень ${f.level}: символ ${f.symbol}, позиция ${f.pos}`}
                                 >
                                     <Gem n={f.level} size="1.7rem" />
                                     <span className={s.cardLvl}>
-                                        LVL {pad2(f.level)}
+                                        УР. {pad2(f.level)}
                                     </span>
                                     <span className={s.cardSym}>
                                         {f.symbol}
                                     </span>
                                     <span className={s.cardPos}>
-                                        POS {pad2(f.pos)}
+                                        ПОЗ {pad2(f.pos)}
                                     </span>
                                 </li>
                             ))}
@@ -180,9 +180,9 @@ export default function FinalAssembly() {
                 {phase !== "head" && (
                     <section
                         className={s.keyArea}
-                        aria-label="Archive key input"
+                        aria-label="Ввод ключа архива"
                     >
-                        <p className={s.keyLabel}>ARCHIVE KEY</p>
+                        <p className={s.keyLabel}>КЛЮЧ АРХИВА</p>
 
                         <div
                             key={`slots-${attempts}`}
@@ -198,7 +198,7 @@ export default function FinalAssembly() {
                                         className={s.hyphen}
                                         aria-hidden="true"
                                     >
-                                        –
+                                        -
                                     </span>
                                 ) : (
                                     <button
@@ -241,7 +241,7 @@ export default function FinalAssembly() {
                                     autoComplete="off"
                                     autoCapitalize="characters"
                                     spellCheck={false}
-                                    aria-label="Archive key, 12 characters"
+                                    aria-label="Ключ архива, 12 символов"
                                     aria-describedby={
                                         error ? "key-error" : undefined
                                     }
@@ -254,15 +254,15 @@ export default function FinalAssembly() {
                                         disabled={!letters}
                                         sound={null}
                                     >
-                                        Assemble key
+                                        Собрать ключ
                                     </TerminalButton>
                                 </div>
                                 <p
                                     className={`${s.keyNote} tnum`}
                                     aria-hidden="true"
                                 >
-                                    {filled}/{KEY_LETTERS.length} characters ·
-                                    hyphens are automatic
+                                    Символов: {filled}/{KEY_LETTERS.length} ·
+                                    дефисы ставятся автоматически
                                 </p>
                                 {error && (
                                     <p
@@ -275,8 +275,8 @@ export default function FinalAssembly() {
                                 )}
                                 {attempts >= 2 && (
                                     <p className={s.keyNote}>
-                                        The manifest lists every position. Each
-                                        fragment holds exactly one.
+                                        В манифесте перечислена каждая позиция.
+                                        У каждого фрагмента ровно одна.
                                     </p>
                                 )}
                             </>
@@ -297,7 +297,7 @@ export default function FinalAssembly() {
                                     onClick={() => navigate("final.verify")}
                                     autoFocus
                                 >
-                                    Continue
+                                    Продолжить
                                 </TerminalButton>
                             </div>
                         )}

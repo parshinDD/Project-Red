@@ -9,35 +9,35 @@ const LINES = [
     { k: "gap", delay: 150 },
     {
         k: "leader",
-        label: "Device check",
-        status: "FAILED",
+        label: "Проверка устройства",
+        status: "СБОЙ",
         tone: "warn",
         delay: 520,
     },
     {
         k: "leader",
-        label: "Screen size",
-        status: "INSUFFICIENT",
+        label: "Размер экрана",
+        status: "НЕДОСТАТОЧЕН",
         delay: 430,
     },
     {
         k: "leader",
-        label: "Physical keyboard",
-        status: "NOT FOUND",
+        label: "Физическая клавиатура",
+        status: "НЕ НАЙДЕНА",
         delay: 430,
     },
     { k: "gap", delay: 260 },
-    { k: "text", text: "This build was designed for a laptop.", delay: 560 },
+    { k: "text", text: "Эта сборка рассчитана на ноутбук.", delay: 560 },
     {
         k: "text",
-        text: "It is not a bug. It is a requirement.",
+        text: "Это не баг. Это требование.",
         tone: "dim",
         delay: 520,
     },
     { k: "gap", delay: 150 },
     {
         k: "text",
-        text: "Please reopen PROJECT RED on a laptop.",
+        text: "Пожалуйста, откройте PROJECT RED на ноутбуке.",
         tone: "hint",
         delay: 680,
     },
@@ -48,7 +48,7 @@ export default function PhoneGate() {
         <div className={s.gate} data-theme="crt" role="status">
             <i className={s.led} aria-hidden="true" />
             <TerminalWindow
-                title="Project Red / device check"
+                title="Project Red / проверка устройства"
                 className={s.win}
             >
                 <TypedBlock items={LINES} />

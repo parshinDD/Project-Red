@@ -45,8 +45,8 @@ export default function PowerGate({ onStart }) {
     return (
         <div className={s.gate} role="status">
             <i className={s.led} aria-hidden="true" />
-            <p className={s.prompt}>PRESS ANY KEY</p>
-            <p className={s.hint}>{BUILD_NAME} · best with sound</p>
+            <p className={s.prompt}>НАЖМИТЕ ЛЮБУЮ КЛАВИШУ</p>
+            <p className={s.hint}>{BUILD_NAME} · лучше со звуком</p>
         </div>
     );
 }

@@ -7,22 +7,22 @@ import CompletePanel from "@/ui/CompletePanel";
 
 const COPY = {
     1: [
-        "ACT I COMPLETE",
-        "3/3 LEVELS CLEARED",
+        "АКТ I ПРОЙДЕН",
+        "Уровней пройдено: 3/3",
         "",
-        "Build status: unstable.",
-        "Player status: acceptable.",
+        "Статус сборки: нестабильный.",
+        "Статус игрока: приемлемый.",
     ],
     2: [
-        "ACT II COMPLETE",
-        "All survival tests passed.",
+        "АКТ II ПРОЙДЕН",
+        "Все тесты на выживание пройдены.",
         "",
-        "System integrity: questionable.",
+        "Целостность системы: сомнительная.",
     ],
     3: [
-        "ACT III COMPLETE",
-        "Memory records recovered: 3",
-        "Developer identity: REDACTED",
+        "АКТ III ПРОЙДЕН",
+        "Записей памяти восстановлено: 3",
+        "Личность разработчика: СКРЫТА",
     ],
 };
 
@@ -31,7 +31,7 @@ export default function ActComplete() {
     const clean = useGameStore((s) => !(s.actHpLost[act] > 0));
 
     const lines = useMemo(() => {
-        const base = (COPY[act] ?? [`ACT ${act} COMPLETE`]).map((text, i) => ({
+        const base = (COPY[act] ?? [`АКТ ${act} ПРОЙДЕН`]).map((text, i) => ({
             text,
             tone: i === 0 ? "title" : "fg",
         }));
@@ -40,7 +40,7 @@ export default function ActComplete() {
             ? [
                   ...base,
                   { text: "" },
-                  { text: "Clean run: no HP lost.", tone: "dim" },
+                  { text: "Чистое прохождение: HP не потеряны.", tone: "dim" },
               ]
             : base;
     }, [act, clean]);
@@ -51,6 +51,6 @@ export default function ActComplete() {
     }, [act]);
 
     return (
-        <CompletePanel title="ACT REPORT" lines={lines} onContinue={advance} />
+        <CompletePanel title="ОТЧЕТ ПО АКТУ" lines={lines} onContinue={advance} />
     );
 }

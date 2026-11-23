@@ -1,41 +1,41 @@
 const COMMON = {
     build: [["BUILD_02-12", "BUILD_??-??"]],
     hp: [["HP", "??"]],
-    hint: [["Hint", "None"]],
-    menu: [["Menu", "Stay"]],
-    journal: [["Journal", "Records"]],
-    objective: [["Objective", "Directive"]],
+    hint: [["Подсказка", "Нет"]],
+    menu: [["Меню", "Остаться"]],
+    journal: [["Журнал", "Записи"]],
+    objective: [["Задача", "Директива"]],
     where: [
-        ["LEVEL", "ERROR"],
-        ["ACT", "???"],
+        ["УРОВЕНЬ", "ОШИБКА"],
+        ["АКТ", "???"],
     ],
 };
 
 const WHERE_BY_LEVEL = {
-    4: [["GREEN LIGHT", "RED LIGHT"]],
-    5: [["BRIDGE", "ABYSS"]],
-    6: [["VOTE", "LIES"]],
-    7: [["CREATION", "DELETION"]],
-    8: [["FAMILIARS", "RELATIVES"]],
-    9: [["TAVERN", "SERVER"]],
-    10: [["CIPHER", "SILENCE"]],
-    11: [["PROTOCOL", "PAYLOAD"]],
-    12: [["SIGNAL", "STATIC"]],
+    4: [["ЗЕЛЕНЫЙ СВЕТ", "КРАСНЫЙ СВЕТ"]],
+    5: [["МОСТ", "БЕЗДНА"]],
+    6: [["ГОЛОСОВАНИЕ", "ЛЖЕЦЫ"]],
+    7: [["СОЗДАНИЕ", "УДАЛЕНИЕ"]],
+    8: [["ФАМИЛЬЯРЫ", "РОДСТВЕННИКИ"]],
+    9: [["ТАВЕРНА", "СЕРВЕР"]],
+    10: [["ШИФР", "ТИШИНА"]],
+    11: [["ПРОТОКОЛ", "БОЕЗАРЯД"]],
+    12: [["СИГНАЛ", "ПОМЕХИ"]],
 };
 
 const SKIN = {
     3: {
         build: [["BUILD", "REALM"]],
-        where: [["LEVEL", "QUEST"]],
-        hint: [["Hint", "Rune"]],
-        menu: [["Menu", "Camp"]],
-        journal: [["Journal", "Scrolls"]],
-        objective: [["Objective", "Quest"]],
+        where: [["УРОВЕНЬ", "КВЕСТ"]],
+        hint: [["Подсказка", "Руна"]],
+        menu: [["Меню", "Лагерь"]],
+        journal: [["Журнал", "Свитки"]],
+        objective: [["Задача", "Квест"]],
     },
 };
 
 export const skinOf = (act, key) => SKIN[act]?.[key] ?? [];
-const WHERE_COMPLETE = [["COMPLETE", "UNSTABLE"]];
+const WHERE_COMPLETE = [["ПРОЙДЕН", "НЕСТАБИЛЕН"]];
 
 export function swapsFor(key, node) {
     const base = COMMON[key] ?? [];

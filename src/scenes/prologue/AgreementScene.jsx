@@ -15,34 +15,32 @@ const TERMS = [
     {
         k: "text",
         as: "h1",
-        text: "PLAYER TEST AGREEMENT",
+        text: "ТЕСТОВОЕ СОГЛАШЕНИЕ ИГРОКА",
         tone: "title",
         delay: 500,
     },
     { k: "gap", delay: 120 },
     {
         k: "text",
-        text: "By continuing, you agree to test an experimental build.",
+        text: "Продолжая, вы соглашаетесь протестировать экспериментальную сборку.",
         delay: 200,
     },
     { k: "gap", delay: 120 },
     {
         k: "text",
-        text: "The test may include puzzles, memory checks, visual anomalies and several questionable design decisions.",
-        delay: 200,
-    },
-    { k: "gap", delay: 120 },
-    { k: "text", text: "Progress is stored locally.", delay: 200 },
-    { k: "gap", delay: 120 },
-    {
-        k: "text",
-        text: "The developer accepts no responsibility for unusually persistent cats, suspicious patch notes or unexpected rewards.",
+        text: "Тест может включать головоломки, проверки памяти, визуальные аномалии и несколько сомнительных проектных решений.",
         delay: 200,
     },
     { k: "gap", delay: 120 },
     {
         k: "text",
-        text: "By completing this test, you may receive a birthday-related item.",
+        text: "Прогресс сохраняется локально.",
+        delay: 200,
+    },
+    { k: "gap", delay: 120 },
+    {
+        k: "text",
+        text: "Разработчик не несет ответственности за необычно настойчивых кошек, подозрительные патчноуты и неожиданные награды.",
         delay: 200,
     },
 ];
@@ -63,12 +61,12 @@ export default function AgreementScene() {
         if (!idOk) {
             next.id =
                 idFails >= 2
-                    ? "PLAYER ID rejected. Registry note: the ID is a single lowercase word of four letters."
-                    : "PLAYER ID not found in the recipient registry.";
+                    ? "PLAYER ID отклонен. Запись в реестре: ID - одно слово из четырех латинских букв в нижнем регистре."
+                    : "PLAYER ID не найден в реестре получателей.";
             setIdFails((n) => n + 1);
         }
 
-        if (!read) next.read = "Confirmation required.";
+        if (!read) next.read = "Требуется подтверждение.";
 
         setErrors(next);
         if (Object.keys(next).length) {
@@ -93,7 +91,7 @@ export default function AgreementScene() {
 
     return (
         <div className={s.screen}>
-            <TerminalWindow title="Project Red / agreement">
+            <TerminalWindow title="Project Red / соглашение">
                 <div className={s.terms}>
                     <TypedBlock items={TERMS} onDone={() => setTyped(true)} />
                 </div>
@@ -110,23 +108,22 @@ export default function AgreementScene() {
                         </button>
                         {clauseOpen && (
                             <p className={s.clause}>
-                                § 12.b - The build number is not random. This
-                                clause was removed in review for being too
-                                obvious.
+                                § 12.b - Номер сборки не случаен. Этот пункт был
+                                удален на ревью за излишнюю очевидность.
                             </p>
                         )}
 
                         <form className={s.form} onSubmit={submit} noValidate>
                             <TerminalField
-                                label="Player ID"
-                                helper="Registered recipients only."
+                                label="ID игрока"
+                                helper="Только зарегистрированные получатели."
                                 value={playerId}
                                 onChange={(e) => setPlayerId(e.target.value)}
                                 error={errors.id}
                                 autoFocus
                             />
                             <TerminalCheckbox
-                                label="I have read the terms"
+                                label="Условия прочитаны"
                                 checked={read}
                                 onChange={(e) => setRead(e.target.checked)}
                                 error={errors.read}
@@ -136,7 +133,7 @@ export default function AgreementScene() {
                                 type="submit"
                                 sound={null}
                             >
-                                Accept &amp; launch
+                                Принять и запустить
                             </TerminalButton>
                         </form>
                     </div>

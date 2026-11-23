@@ -97,7 +97,7 @@ function Drop({ n }) {
                 <Gem n={n} size="min(11rem, 34vw)" />
             </div>
             <div className={s.cap} data-cap>
-                <span className={s.capTitle}>Shard {pad2(n)} recovered</span>
+                <span className={s.capTitle}>Осколок {pad2(n)} восстановлен</span>
                 <span className={s.capName}>{GEMS[n].name}</span>
             </div>
         </div>

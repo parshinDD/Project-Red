@@ -10,28 +10,28 @@ import s from "./level03.module.css";
 
 const TARGET = 8;
 const PADS = [
-    { name: "RED", key: "1" },
-    { name: "BLUE", key: "2" },
-    { name: "GREEN", key: "3" },
-    { name: "YELLOW", key: "4" },
+    { name: "КРАСНАЯ", key: "1" },
+    { name: "СИНЯЯ", key: "2" },
+    { name: "ЗЕЛЕНАЯ", key: "3" },
+    { name: "ЖЕЛТАЯ", key: "4" },
 ];
 
 const STATE_TEXT = {
-    intro: "READY",
-    showing: "WATCH",
-    input: "REPEAT",
-    waiting: "OK",
-    error: "MISMATCH",
-    won: "PASSED",
+    intro: "ГОТОВО",
+    showing: "СМОТРИ",
+    input: "ПОВТОРИ",
+    waiting: "ОК",
+    error: "НЕ СОВПАЛО",
+    won: "ПРОЙДЕНО",
 };
 
 const COMPLETE_LINES = [
-    { text: "MEMORY TEST PASSED", tone: "title" },
-    { text: "Result: 8/8" },
-    { text: "Personal data accessed: 0" },
+    { text: "ТЕСТ ПАМЯТИ ПРОЙДЕН", tone: "title" },
+    { text: "Результат: 8/8" },
+    { text: "Доступ к личным данным: 0" },
     { text: "", delay: 900 },
     {
-        text: "Correction: 1 record accessed.",
+        text: "Поправка: доступ к 1 записи.",
         tone: "err",
         glitch: true,
         delay: 500,
@@ -107,7 +107,10 @@ export default function Level03Memory() {
         const hp = damage();
 
         if (hp > 0) {
-            say("Sequence mismatch. Replaying the sequence…", "err");
+            say(
+                "Последовательность не совпала. Повторяю последовательность...",
+                "err",
+            );
             later(() => setMode("showing"), 1100);
         }
     };
@@ -165,23 +168,23 @@ export default function Level03Memory() {
 
     return (
         <LevelFrame
-            objective={`Repeat the sequence. Clear ${TARGET} rounds to pass. Each mistake costs 1 HP.`}
+            objective={`Повторяйте последовательность. Пройдите ${TARGET} раундов. Каждая ошибка стоит 1 HP.`}
         >
             <div className={s.layout}>
                 <div className={s.info}>
                     <dl className={s.readout}>
                         <div>
-                            <dt>Round</dt>
+                            <dt>Раунд</dt>
                             <dd>
                                 {Math.min(round, TARGET)}/{TARGET}
                             </dd>
                         </div>
                         <div>
-                            <dt>Mistakes</dt>
+                            <dt>Ошибки</dt>
                             <dd>{errors}</dd>
                         </div>
                         <div>
-                            <dt>Status</dt>
+                            <dt>Статус</dt>
                             <dd className={s.state} aria-live="polite">
                                 {STATE_TEXT[mode]}
                             </dd>
@@ -190,8 +193,9 @@ export default function Level03Memory() {
                     {mode === "intro" && (
                         <>
                             <p className={s.text}>
-                                Watch the pads light up, then repeat the order.
-                                Click the pads or press 1-4.
+                                Смотрите, как подсвечиваются кнопки, затем
+                                повторите порядок. Нажимайте кнопки или клавиши
+                                1-4.
                             </p>
                             <div className={s.actions}>
                                 <TerminalButton
@@ -199,7 +203,7 @@ export default function Level03Memory() {
                                     onClick={() => setMode("showing")}
                                     autoFocus
                                 >
-                                    Start test
+                                    Начать тест
                                 </TerminalButton>
                             </div>
                         </>
@@ -210,13 +214,13 @@ export default function Level03Memory() {
                                 onClick={() => setMode("showing")}
                                 disabled={mode !== "input"}
                             >
-                                Replay sequence
+                                Повторить последовательность
                             </TerminalButton>
                         </div>
                     )}
                     {(mode === "won" || completed) && (
                         <CompletePanel
-                            title="Memory test"
+                            title="Тест памяти"
                             lines={COMPLETE_LINES}
                             shard={3}
                             onContinue={next}
@@ -224,7 +228,11 @@ export default function Level03Memory() {
                     )}
                 </div>
 
-                <div className={s.device} role="group" aria-label="Memory pads">
+                <div
+                    className={s.device}
+                    role="group"
+                    aria-label="Кнопки памяти"
+                >
                     {PADS.map((p, i) => (
                         <button
                             key={p.name}
@@ -236,7 +244,7 @@ export default function Level03Memory() {
                             )}
                             disabled={mode !== "input"}
                             onClick={() => press(i)}
-                            aria-label={`${p.name} pad, key ${p.key}`}
+                            aria-label={`${p.name} кнопка, клавиша ${p.key}`}
                         >
                             <span className={s.key} aria-hidden="true">
                                 {p.key}

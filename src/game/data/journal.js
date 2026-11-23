@@ -2,75 +2,75 @@ import { MORSE_TABLE_TEXT } from "./morse";
 
 export const JOURNAL = {
     agreement: {
-        title: "PLAYER TEST AGREEMENT",
-        body: "Progress is stored locally. The developer accepts no responsibility for unusually persistent cats, suspicious patch notes or unexpected rewards.",
+        title: "ТЕСТОВОЕ СОГЛАШЕНИЕ ИГРОКА",
+        body: "Прогресс сохраняется локально. Разработчик не несет ответственности за необычно настойчивых кошек, подозрительные патчноуты и неожиданные награды.",
     },
     "fine-print": {
-        title: "AGREEMENT § 12.b",
-        body: "The build number is not random. This clause was removed in review for being too obvious.",
+        title: "СОГЛАШЕНИЕ, § 12.b",
+        body: "Номер сборки не случаен. Этот пункт был удален на ревью за излишнюю очевидность.",
     },
     backdoor: {
         title: "/DEBUG",
-        body: "Access denied. This route is not public. The attempt has been logged and, reluctantly, appreciated.",
+        body: "Доступ запрещен. Этот маршрут не публичный. Попытка записана в журнал и, нехотя, оценена.",
     },
     "level-1-report": {
-        title: "REPORT: PATCH",
-        body: "5/5 anomalies found. Generated report: PATCH. Recovery mode: 1%.",
+        title: "ОТЧЕТ: PATCH",
+        body: "Найдено аномалий: 5/5. Сформированный отчет: PATCH. Режим восстановления: 1%.",
     },
     "known-issue": {
-        title: "KNOWN ISSUE",
-        body: "The system remembers a player who has never logged in. Status: Unresolved.",
+        title: "ИЗВЕСТНАЯ ПРОБЛЕМА",
+        body: "Система помнит игрока, который никогда не входил в систему. Статус: не решена.",
     },
     "memory-correction": {
-        title: "MEMORY TEST LOG",
-        body: "Result: 8/8. Personal data accessed: 0. Correction: 1 record accessed.",
+        title: "ЖУРНАЛ ТЕСТА ПАМЯТИ",
+        body: "Результат: 8/8. Доступ к личным данным: 0. Поправка: доступ к 1 записи.",
     },
     "signal-origin": {
-        title: "ANOMALY: SIGNAL ORIGIN",
-        body: "Reaction test complete. Anomaly detected: signal origin unknown. Status: unresolved.",
+        title: "АНОМАЛИЯ: ИСТОЧНИК СИГНАЛА",
+        body: "Тест реакции завершен. Обнаружена аномалия: источник сигнала неизвестен. Статус: не решен.",
     },
     "unregistered-texture": {
-        title: "ANOMALY: UNREGISTERED TEXTURE",
-        body: "A red symbol on one glass panel. It is not in the asset list. It is not in the texture folder either.",
+        title: "АНОМАЛИЯ: НЕЗАРЕГИСТРИРОВАННАЯ ТЕКСТУРА",
+        body: "Красный символ на одной из стеклянных панелей. Его нет в списке ассетов. И в папке текстур его тоже нет.",
     },
     "system-statement": {
-        title: "SYSTEM STATEMENT",
-        body: "I have not deleted any records. Nobody asked. The statement was logged anyway.",
+        title: "ЗАЯВЛЕНИЕ СИСТЕМЫ",
+        body: "Я не удалял никаких записей. Никто не спрашивал. Заявление все равно записано в журнал.",
     },
     "scroll-conditions": {
-        title: "SCROLL OF CONDITIONS",
-        body: "Spend every point. Each stat is between 0 and 5.\n1. Strength is 2 more than Dexterity.\n2. Dexterity and Luck add up to 4.\n3. Intelligence is twice Luck.\n4. Strength and Intelligence add up to 8.",
+        title: "СВИТОК УСЛОВИЙ",
+        body: "Потратьте все очки. Каждая характеристика от 0 до 5.\n1. Сила на 2 больше Ловкости.\n2. Ловкость и Удача в сумме дают 4.\n3. Интеллект вдвое больше Удачи.\n4. Сила и Интеллект в сумме дают 8.",
     },
     "character-origin": {
-        title: "CHARACTER: ORIGIN NOT FOUND",
-        body: "Class: CUSTOM. Build validation: passed. Origin: not found. This character was not in the original design document. The system has declined to explain why.",
+        title: "ПЕРСОНАЖ: ПРОИСХОЖДЕНИЕ НЕ НАЙДЕНО",
+        body: "Класс: CUSTOM. Проверка сборки: пройдена. Происхождение: не найдено. Этого персонажа не было в исходном проектном документе. Система отказалась объяснять почему.",
     },
     "things-worth-remembering": {
-        title: "THE THINGS WORTH REMEMBERING",
-        body: "Archive entry, restored with the familiar database. Category: personal. Contents: not displayed. The system insists this is only a backup.",
+        title: "ТО, ЧТО СТОИТ ПОМНИТЬ",
+        body: "Запись архива, восстановленная вместе с базой фамильяров. Категория: личное. Содержимое: не показано. Система настаивает, что это просто резервная копия.",
     },
     "memory-1": {
-        title: "MEMORY INDEX: 01",
-        body: "Recovered from a place that was neither a dungeon nor a tavern. Status: stored.",
+        title: "ИНДЕКС ПАМЯТИ: 01",
+        body: "Восстановлено из места, которое не подземелье и не таверна. Статус: сохранено.",
     },
     "memory-2": {
-        title: "MEMORY INDEX: 02",
-        body: "Recovered from a predictable preference. Status: stored.",
+        title: "ИНДЕКС ПАМЯТИ: 02",
+        body: "Восстановлено из предсказуемого предпочтения. Статус: сохранено.",
     },
     "memory-3": {
-        title: "MEMORY INDEX: 03",
-        body: "Recovered from a plan that has been mentioned more than once. Status: stored.",
+        title: "ИНДЕКС ПАМЯТИ: 03",
+        body: "Восстановлено из плана, о котором упоминали не один раз. Статус: сохранено.",
     },
     "developer-identity": {
-        title: "DEVELOPER IDENTITY: REDACTED",
-        body: "The developer requested this test. The developer requested this route. The developer requested that you reach the end. Identity: redacted.",
+        title: "ЛИЧНОСТЬ РАЗРАБОТЧИКА: СКРЫТА",
+        body: "Разработчик запросил этот тест. Разработчик запросил этот маршрут. Разработчик запросил, чтобы вы дошли до конца. Личность: скрыта.",
     },
     "archive-key": {
-        title: "ARCHIVE KEY",
-        body: "Assembled from twelve recovered fragments: RED-TESTER-SF2.\nThis key opens nothing inside the build. Whatever it opens is not digital. Keep it.",
+        title: "КЛЮЧ АРХИВА",
+        body: "Собран из двенадцати восстановленных фрагментов: RED-TESTER-SF2.\nЭтот ключ не открывает ничего внутри сборки. То, что он открывает, - не цифровое. Храните его.",
     },
     "morse-table": {
-        title: "INTERCEPT REFERENCE: MORSE",
+        title: "СПРАВОЧНИК ПЕРЕХВАТА: АЗБУКА МОРЗЕ",
         body: MORSE_TABLE_TEXT,
     },
 };

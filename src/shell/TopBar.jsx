@@ -27,7 +27,7 @@ export default function TopBar({ node }) {
             useUiStore
                 .getState()
                 .pushMessage(
-                    "ACCESS DENIED: /debug is not a public route.",
+                    "ДОСТУП ЗАПРЕЩЕН: /debug не публичный маршрут.",
                     "err",
                 );
 
@@ -45,7 +45,7 @@ export default function TopBar({ node }) {
                     type="button"
                     className={s.build}
                     onClick={poke}
-                    aria-label="Build identifier"
+                    aria-label="Идентификатор сборки"
                 >
                     <span className={s.buildName}>
                         PROJECT <b>RED</b>
@@ -76,7 +76,7 @@ export default function TopBar({ node }) {
                             swaps={swapsFor("journal")}
                             skinKey="journal"
                         >
-                            Journal
+                            Журнал
                         </Glitchable>
                         <kbd>[J]</kbd>
                     </button>

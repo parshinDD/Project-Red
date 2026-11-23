@@ -5,8 +5,8 @@ import TypedBlock from "@/ui/TypedBlock";
 
 export function SceneLoading() {
     return (
-        <TerminalWindow title="Loading">
-            <TermLine text="Loading module…" tone="dim" silent instant />
+        <TerminalWindow title="Загрузка">
+            <TermLine text="Загрузка модуля…" tone="dim" silent instant />
         </TerminalWindow>
     );
 }
@@ -15,14 +15,14 @@ export default function ComingSoon() {
     const node = getNode(useGameStore((s) => s.nodeId));
 
     const items = [
-        { k: "text", text: "BUILD NOT YET DEPLOYED", tone: "err", delay: 300 },
+        { k: "text", text: "СБОРКА ЕЩЕ НЕ РАЗВЕРНУТА", tone: "err", delay: 300 },
         { k: "gap", delay: 100 },
-        { k: "text", text: `Requested: ${nodeLabel(node)}`, tone: "dim" },
-        { k: "text", text: "This module is not part of the current build." },
+        { k: "text", text: `Запрошено: ${nodeLabel(node)}`, tone: "dim" },
+        { k: "text", text: "Этот модуль не входит в текущую сборку." },
     ];
 
     return (
-        <TerminalWindow title="Module not found">
+        <TerminalWindow title="Модуль не найден">
             <TypedBlock items={items} />
         </TerminalWindow>
     );

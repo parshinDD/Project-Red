@@ -3,10 +3,10 @@ export const MIN = 0;
 export const MAX = 5;
 
 export const STATS = [
-    { id: "str", name: "Strength" },
-    { id: "dex", name: "Dexterity" },
-    { id: "int", name: "Intelligence" },
-    { id: "luck", name: "Luck" },
+    { id: "str", name: "Сила" },
+    { id: "dex", name: "Ловкость" },
+    { id: "int", name: "Интеллект" },
+    { id: "luck", name: "Удача" },
 ];
 
 export const START = { str: 0, dex: 0, int: 0, luck: 0 };
@@ -14,42 +14,42 @@ export const START = { str: 0, dex: 0, int: 0, luck: 0 };
 export const TRIALS = [
     {
         id: "blade",
-        name: "Trial of the Blade",
-        blurb: "A duel on a narrow bridge.",
+        name: "Испытание клинка",
+        blurb: "Дуэль на узком мосту.",
         checks: [
             {
                 ok: (s) => s.str === s.dex + 2,
-                fail: () => "Dexterity check failed.",
+                fail: () => "Проверка ловкости не пройдена.",
             },
         ],
     },
     {
         id: "shadows",
-        name: "Trial of Shadows",
-        blurb: "A locked vault and a long corridor.",
+        name: "Испытание теней",
+        blurb: "Запертый сейф и длинный коридор.",
         checks: [
             {
                 ok: (s) => s.dex + s.luck === 4,
-                fail: () => "Luck check failed.",
+                fail: () => "Проверка удачи не пройдена.",
             },
         ],
     },
     {
         id: "mage",
-        name: "Mage's Trial",
-        blurb: "Three questions that only have a correct answer.",
+        name: "Испытание мага",
+        blurb: "Три вопроса, у которых есть только один верный ответ.",
         checks: [
             {
                 ok: (s) => s.int === 2 * s.luck,
                 fail: () =>
-                    "The mage's trial failed: intelligence is out of tune with luck.",
+                    "Испытание мага провалено: интеллект не в ладах с удачей.",
             },
             {
                 ok: (s) => s.str + s.int === 8,
                 fail: (s) =>
                     s.str + s.int < 8
-                        ? "Not enough points to pass the mage's trial."
-                        : "Too many points are invested in the mage's trial.",
+                        ? "Недостаточно очков для прохождения испытания мага."
+                        : "В испытание мага вложено слишком много очков.",
             },
         ],
     },

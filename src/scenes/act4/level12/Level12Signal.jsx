@@ -14,31 +14,36 @@ import { COMMAND, SIGNAL_TEXT, isSignal } from "./signal";
 import s from "./level12.module.css";
 
 const VERIFIED = [
-    { k: "text", text: "SIGNAL VERIFIED", tone: "title", delay: 300 },
+    { k: "text", text: "СИГНАЛ ПОДТВЕРЖДЕН", tone: "title", delay: 300 },
     { k: "gap", delay: 100 },
-    { k: "text", text: `Payload decoded: ${COMMAND}`, delay: 450 },
-    { k: "text", text: "Source: UNRESOLVED", tone: "dim", delay: 450 },
+    { k: "text", text: `Расшифрованная нагрузка: ${COMMAND}`, delay: 450 },
+    { k: "text", text: "Источник: НЕ УСТАНОВЛЕН", tone: "dim", delay: 450 },
     {
         k: "text",
-        text: "The system recognizes this signature.",
+        text: "Система узнает эту сигнатуру.",
         tone: "dim",
         delay: 700,
     },
     {
         k: "text",
-        text: "The system refuses to elaborate.",
+        text: "Система отказывается пояснять.",
         tone: "err",
         delay: 700,
     },
 ];
 
 const ACCEPTED = [
-    { text: "COMMAND ACCEPTED", tone: "title" },
+    { text: "КОМАНДА ПРИНЯТА", tone: "title" },
     { text: "" },
-    { text: "All required fragments verified.", delay: 450 },
+    { text: "Все необходимые фрагменты проверены.", delay: 450 },
     { text: "" },
     { text: "BUILD_02-12", tone: "dim", delay: 400 },
-    { text: "FINAL RECOVERY READY", tone: "err", glitch: true, delay: 500 },
+    {
+        text: "ФИНАЛЬНОЕ ВОССТАНОВЛЕНИЕ ГОТОВО",
+        tone: "err",
+        glitch: true,
+        delay: 500,
+    },
 ];
 
 const BARS = 28;
@@ -86,7 +91,7 @@ export default function Level12Signal() {
             setStage("verified");
         } else {
             play("error");
-            setNote("SIGNAL MISMATCH: the transmitted word was not recovered.");
+            setNote("НЕСОВПАДЕНИЕ СИГНАЛА: переданное слово не восстановлено.");
         }
     };
 
@@ -96,30 +101,30 @@ export default function Level12Signal() {
     };
 
     return (
-        <LevelFrame objective="Recover the transmitted word.">
+        <LevelFrame objective="Восстановите переданное слово.">
             <div className={s.layout}>
                 {stage === "signal" && !completed && (
                     <>
                         <section
                             className={s.panel}
-                            aria-label="Incoming transmission"
+                            aria-label="Входящая передача"
                         >
                             <header className={s.head}>
                                 <span className={s.live} aria-hidden="true" />
-                                <span>INCOMING TRANSMISSION</span>
+                                <span>ВХОДЯЩАЯ ПЕРЕДАЧА</span>
                             </header>
 
                             <dl className={s.meta}>
                                 <div>
-                                    <dt>Source</dt>
-                                    <dd>UNKNOWN</dd>
+                                    <dt>Источник</dt>
+                                    <dd>НЕИЗВЕСТЕН</dd>
                                 </div>
                                 <div>
-                                    <dt>Format</dt>
+                                    <dt>Формат</dt>
                                     <dd>MORSE</dd>
                                 </div>
                                 <div>
-                                    <dt>Signal integrity</dt>
+                                    <dt>Целостность сигнала</dt>
                                     <dd className="tnum">87%</dd>
                                 </div>
                             </dl>
@@ -142,9 +147,9 @@ export default function Level12Signal() {
                             </div>
 
                             <p className={s.status}>
-                                The signal can be replayed.
+                                Сигнал можно прослушать повторно.
                                 <br />
-                                Visual decoding is unavailable.
+                                Визуальное декодирование недоступно.
                             </p>
 
                             <div className={s.actions}>
@@ -155,17 +160,17 @@ export default function Level12Signal() {
                                     sound={null}
                                 >
                                     {playing
-                                        ? "▮▮ Playing..."
+                                        ? "▮▮ Воспроизведение..."
                                         : heard
-                                          ? "▶ Replay signal"
-                                          : "▶ Play signal"}
+                                          ? "▶ Повторить сигнал"
+                                          : "▶ Прослушать сигнал"}
                                 </TerminalButton>
                             </div>
                         </section>
 
                         <section className={s.answer}>
                             <TerminalField
-                                label="Transmitted word"
+                                label="Переданное слово"
                                 value={answer}
                                 onChange={(e) => {
                                     setNote("");
@@ -182,7 +187,7 @@ export default function Level12Signal() {
                                 disabled={!answer.trim()}
                                 sound={null}
                             >
-                                Decode
+                                Расшифровать
                             </TerminalButton>
                         </section>
 
@@ -196,7 +201,7 @@ export default function Level12Signal() {
 
                 {stage === "verified" && (
                     <>
-                        <TerminalWindow title="Signal">
+                        <TerminalWindow title="Сигнал">
                             <TypedBlock
                                 items={VERIFIED}
                                 onDone={() => setVerifiedDone(true)}
@@ -208,7 +213,7 @@ export default function Level12Signal() {
                                     variant="primary"
                                     onClick={() => setStage("reboot")}
                                 >
-                                    Continue
+                                    Продолжить
                                 </TerminalButton>
                             </div>
                         )}
@@ -221,7 +226,7 @@ export default function Level12Signal() {
 
                 {(stage === "done" || completed) && (
                     <CompletePanel
-                        title="Recovery"
+                        title="Восстановление"
                         lines={ACCEPTED}
                         shard={12}
                         onContinue={() => navigate("final.assembly")}

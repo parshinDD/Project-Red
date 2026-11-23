@@ -25,22 +25,22 @@ function Panel() {
             className={s.drawer}
             role="dialog"
             aria-modal="true"
-            aria-label="Journal"
+            aria-label="Журнал"
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
         >
             <div className={s.drawerHead}>
-                <h2 className={s.drawerTitle}>Journal</h2>
+                <h2 className={s.drawerTitle}>Журнал</h2>
                 <TerminalButton size="small" onClick={close}>
-                    Close [J]
+                    Закрыть [J]
                 </TerminalButton>
             </div>
             <div className={s.tabs} role="tablist">
                 {[
-                    ["archive", "Archive"],
-                    ["achievements", "Achievements"],
+                    ["archive", "Архив"],
+                    ["achievements", "Достижения"],
                 ].map(([id, name]) => (
                     <button
                         key={id}
@@ -57,7 +57,7 @@ function Panel() {
             <div className={s.drawerBody} role="tabpanel">
                 {tab === "archive" &&
                     (journal.length === 0 ? (
-                        <p className={s.empty}>No records recovered yet.</p>
+                        <p className={s.empty}>Записей пока не восстановлено.</p>
                     ) : (
                         journal.map(
                             (id) =>
@@ -76,7 +76,7 @@ function Panel() {
                                 {earned.length}/
                                 {Object.keys(ACHIEVEMENTS).length}
                             </span>{" "}
-                            unlocked
+                            открыто
                         </p>
                         {Object.entries(ACHIEVEMENTS).map(([id, a]) => {
                             const has = earned.includes(id);
@@ -91,21 +91,21 @@ function Panel() {
                                             <h3>{a.name}</h3>
                                             <p>{a.desc}</p>
                                             <span className={s.achTag}>
-                                                Unlocked
+                                                Открыто
                                             </span>
                                         </div>
                                     ) : (
                                         <div className={s.achText}>
-                                            <h3>Locked</h3>
+                                            <h3>Закрыто</h3>
                                             <p
                                                 className={s.redact}
-                                                aria-label="Hidden until unlocked"
+                                                aria-label="Скрыто до открытия"
                                             >
                                                 <i />
                                                 <i />
                                             </p>
                                             <span className={s.achTag}>
-                                                Not yet unlocked
+                                                Пока не открыто
                                             </span>
                                         </div>
                                     )}

@@ -1,10 +1,10 @@
 export const ACTS = {
-    0: { roman: "", name: "PROLOGUE" },
-    1: { roman: "I", name: "CLOSED BETA" },
-    2: { roman: "II", name: "SURVIVAL" },
-    3: { roman: "III", name: "ISEKAI" },
-    4: { roman: "IV", name: "SCOUT CORPS & RED MAGIC" },
-    5: { roman: "", name: "FINAL" },
+    0: { roman: "", name: "ПРОЛОГ" },
+    1: { roman: "I", name: "ЗАКРЫТАЯ БЕТА" },
+    2: { roman: "II", name: "ВЫЖИВАНИЕ" },
+    3: { roman: "III", name: "ИСЕКАЙ" },
+    4: { roman: "IV", name: "РАЗВЕДКОРПУС" },
+    5: { roman: "", name: "ФИНАЛ" },
 };
 
 const level = (n, act, theme, title, tip) => ({
@@ -25,7 +25,7 @@ export const NODES = [
         theme: "crt",
         surface: "crt",
         mood: "dark",
-        title: "BOOT",
+        title: "ЗАГРУЗКА",
     },
     {
         id: "prologue.agreement",
@@ -34,7 +34,7 @@ export const NODES = [
         theme: "crt",
         surface: "crt",
         mood: "contract",
-        title: "AGREEMENT",
+        title: "СОГЛАШЕНИЕ",
     },
     {
         id: "prologue.welcome",
@@ -43,116 +43,116 @@ export const NODES = [
         theme: "crt",
         surface: "crt",
         mood: "online",
-        title: "WELCOME",
+        title: "ПРИВЕТСТВИЕ",
     },
 
     level(
         1,
         1,
         "pixel",
-        "BUG HUNT",
-        "Click anything that looks wrong. Hints are free.",
+        "ОХОТА НА БАГИ",
+        "Нажимайте на все, что выглядит неправильно. Подсказки бесплатны.",
     ),
     level(
         2,
         1,
         "log",
-        "PATCH NOTES",
-        "Read the entries carefully. Wrong answers cost nothing.",
+        "ПАТЧНОУТЫ",
+        "Читайте записи внимательно. Неверные ответы ничего не стоят.",
     ),
     level(
         3,
         1,
         "minimal",
-        "MEMORY",
-        "Each mistake costs 1 HP. The sequence is replayed after an error.",
+        "ПАМЯТЬ",
+        "Каждая ошибка стоит 1 HP. После ошибки последовательность повторяется.",
     ),
     {
         id: "act.1.complete",
         kind: "actComplete",
         act: 1,
         theme: "minimal",
-        title: "ACT COMPLETE",
+        title: "АКТ ПРОЙДЕН",
     },
 
     level(
         4,
         2,
         "industrial",
-        "RED LIGHT, GREEN LIGHT",
-        "Hold SPACE to move. Let go on red: moving on red costs 1 HP.",
+        "КРАСНЫЙ СВЕТ, ЗЕЛЕНЫЙ СВЕТ",
+        "Держите ПРОБЕЛ, чтобы двигаться. Отпускайте на красном: движение на красном стоит 1 HP.",
     ),
     level(
         5,
         2,
         "arena",
-        "GLASS BRIDGE",
-        "Read the rules. A wrong crossing costs 1 HP. Hints are free.",
+        "СТЕКЛЯННЫЙ МОСТ",
+        "Прочитайте правила. Ошибочный переход стоит 1 HP. Подсказки бесплатны.",
     ),
     level(
         6,
         2,
         "dossier",
-        "LIAR VOTE",
-        "Wrong reports cost nothing. Hints are free.",
+        "ГОЛОСОВАНИЕ ЛЖЕЦОВ",
+        "Ошибочные отчеты ничего не стоят. Подсказки бесплатны.",
     ),
     {
         id: "act.2.complete",
         kind: "actComplete",
         act: 2,
         theme: "arena",
-        title: "ACT COMPLETE",
+        title: "АКТ ПРОЙДЕН",
     },
 
     level(
         7,
         3,
         "fantasy",
-        "CHARACTER CREATION",
-        "A scroll has been added to your journal [J]. Wrong builds cost nothing.",
+        "СОЗДАНИЕ ПЕРСОНАЖА",
+        "Свиток добавлен в ваш журнал [J]. Ошибочные сборки ничего не стоят.",
     ),
     level(
         8,
         3,
         "fantasy",
-        "FAMILIARS",
-        "Wrong answers cost nothing. Hints are free.",
+        "ФАМИЛЬЯРЫ",
+        "Неверные ответы ничего не стоят. Подсказки бесплатны.",
     ),
     level(
         9,
         3,
         "tavern",
-        "TAVERN",
-        "Visit them in any order. Wrong answers cost nothing.",
+        "ТАВЕРНА",
+        "Посещайте их в любом порядке. Неверные ответы ничего не стоят.",
     ),
     {
         id: "act.3.complete",
         kind: "actComplete",
         act: 3,
         theme: "tavern",
-        title: "ACT COMPLETE",
+        title: "АКТ ПРОЙДЕН",
     },
 
     level(
         10,
         4,
         "military",
-        "SCOUT CIPHER",
-        "Wrong answers cost nothing. Hints are free.",
+        "ШИФР РАЗВЕДЧИКА",
+        "Неверные ответы ничего не стоят. Подсказки бесплатны.",
     ),
     level(
         11,
         4,
         "tactical",
-        "TITAN PROTOCOL",
-        "No HP is lost here. Hints are free.",
+        "ПРОТОКОЛ ТИТАНОВ",
+        "HP на этом уровне не списывается. Подсказки бесплатны.",
     ),
     level(
         12,
         4,
         "signal",
-        "RED MAGIC SIGNAL",
-        "The signal can be replayed. Hints are free.",
+        "СИГНАЛ RED MAGIC",
+        "Сигнал можно прослушать повторно. Подсказки бесплатны.",
     ),
 
     {
@@ -162,8 +162,8 @@ export const NODES = [
         theme: "crt",
         surface: "crt",
         mood: "alarm",
-        title: "ASSEMBLY",
-        tip: "Twelve fragments. Twelve positions. One key.",
+        title: "СБОРКА",
+        tip: "Двенадцать фрагментов. Двенадцать позиций. Один ключ.",
     },
     {
         id: "final.verify",
@@ -172,7 +172,7 @@ export const NODES = [
         theme: "crt",
         surface: "crt",
         mood: "online",
-        title: "ARCHIVE CHECK",
+        title: "ПРОВЕРКА АРХИВА",
     },
     {
         id: "final.report",
@@ -181,7 +181,7 @@ export const NODES = [
         theme: "crt",
         surface: "crt",
         mood: "final",
-        title: "FINAL REPORT",
+        title: "ФИНАЛЬНЫЙ ОТЧЕТ",
     },
 ];
 
@@ -198,12 +198,12 @@ export const pad2 = (n) => String(n).padStart(2, "0");
 export function nodeLabel(node) {
     if (!node) return "";
 
-    if (node.kind === "prologue") return "PROLOGUE";
+    if (node.kind === "prologue") return "ПРОЛОГ";
 
-    if (node.kind === "final") return `FINAL — ${node.title}`;
+    if (node.kind === "final") return `ФИНАЛ - ${node.title}`;
 
     const act = ACTS[node.act];
-    if (node.kind === "actComplete") return `ACT ${act.roman} · COMPLETE`;
+    if (node.kind === "actComplete") return `АКТ ${act.roman} · ПРОЙДЕН`;
 
-    return `ACT ${act.roman} · LEVEL ${pad2(node.level)} — ${node.title}`;
+    return `АКТ ${act.roman} · УРОВЕНЬ ${pad2(node.level)} - ${node.title}`;
 }

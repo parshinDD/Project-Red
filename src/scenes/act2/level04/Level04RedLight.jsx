@@ -26,11 +26,11 @@ const PAD = 20;
 const MINI = Array.from({ length: 20 }, (_, i) => (i + 1) * 5);
 
 const COMPLETE_LINES = [
-    { text: "REACTION TEST COMPLETE", tone: "title" },
-    { text: "Distance: 100/100 steps" },
+    { text: "ТЕСТ РЕАКЦИИ ПРОЙДЕН", tone: "title" },
+    { text: "Дистанция: 100/100 шагов" },
     { text: "", delay: 700 },
     {
-        text: "Anomaly detected: Signal origin unknown.",
+        text: "Обнаружена аномалия: источник сигнала неизвестен.",
         tone: "err",
         glitch: true,
         delay: 500,
@@ -245,7 +245,7 @@ export default function Level04RedLight() {
                 now > sm.graceUntil
             ) {
                 sm.caught = true;
-                say("Movement detected during RED LIGHT.", "err");
+                say("Зафиксировано движение при КРАСНОМ СВЕТЕ.", "err");
                 damage();
             }
 
@@ -288,7 +288,7 @@ export default function Level04RedLight() {
                 setMode("timeout");
                 play("error");
                 say(
-                    "Time expired. No HP is lost: the test can be repeated.",
+                    "Время истекло. HP не списывается: тест можно повторить.",
                     "dim",
                 );
             }
@@ -329,17 +329,17 @@ export default function Level04RedLight() {
     const { light, steps, left, caught } = view;
     const running = mode === "running";
     const lightText = !running
-        ? "STANDBY"
+        ? "ОЖИДАНИЕ"
         : caught
-          ? "CAUGHT"
+          ? "ПОЙМАН"
           : light === "green"
-            ? "MOVE"
-            : "STOP";
+            ? "ДВИЖЕНИЕ"
+            : "СТОП";
 
     return (
-        <LevelFrame objective="Reach the finish line.">
+        <LevelFrame objective="Доберитесь до финишной черты.">
             <div className={s.layout}>
-                <section className={s.arena} aria-label="Reaction arena">
+                <section className={s.arena} aria-label="Арена реакции">
                     <div
                         className={s.tower}
                         data-light={running ? light : "off"}
@@ -375,7 +375,7 @@ export default function Level04RedLight() {
                                 className={s.gate}
                                 style={{ "--at": PAD + GOAL }}
                             >
-                                <b>FINISH</b>
+                                <b>ФИНИШ</b>
                                 <span />
                             </i>
                         </div>
@@ -388,7 +388,7 @@ export default function Level04RedLight() {
                     <div
                         className={s.mini}
                         role="img"
-                        aria-label={`${steps} of ${GOAL} steps`}
+                        aria-label={`Шагов: ${steps} из ${GOAL}`}
                     >
                         {MINI.map((n) => (
                             <i key={n} data-on={steps >= n || undefined} />
@@ -406,15 +406,15 @@ export default function Level04RedLight() {
                         }}
                         onPointerUp={() => hold(false)}
                         onPointerCancel={() => hold(false)}
-                        aria-label="Hold to move. Keyboard: hold Space"
+                        aria-label="Держите, чтобы двигаться. Клавиатура: удерживайте Space"
                     >
-                        Hold to move <kbd>Space</kbd>
+                        Держите, чтобы двигаться <kbd>Space</kbd>
                     </button>
                     <p className="srOnly" aria-live="assertive">
                         {running
                             ? light === "red"
-                                ? "Red light. Stop."
-                                : "Green light. Move."
+                                ? "Красный свет. Стоп."
+                                : "Зеленый свет. Двигайтесь."
                             : ""}
                     </p>
                 </section>
@@ -422,17 +422,17 @@ export default function Level04RedLight() {
                 <div className={s.info}>
                     <dl className={s.readout}>
                         <div>
-                            <dt>Distance</dt>
+                            <dt>Дистанция</dt>
                             <dd>
                                 {steps}/{GOAL}
                             </dd>
                         </div>
                         <div>
-                            <dt>Time</dt>
+                            <dt>Время</dt>
                             <dd>{left.toFixed(1)}s</dd>
                         </div>
                         <div>
-                            <dt>Signal</dt>
+                            <dt>Сигнал</dt>
                             <dd
                                 className={cx(
                                     s.state,
@@ -448,14 +448,16 @@ export default function Level04RedLight() {
                         <>
                             <ul className={s.rules}>
                                 <li>
-                                    <b className={s.go}>GREEN LIGHT:</b> move
+                                    <b className={s.go}>ЗЕЛЕНЫЙ СВЕТ:</b>{" "}
+                                    двигайтесь
                                 </li>
                                 <li>
-                                    <b className={s.stop}>RED LIGHT:</b> stop
+                                    <b className={s.stop}>КРАСНЫЙ СВЕТ:</b>{" "}
+                                    остановитесь
                                 </li>
-                                <li>Time limit: {LIMIT_S} seconds</li>
-                                <li>Required distance: {GOAL} steps</li>
-                                <li>Moving on red: -1 HP</li>
+                                <li>Лимит времени: {LIMIT_S} секунд</li>
+                                <li>Нужная дистанция: {GOAL} шагов</li>
+                                <li>Движение на красный: -1 HP</li>
                             </ul>
                             <div className={s.actions}>
                                 <TerminalButton
@@ -463,7 +465,7 @@ export default function Level04RedLight() {
                                     onClick={start}
                                     autoFocus
                                 >
-                                    Start test
+                                    Начать тест
                                 </TerminalButton>
                             </div>
                         </>
@@ -472,8 +474,8 @@ export default function Level04RedLight() {
                     {mode === "timeout" && (
                         <>
                             <p className={s.text}>
-                                TIME EXPIRED - {steps}/{GOAL} steps. The test
-                                can be repeated at no cost.
+                                ВРЕМЯ ВЫШЛО - {steps}/{GOAL} шагов. Тест можно
+                                повторить бесплатно.
                             </p>
                             <div className={s.actions}>
                                 <TerminalButton
@@ -481,20 +483,20 @@ export default function Level04RedLight() {
                                     onClick={start}
                                     autoFocus
                                 >
-                                    Repeat test
+                                    Повторить тест
                                 </TerminalButton>
                             </div>
                         </>
                     )}
                     {running && (
                         <p className={s.text}>
-                            Hold SPACE or the button to move. Let go the moment
-                            the light turns red.
+                            Держите SPACE или кнопку, чтобы двигаться. Отпустите
+                            в тот же момент, когда свет станет красным.
                         </p>
                     )}
                     {(mode === "won" || completed) && (
                         <CompletePanel
-                            title="Reaction test"
+                            title="Тест реакции"
                             lines={COMPLETE_LINES}
                             shard={4}
                             onContinue={next}

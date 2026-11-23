@@ -19,19 +19,24 @@ import {
 import s from "./level07.module.css";
 
 const COMPLETE_LINES = [
-    { text: "CHARACTER CREATED", tone: "title" },
+    { text: "ПЕРСОНАЖ СОЗДАН", tone: "title" },
     { text: "" },
-    { text: "Class: CUSTOM" },
-    { text: "Build validation: PASSED" },
-    { text: "Origin: NOT FOUND", tone: "err", glitch: true, delay: 500 },
+    { text: "Класс: CUSTOM" },
+    { text: "Проверка сборки: ПРОЙДЕНА" },
+    {
+        text: "Происхождение: НЕ НАЙДЕНО",
+        tone: "err",
+        glitch: true,
+        delay: 500,
+    },
     { text: "", delay: 600 },
     {
-        text: "This character was not in the original design document.",
+        text: "Этого персонажа не было в исходном проектном документе.",
         delay: 500,
     },
     { text: "" },
     {
-        text: "The system has declined to explain why.",
+        text: "Система отказалась объяснять почему.",
         tone: "dim",
         delay: 700,
     },
@@ -211,7 +216,9 @@ function Hero({ stats }) {
                             )}
                             <g
                                 className={s.sigil}
-                                style={{ opacity: v > 0 ? 0.75 + t * 0.25 : 0.28 }}
+                                style={{
+                                    opacity: v > 0 ? 0.75 + t * 0.25 : 0.28,
+                                }}
                             >
                                 <circle
                                     cx="12"
@@ -270,7 +277,10 @@ export default function Level07Character() {
 
         if (failed.length) {
             play("trialFail");
-            say(`${failed.length} of ${trials.length} trials failed.`, "err");
+            say(
+                `Провалено испытаний: ${failed.length} из ${trials.length}.`,
+                "err",
+            );
 
             return;
         }
@@ -290,9 +300,9 @@ export default function Level07Character() {
     };
 
     return (
-        <LevelFrame objective="Build a hero for three trials. Spend all 12 points.">
+        <LevelFrame objective="Соберите героя для трех испытаний. Потратьте все 12 очков.">
             <div className={s.layout}>
-                <section className={s.sheet} aria-label="Character sheet">
+                <section className={s.sheet} aria-label="Лист персонажа">
                     <Hero stats={stats} />
                     <ul className={s.stats}>
                         {STATS.map((st) => (
@@ -320,7 +330,7 @@ export default function Level07Character() {
                                     className={s.step}
                                     onClick={() => change(st.id, -1)}
                                     disabled={done || stats[st.id] <= MIN}
-                                    aria-label={`Decrease ${st.name}`}
+                                    aria-label={`Уменьшить: ${st.name}`}
                                 >
                                     -
                                 </button>
@@ -333,7 +343,7 @@ export default function Level07Character() {
                                         stats[st.id] >= MAX ||
                                         remaining <= 0
                                     }
-                                    aria-label={`Increase ${st.name}`}
+                                    aria-label={`Увеличить: ${st.name}`}
                                 >
                                     +
                                 </button>
@@ -341,7 +351,7 @@ export default function Level07Character() {
                         ))}
                     </ul>
                     <p className={s.points}>
-                        Points remaining{" "}
+                        Осталось очков{" "}
                         <b className={cx(s.pointsNo, "tnum")}>{remaining}</b>
                     </p>
                 </section>
@@ -349,14 +359,14 @@ export default function Level07Character() {
                 <div className={s.info}>
                     {done || completed ? (
                         <CompletePanel
-                            title="Character"
+                            title="Персонаж"
                             lines={COMPLETE_LINES}
                             shard={7}
                             onContinue={next}
                         />
                     ) : (
                         <>
-                            <ul className={s.trials} aria-label="Trials">
+                            <ul className={s.trials} aria-label="Испытания">
                                 {TRIALS.map((t) => {
                                     const result = report?.trials?.find(
                                         (r) => r.id === t.id,
@@ -378,7 +388,7 @@ export default function Level07Character() {
                                                 <ul className={s.verdict}>
                                                     {result.failures.length ===
                                                     0 ? (
-                                                        <li>Passed.</li>
+                                                        <li>Пройдено.</li>
                                                     ) : (
                                                         result.failures.map(
                                                             (m) => (
@@ -397,8 +407,8 @@ export default function Level07Character() {
 
                             {report?.unspent > 0 && (
                                 <p className={s.warn} role="alert">
-                                    Unspent points: {report.unspent}. Every
-                                    point has to be spent.
+                                    Не потрачено очков: {report.unspent}. Каждое
+                                    очко должно быть потрачено.
                                 </p>
                             )}
 
@@ -408,13 +418,13 @@ export default function Level07Character() {
                                     onClick={confirm}
                                     sound={null}
                                 >
-                                    Confirm build
+                                    Подтвердить сборку
                                 </TerminalButton>
                                 <TerminalButton
                                     onClick={reset}
                                     disabled={spent(stats) === 0}
                                 >
-                                    Reset
+                                    Сброс
                                 </TerminalButton>
                             </div>
                         </>

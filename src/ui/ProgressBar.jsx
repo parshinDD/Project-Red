@@ -17,7 +17,7 @@ export default function ProgressBar({
     paused = false,
     skip = false,
     restAt = 0,
-    label = "Loading",
+    label = "Загрузка",
 }) {
     const value = useMotionValue(0);
 

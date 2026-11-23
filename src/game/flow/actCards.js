@@ -3,33 +3,37 @@ import { BUILD_NAME } from "@/game/constants";
 export const ACT_CARD = {
     1: {
         motif: "stamp",
-        kicker: `${BUILD_NAME} · CHAPTER 1 / 4`,
-        log: ["channel: closed beta", "testers: 1", "stability: unknown"],
+        kicker: `${BUILD_NAME} · ГЛАВА 1 / 4`,
+        log: ["канал: закрытая бета", "тестеры: 1", "стабильность: неизвестна"],
     },
 
     2: {
         motif: "hazard",
-        kicker: `${BUILD_NAME} · CHAPTER 2 / 4`,
+        kicker: `${BUILD_NAME} · ГЛАВА 2 / 4`,
         log: [
-            "time limits: enabled",
-            "mistakes: logged",
-            "mercy: not implemented",
+            "лимиты времени: включены",
+            "ошибки: записываются",
+            "жалость: не реализована",
         ],
     },
 
     3: {
         motif: "runes",
-        kicker: `${BUILD_NAME} · CHAPTER 3 / 4`,
-        log: ["origin: not found", "world: loading", "permission: unclear"],
+        kicker: `${BUILD_NAME} · ГЛАВА 3 / 4`,
+        log: [
+            "происхождение: не найдено",
+            "мир: загружается",
+            "разрешение: неясно",
+        ],
     },
 
     4: {
         motif: "signal",
-        kicker: `${BUILD_NAME} · CHAPTER 4 / 4`,
+        kicker: `${BUILD_NAME} · ГЛАВА 4 / 4`,
         log: [
-            "signal: unregistered",
-            "source: unknown",
-            "recovery: in progress",
+            "сигнал: не зарегистрирован",
+            "источник: неизвестен",
+            "восстановление: идет",
         ],
     },
 };
@@ -37,5 +41,5 @@ export const ACT_CARD = {
 export const DEFAULT_ACT_CARD = {
     motif: "signal",
     kicker: BUILD_NAME,
-    log: ["loading module"],
+    log: ["загрузка модуля"],
 };

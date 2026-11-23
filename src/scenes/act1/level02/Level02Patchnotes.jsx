@@ -10,24 +10,25 @@ import LevelFrame from "@/ui/LevelFrame";
 import s from "./level02.module.css";
 
 const ENTRIES = [
-    "Reduced lag when petting cats",
-    "Enhanced quality of snacks",
-    "Sofa collision fixed",
-    "Patched the red-light bug",
-    "Added more cats",
-    "Weapon balance: none",
-    "No bugs found (we hope)",
+    "Радикально ускорено поглаживание кошек",
+    "Еще повышено качество снеков",
+    "Софа: исправлены коллизии",
+    "Пофикшен баг с красным светом",
+    "Ассортимент кошек расширен",
+    "В баланс оружия изменения не вносились",
+    "Новых багов не найдено (надеемся)",
 ];
 
 const ANSWER = "RESPAWN";
+const ANSWER_RU = "РЕСПАВН";
 
 const COMPLETE_LINES = [
-    { text: "UPDATE APPLIED", tone: "title" },
-    { text: "Respawn module unlocked." },
+    { text: "ОБНОВЛЕНИЕ ПРИМЕНЕНО", tone: "title" },
+    { text: "Модуль RESPAWN разблокирован." },
     { text: "", delay: 250 },
-    { text: "KNOWN ISSUE:", tone: "err", delay: 700 },
-    { text: "The system remembers a player who has never logged in." },
-    { text: "Status: Unresolved.", tone: "dim" },
+    { text: "ИЗВЕСТНАЯ ПРОБЛЕМА:", tone: "err", delay: 700 },
+    { text: "Система помнит игрока, который никогда не входил в систему." },
+    { text: "Статус: не решена.", tone: "dim" },
 ];
 
 export default function Level02Patchnotes() {
@@ -39,28 +40,32 @@ export default function Level02Patchnotes() {
     const submit = (e) => {
         e.preventDefault();
 
-        if (value.trim().toUpperCase() === ANSWER) {
+        const answer = value.trim().toUpperCase();
+
+        if (answer === ANSWER || answer === ANSWER_RU) {
             grantJournal("known-issue");
             complete();
         } else {
-            setError("UPDATE REJECTED: unknown recovery keyword.");
-            say("No HP is lost for a wrong keyword.", "dim");
+            setError(
+                "ОБНОВЛЕНИЕ ОТКЛОНЕНО: неизвестное ключевое слово восстановления.",
+            );
+            say("За неверное ключевое слово HP не списывается.", "dim");
             play("error");
         }
     };
 
     return (
-        <LevelFrame objective="Something in this changelog is not just a changelog. Find the recovery keyword.">
+        <LevelFrame objective="В этом журнале обновлений не просто журнал обновлений. Найдите ключевое слово восстановления.">
             <div className={s.layout}>
-                <section className={s.window} aria-label="Update log">
+                <section className={s.window} aria-label="Журнал обновлений">
                     <div className={s.bar}>
-                        <span>Update log - build 02.1.2</span>
+                        <span>Журнал обновлений - сборка 02.1.2</span>
                         <span className={s.ver}>v1.2.0</span>
                     </div>
                     <div className={s.content}>
-                        <h2 className={s.heading}>Patch notes</h2>
+                        <h2 className={s.heading}>Патчноуты</h2>
                         <p className={s.sub}>
-                            Changes since the previous internal build:
+                            Изменения с прошлой внутренней сборки:
                         </p>
                         <ul className={s.entries}>
                             {ENTRIES.map((line) => (
@@ -69,28 +74,29 @@ export default function Level02Patchnotes() {
                         </ul>
                     </div>
                     <p className={s.status}>
-                        Update ready · waiting for recovery keyword
+                        Обновление готово · ожидается ключевое слово
+                        восстановления
                     </p>
                 </section>
 
                 <aside>
                     {completed ? (
                         <CompletePanel
-                            title="Update"
+                            title="Обновление"
                             lines={COMPLETE_LINES}
                             shard={2}
                             onContinue={next}
                         />
                     ) : (
-                        <TerminalWindow title="Apply update">
+                        <TerminalWindow title="Применить обновление">
                             <form
                                 className={s.form}
                                 onSubmit={submit}
                                 noValidate
                             >
                                 <TerminalField
-                                    label="Recovery keyword"
-                                    helper="Letters only. Wrong answers cost nothing."
+                                    label="Ключевое слово восстановления"
+                                    helper="Только буквы. Неверные ответы ничего не стоят."
                                     value={value}
                                     onChange={(e) => {
                                         setValue(e.target.value);
@@ -104,7 +110,7 @@ export default function Level02Patchnotes() {
                                     type="submit"
                                     sound={null}
                                 >
-                                    Apply update
+                                    Применить обновление
                                 </TerminalButton>
                             </form>
                         </TerminalWindow>

@@ -9,9 +9,9 @@ import { CIPHERTEXT, LENGTH, QUOTE, isAnswer } from "./cipher";
 import s from "./level10.module.css";
 
 const COMPLETE_LINES = [
-    { text: "TRANSMISSION DECODED", tone: "title" },
+    { text: "ПЕРЕДАЧА РАСШИФРОВАНА", tone: "title" },
     { text: "" },
-    { text: "Source remains unknown.", tone: "dim", delay: 500 },
+    { text: "Источник по-прежнему неизвестен.", tone: "dim", delay: 500 },
 ];
 
 const isLetter = (ch) => /\p{L}/u.test(ch);
@@ -66,7 +66,7 @@ export default function Level10Cipher() {
         } else {
             play("error");
             setNote(
-                "DECODE REJECTED: the word does not match the transmission.",
+                "РАСШИФРОВКА ОТКЛОНЕНА: слово не совпадает с передачей.",
             );
         }
     };
@@ -94,11 +94,11 @@ export default function Level10Cipher() {
     };
 
     return (
-        <LevelFrame objective="Decode the intercepted transmission.">
+        <LevelFrame objective="Расшифруйте перехваченную передачу.">
             <div className={s.layout}>
                 {done || completed ? (
                     <CompletePanel
-                        title="Scout cipher"
+                        title="Шифр разведчика"
                         lines={COMPLETE_LINES}
                         shard={10}
                         onContinue={next}
@@ -107,17 +107,17 @@ export default function Level10Cipher() {
                     <>
                         <section
                             className={s.dispatch}
-                            aria-label="Transmission"
+                            aria-label="Передача"
                         >
                             <header className={s.head}>
-                                <span>INTERCEPTED TRANSMISSION</span>
-                                <span>SOURCE: UNKNOWN</span>
+                                <span>ПЕРЕХВАЧЕННАЯ ПЕРЕДАЧА</span>
+                                <span>ИСТОЧНИК: НЕИЗВЕСТЕН</span>
                             </header>
 
                             <div
                                 className={s.cipher}
                                 role="group"
-                                aria-label={`Transmission ${CIPHERTEXT}`}
+                                aria-label={`Передача ${CIPHERTEXT}`}
                             >
                                 {source.map((ch, i) => (
                                     <div key={i} className={s.col}>
@@ -130,7 +130,7 @@ export default function Level10Cipher() {
                                             autoComplete="off"
                                             autoCapitalize="characters"
                                             spellCheck={false}
-                                            aria-label={`Letter ${i + 1} of ${LENGTH}`}
+                                            aria-label={`Буква ${i + 1} из ${LENGTH}`}
                                             onChange={(e) => {
                                                 const v = e.target.value;
 
@@ -174,7 +174,7 @@ export default function Level10Cipher() {
                                 disabled={!full}
                                 sound={null}
                             >
-                                Submit
+                                Отправить
                             </TerminalButton>
                         </div>
 

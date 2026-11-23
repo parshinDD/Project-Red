@@ -17,14 +17,14 @@ const SHAFT = [0, 1, 2, 3, 4, 5, 6, 7];
 const ROWS = Array.from({ length: PAIRS }, (_, i) => PAIRS - i);
 
 const lines = (found) => [
-    { text: "BRIDGE CROSSED", tone: "title" },
-    { text: "Panels tested: 6" },
-    { text: "Structural integrity: acceptable.", tone: "dim" },
+    { text: "МОСТ ПЕРЕЙДЕН", tone: "title" },
+    { text: "Проверено панелей: 6" },
+    { text: "Целостность конструкции: приемлемая.", tone: "dim" },
     ...(found
         ? [
               { text: "", delay: 500 },
               {
-                  text: "Unregistered texture: logged as anomaly.",
+                  text: "Незарегистрированная текстура: записана как аномалия.",
                   tone: "err",
                   glitch: true,
                   delay: 400,
@@ -106,7 +106,7 @@ export default function Level05GlassBridge() {
             setViolated(broken);
             setMode("broken");
             play("glassCrack");
-            say(`CONSTRAINT VIOLATED: ${broken.text}`, "err");
+            say(`НАРУШЕНИЕ ОГРАНИЧЕНИЯ: ${broken.text}`, "err");
             damage();
             later(() => setMode("idle"), 1300);
 
@@ -140,7 +140,7 @@ export default function Level05GlassBridge() {
     const findTexture = (e) => {
         e.stopPropagation();
         play("anomaly");
-        say("UNREGISTERED TEXTURE", "err");
+        say("НЕЗАРЕГИСТРИРОВАННАЯ ТЕКСТУРА", "err");
         grantJournal("unregistered-texture");
         grantAchievement("texture-not-found");
     };
@@ -157,9 +157,9 @@ export default function Level05GlassBridge() {
     };
 
     return (
-        <LevelFrame objective="Cross the bridge. Each pair has one safe panel. Every rule must hold.">
+        <LevelFrame objective="Перейдите мост. В каждой паре одна безопасная панель. Все правила должны выполняться.">
             <div className={s.layout}>
-                <section className={s.arena} aria-label="Glass bridge">
+                <section className={s.arena} aria-label="Стеклянный мост">
                     <div className={s.abyss} aria-hidden="true">
                         {SHAFT.map((k) => (
                             <i
@@ -177,13 +177,13 @@ export default function Level05GlassBridge() {
                         className={s.bridge}
                         data-broken={mode === "broken" || undefined}
                     >
-                        <div className={s.platform}>Exit</div>
+                        <div className={s.platform}>Выход</div>
                         {ROWS.map((pair) => (
                             <div
                                 key={pair}
                                 className={s.pair}
                                 role="group"
-                                aria-label={`Panel pair ${pair}`}
+                                aria-label={`Пара панелей ${pair}`}
                             >
                                 {["L", "R"].map((side) => (
                                     <div key={side} className={s.cell}>
@@ -194,7 +194,7 @@ export default function Level05GlassBridge() {
                                             aria-pressed={
                                                 picks[pair - 1] === side
                                             }
-                                            aria-label={`Pair ${pair}, ${side === "L" ? "left" : "right"} panel`}
+                                            aria-label={`Пара ${pair}, ${side === "L" ? "левая" : "правая"} панель`}
                                             onClick={() => choose(pair, side)}
                                         >
                                             {pair === GLYPH_PAIR &&
@@ -210,8 +210,8 @@ export default function Level05GlassBridge() {
                                                 aria-hidden="true"
                                             >
                                                 {side === "L"
-                                                    ? "LEFT"
-                                                    : "RIGHT"}
+                                                    ? "ЛЕВАЯ"
+                                                    : "ПРАВАЯ"}
                                             </span>
                                         </button>
                                         {pair === GLYPH_PAIR &&
@@ -220,7 +220,7 @@ export default function Level05GlassBridge() {
                                                     type="button"
                                                     className={s.glyphHit}
                                                     onClick={findTexture}
-                                                    aria-label="Unregistered texture"
+                                                    aria-label="Незарегистрированная текстура"
                                                 />
                                             )}
                                     </div>
@@ -233,21 +233,21 @@ export default function Level05GlassBridge() {
                                 </span>
                             </div>
                         ))}
-                        <div className={s.platform}>Start</div>
+                        <div className={s.platform}>Старт</div>
                     </div>
                 </section>
 
                 <div className={s.info}>
                     {mode === "won" || completed ? (
                         <CompletePanel
-                            title="Glass bridge"
+                            title="Стеклянный мост"
                             lines={lines(foundBefore)}
                             shard={5}
                             onContinue={next}
                         />
                     ) : (
                         <>
-                            <TerminalWindow title="Bridge inspection rules">
+                            <TerminalWindow title="Правила осмотра моста">
                                 <ol className={s.rules}>
                                     {RULES.map((r, i) => (
                                         <li
@@ -270,8 +270,8 @@ export default function Level05GlassBridge() {
                             </TerminalWindow>
                             <p className={s.text}>
                                 {mode === "broken"
-                                    ? `CONSTRAINT VIOLATED - ${violated?.text} The bridge cracks: -${HP_COST_OF_A_FALL} HP.`
-                                    : "Pick one panel in every pair, then cross. A wrong crossing costs 1 HP. Hints are free."}
+                                    ? `НАРУШЕНИЕ ОГРАНИЧЕНИЯ - ${violated?.text} Мост трескается: -${HP_COST_OF_A_FALL} HP.`
+                                    : "Выберите по одной панели в каждой паре и переходите. Ошибочный переход стоит 1 HP."}
                             </p>
                             <div className={s.actions}>
                                 <TerminalButton
@@ -280,14 +280,14 @@ export default function Level05GlassBridge() {
                                     disabled={!ready || busy}
                                     sound={null}
                                 >
-                                    Cross bridge
+                                    Перейти мост
                                 </TerminalButton>
                                 <TerminalButton
                                     onClick={reset}
                                     disabled={busy || picks.every((p) => !p)}
                                     sound={null}
                                 >
-                                    Reset
+                                    Сброс
                                 </TerminalButton>
                             </div>
                         </>

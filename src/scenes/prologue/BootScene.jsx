@@ -11,29 +11,29 @@ const HEAD = [
     { k: "text", text: "PROJECT RED INTERACTIVE", tone: "title", delay: 700 },
     { k: "text", text: "INTERNAL BUILD 02.1.2", tone: "dim", delay: 300 },
     { k: "gap", delay: 100 },
-    { k: "text", text: "Initializing test environment…", delay: 350 },
+    { k: "text", text: "Инициализация тестовой среды...", delay: 350 },
 ];
 
 const TAIL = [
-    { k: "leader", label: "Loading assets", status: "OK", delay: 450 },
-    { k: "leader", label: "Loading player profile", status: "OK", delay: 300 },
+    { k: "leader", label: "Загрузка ассетов", status: "OK", delay: 450 },
+    { k: "leader", label: "Загрузка профиля игрока", status: "OK", delay: 300 },
     {
         k: "leader",
-        label: "Verifying recipient",
-        status: "WARNING",
+        label: "Проверка получателя",
+        status: "ВНИМАНИЕ",
         tone: "warn",
         delay: 600,
     },
     { k: "gap", delay: 200 },
     {
         k: "text",
-        text: "Recipient already registered.",
+        text: "Получатель уже зарегистрирован.",
         tone: "err",
         delay: 600,
     },
     { k: "gap", delay: 250 },
-    { k: "text", text: "NOTICE:", tone: "dim", delay: 350 },
-    { k: "text", text: "This is probably a caching issue.", delay: 200 },
+    { k: "text", text: "УВЕДОМЛЕНИЕ:", tone: "dim", delay: 350 },
+    { k: "text", text: "Вероятно, это проблема кеширования.", delay: 200 },
 ];
 
 const BAR = [
@@ -54,7 +54,7 @@ export default function BootScene() {
 
     return (
         <div className={s.screen}>
-            <TerminalWindow title="Project Red / boot">
+            <TerminalWindow title="Project Red / загрузка">
                 <TypedBlock
                     items={HEAD}
                     onDone={() => setStage((v) => Math.max(v, 1))}
@@ -63,7 +63,7 @@ export default function BootScene() {
                     <ProgressBar
                         sequence={BAR}
                         restAt={14}
-                        label="Loading"
+                        label="Загрузка"
                         onDone={() => setStage((v) => Math.max(v, 2))}
                     />
                 )}
@@ -89,7 +89,7 @@ export default function BootScene() {
                             onClick={next}
                             autoFocus
                         >
-                            Continue
+                            Продолжить
                         </TerminalButton>
                     </div>
                 )}

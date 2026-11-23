@@ -9,7 +9,7 @@ export default function TransitionConsole() {
 
     return (
         <div className={s.screen}>
-            <TerminalWindow title="Project Red / system">
+            <TerminalWindow title="Project Red / система">
                 <TypedBlock items={lines} onDone={finishCutRun} />
             </TerminalWindow>
         </div>

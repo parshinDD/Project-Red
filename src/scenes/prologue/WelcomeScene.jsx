@@ -15,20 +15,24 @@ export default function WelcomeScene() {
         () => [
             {
                 k: "text",
-                text: `Welcome, ${playerId || "player"}.`,
+                text: `Добро пожаловать, ${playerId || "игрок"}.`,
                 tone: "title",
                 delay: 600,
             },
             { k: "gap", delay: 150 },
-            { k: "text", text: "Your test session is now active.", delay: 350 },
             {
                 k: "text",
-                text: "Please do not attempt to repair the game.",
+                text: "Ваша тестовая сессия активна.",
+                delay: 350,
+            },
+            {
+                k: "text",
+                text: "Пожалуйста, не пытайтесь починить игру.",
                 delay: 450,
             },
             {
                 k: "text",
-                text: "That is technically not your job.",
+                text: "Формально говоря, это не ваша работа.",
                 tone: "dim",
                 delay: 650,
             },
@@ -40,7 +44,7 @@ export default function WelcomeScene() {
 
     return (
         <div className={s.screen}>
-            <TerminalWindow title="Project Red / session">
+            <TerminalWindow title="Project Red / сессия">
                 <TypedBlock items={items} onDone={() => setDone(true)} />
                 {done && (
                     <div
@@ -52,7 +56,7 @@ export default function WelcomeScene() {
                             onClick={start}
                             autoFocus
                         >
-                            Start level 01
+                            Начать уровень 01
                         </TerminalButton>
                     </div>
                 )}

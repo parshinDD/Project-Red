@@ -12,13 +12,13 @@ import TavernArt from "./TavernArt";
 import s from "./level09.module.css";
 
 const COMPLETE_LINES = [
-    { text: "MEMORY INDEX: COMPLETE", tone: "title" },
+    { text: "ИНДЕКС ПАМЯТИ: СОБРАН", tone: "title" },
     { text: "" },
-    { text: "The developer requested this test.", delay: 300 },
-    { text: "The developer requested this route.", delay: 500 },
-    { text: "The developer requested that you reach the end.", delay: 500 },
+    { text: "Разработчик запросил этот тест.", delay: 300 },
+    { text: "Разработчик запросил этот маршрут.", delay: 500 },
+    { text: "Разработчик запросил, чтобы вы дошли до конца.", delay: 500 },
     { text: "", delay: 600 },
-    { text: "IDENTITY: REDACTED", tone: "err", glitch: true, delay: 500 },
+    { text: "ЛИЧНОСТЬ: СКРЫТА", tone: "err", glitch: true, delay: 500 },
 ];
 
 export default function Level09Tavern() {
@@ -64,7 +64,7 @@ export default function Level09Tavern() {
             setReply({ ok: true, lines: npc.thanks });
             play("memoryIndex");
             grantJournal(`memory-${npc.index}`);
-            say(`MEMORY INDEX: 0${npc.index}`, "dim");
+            say(`ИНДЕКС ПАМЯТИ: 0${npc.index}`, "dim");
 
             if (next_.length === NPCS.length) {
                 timer.current = setTimeout(() => {
@@ -83,11 +83,11 @@ export default function Level09Tavern() {
     };
 
     return (
-        <LevelFrame objective="Answer the three questions. Visit them in any order.">
+        <LevelFrame objective="Ответьте на три вопроса. Навещать их можно в любом порядке.">
             <div className={s.layout}>
                 {finished ? (
                     <CompletePanel
-                        title="Tavern"
+                        title="Таверна"
                         lines={COMPLETE_LINES}
                         shard={9}
                         onContinue={next}
@@ -95,7 +95,9 @@ export default function Level09Tavern() {
                 ) : (
                     <>
                         <div className={s.scene}>
-                            <TavernArt id={uid.replace(/[^a-zA-Z0-9_-]/g, "")} />
+                            <TavernArt
+                                id={uid.replace(/[^a-zA-Z0-9_-]/g, "")}
+                            />
                             <i className={s.vignette} />
                             {NPCS.map((n) => (
                                 <button
@@ -106,7 +108,7 @@ export default function Level09Tavern() {
                                     data-on={talk === n.id || undefined}
                                     data-solved={isSolved(n.id) || undefined}
                                     onClick={() => visit(n.id)}
-                                    aria-label={`Talk to the ${n.name}${isSolved(n.id) ? " (answered)" : ""}`}
+                                    aria-label={`Поговорить: ${n.name}${isSolved(n.id) ? " (отвечено)" : ""}`}
                                 >
                                     <span className={s.mark} aria-hidden="true">
                                         {isSolved(n.id) ? "✓" : "?"}
@@ -120,9 +122,9 @@ export default function Level09Tavern() {
 
                         <div
                             className={s.index}
-                            aria-label={`Memory index: ${solved.length} of 3`}
+                            aria-label={`Индекс памяти: ${solved.length} из 3`}
                         >
-                            <span>MEMORY INDEX</span>
+                            <span>ИНДЕКС ПАМЯТИ</span>
                             {NPCS.map((n) => (
                                 <b
                                     key={n.id}
@@ -146,7 +148,7 @@ export default function Level09Tavern() {
                                         className={s.hint}
                                         style={{ "--i": GREETING.length }}
                                     >
-                                        Click a character to talk.
+                                        Нажмите на персонажа, чтобы поговорить.
                                     </p>
                                 </div>
                             ) : (
@@ -173,7 +175,7 @@ export default function Level09Tavern() {
                                     ) : (
                                         <div className={s.ask}>
                                             <TerminalField
-                                                label="Your answer"
+                                                label="Ваш ответ"
                                                 value={answer}
                                                 onChange={(e) => {
                                                     setAnswer(e.target.value);
@@ -196,7 +198,7 @@ export default function Level09Tavern() {
                                                 disabled={!answer.trim()}
                                                 sound={null}
                                             >
-                                                Answer
+                                                Ответить
                                             </TerminalButton>
                                         </div>
                                     )}

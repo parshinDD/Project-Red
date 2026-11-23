@@ -10,7 +10,7 @@ export function grantAchievement(id) {
 
     useUiStore.getState().pushToast({
         kind: "achievement",
-        title: "Achievement unlocked",
+        title: "Достижение открыто",
         body: a.name,
         desc: a.desc,
     });
@@ -27,7 +27,7 @@ export function grantJournal(id) {
 
     useUiStore.getState().pushToast({
         kind: "journal",
-        title: "Journal updated",
+        title: "Журнал обновлен",
         body: e.title,
     });
 

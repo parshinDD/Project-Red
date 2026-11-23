@@ -13,7 +13,7 @@ export default function HpMeter() {
         <div
             className={s.meter}
             role="img"
-            aria-label={`Health ${hp} of ${START_HP}`}
+            aria-label={`Здоровье: ${hp} из ${START_HP}`}
         >
             <Glitchable swaps={swapsFor("hp")}>HP</Glitchable>
 
