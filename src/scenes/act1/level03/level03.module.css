@@ -142,6 +142,13 @@
     --pad-lit: #f2cd52;
 }
 
+.prank {
+    grid-column: 1 / -1;
+    display: grid;
+    gap: var(--sp-4);
+    justify-items: start;
+}
+
 @media (max-width: 900px) {
     .layout {
         grid-template-columns: 1fr;

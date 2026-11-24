@@ -4,11 +4,14 @@ import { grantAchievement, grantJournal } from "@/game/rewards";
 import { play } from "@/audio/audioEngine";
 import { cx } from "@/lib/cx";
 import TerminalButton from "@/ui/TerminalButton";
+import { TerminalWindow } from "@/ui/Terminal";
+import TypedBlock from "@/ui/TypedBlock";
 import CompletePanel from "@/ui/CompletePanel";
 import LevelFrame from "@/ui/LevelFrame";
 import s from "./level03.module.css";
 
 const TARGET = 8;
+const JOKE_LEN = 24;
 const PADS = [
     { name: "КРАСНАЯ", key: "1" },
     { name: "СИНЯЯ", key: "2" },
@@ -23,6 +26,8 @@ const STATE_TEXT = {
     waiting: "ОК",
     error: "НЕ СОВПАЛО",
     won: "ПРОЙДЕНО",
+    joke: "ЗАПОМНИЛИ?",
+    prank: "ШУЧУ",
 };
 
 const COMPLETE_LINES = [
@@ -36,6 +41,24 @@ const COMPLETE_LINES = [
         glitch: true,
         delay: 500,
     },
+];
+
+const PRANK_LINES = [
+    { k: "text", text: "ЗАПИСЬ ВОССТАНОВЛЕНА", tone: "title", delay: 300 },
+    { k: "gap", delay: 100 },
+    {
+        k: "text",
+        text: "Никто не смог бы это повторить.",
+        tone: "dim",
+        delay: 450,
+    },
+    {
+        k: "text",
+        text: "Но у тебя почти получилось.",
+        tone: "dim",
+        delay: 500,
+    },
+    { k: "text", text: "РЕЗУЛЬТАТ: ЗАЧТЕНО АВТОМАТИЧЕСКИ", delay: 500 },
 ];
 
 function makeSequence(n) {
@@ -54,6 +77,7 @@ function makeSequence(n) {
 export default function Level03Memory() {
     const { completed, complete, damage, say, next } = useSceneApi(3);
     const seq = useRef(null);
+    const jokeSeq = useRef(null);
 
     if (!seq.current) seq.current = makeSequence(TARGET);
 
@@ -61,6 +85,7 @@ export default function Level03Memory() {
     const [round, setRound] = useState(1);
     const [lit, setLit] = useState(-1);
     const [errors, setErrors] = useState(0);
+    const [prankReady, setPrankReady] = useState(false);
 
     const inputIdx = useRef(0);
     const timers = useRef([]);
@@ -100,6 +125,37 @@ export default function Level03Memory() {
         };
     }, [mode, round]);
 
+    useEffect(() => {
+        if (mode !== "joke") return;
+
+        let cancelled = false;
+        const local = [];
+        const wait = (ms) => new Promise((r) => local.push(setTimeout(r, ms)));
+
+        if (!jokeSeq.current) jokeSeq.current = makeSequence(JOKE_LEN);
+
+        (async () => {
+            await wait(700);
+
+            for (let i = 0; i < jokeSeq.current.length; i++) {
+                if (cancelled) return;
+                setLit(jokeSeq.current[i]);
+                play("pad", { index: jokeSeq.current[i] });
+                await wait(90);
+                setLit(-1);
+                await wait(40);
+            }
+
+            if (!cancelled) setMode("input");
+        })();
+
+        return () => {
+            cancelled = true;
+            local.forEach(clearTimeout);
+            setLit(-1);
+        };
+    }, [mode]);
+
     const fail = () => {
         setErrors((e) => e + 1);
         setMode("error");
@@ -130,6 +186,15 @@ export default function Level03Memory() {
         play("pad", { index: i });
         later(() => setLit(-1), 170);
 
+        if (round > TARGET) {
+            later(() => {
+                setMode("prank");
+                say("ШУЧУ. Уровень пройден.", "hint");
+            }, 400);
+
+            return;
+        }
+
         if (seq.current[inputIdx.current] !== i) {
             fail();
             return;
@@ -138,7 +203,12 @@ export default function Level03Memory() {
         inputIdx.current += 1;
         if (inputIdx.current === round) {
             if (round === TARGET) {
-                win();
+                setMode("waiting");
+                later(() => {
+                    setRound(TARGET + 1);
+                    setMode("joke");
+                }, 800);
+
                 return;
             }
 
@@ -152,6 +222,8 @@ export default function Level03Memory() {
 
     const pressRef = useRef(press);
     pressRef.current = press;
+
+    const prankDone = () => setPrankReady(true);
 
     useEffect(() => {
         const onKey = (e) => {
@@ -208,16 +280,23 @@ export default function Level03Memory() {
                             </div>
                         </>
                     )}
-                    {mode !== "intro" && mode !== "won" && !completed && (
-                        <div className={s.actions}>
-                            <TerminalButton
-                                onClick={() => setMode("showing")}
-                                disabled={mode !== "input"}
-                            >
-                                Повторить последовательность
-                            </TerminalButton>
-                        </div>
-                    )}
+                    {mode !== "intro" &&
+                        mode !== "won" &&
+                        mode !== "prank" &&
+                        !completed && (
+                            <div className={s.actions}>
+                                <TerminalButton
+                                    onClick={() =>
+                                        setMode(
+                                            round > TARGET ? "joke" : "showing",
+                                        )
+                                    }
+                                    disabled={mode !== "input"}
+                                >
+                                    Повторить последовательность
+                                </TerminalButton>
+                            </div>
+                        )}
                     {(mode === "won" || completed) && (
                         <CompletePanel
                             title="Тест памяти"
@@ -256,6 +335,25 @@ export default function Level03Memory() {
                     ))}
                 </div>
             </div>
+
+            {mode === "prank" && !completed && (
+                <div className={s.prank}>
+                    <TerminalWindow title="Служебная записка">
+                        <TypedBlock items={PRANK_LINES} onDone={prankDone} />
+                    </TerminalWindow>
+                    {prankReady && (
+                        <div className={s.actions}>
+                            <TerminalButton
+                                variant="primary"
+                                onClick={win}
+                                autoFocus
+                            >
+                                Завершить уровень
+                            </TerminalButton>
+                        </div>
+                    )}
+                </div>
+            )}
         </LevelFrame>
     );
 }

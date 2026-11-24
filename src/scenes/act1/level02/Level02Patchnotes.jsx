@@ -32,7 +32,7 @@ const COMPLETE_LINES = [
 ];
 
 export default function Level02Patchnotes() {
-    const { completed, complete, say, next } = useSceneApi(2);
+    const { completed, complete, damage, say, next } = useSceneApi(2);
 
     const [value, setValue] = useState("");
     const [error, setError] = useState("");
@@ -49,7 +49,8 @@ export default function Level02Patchnotes() {
             setError(
                 "ОБНОВЛЕНИЕ ОТКЛОНЕНО: неизвестное ключевое слово восстановления.",
             );
-            say("За неверное ключевое слово HP не списывается.", "dim");
+            damage();
+            say("За неверное ключевое слово списывается 1 HP.", "dim");
             play("error");
         }
     };
@@ -96,7 +97,7 @@ export default function Level02Patchnotes() {
                             >
                                 <TerminalField
                                     label="Ключевое слово восстановления"
-                                    helper="Только буквы. Неверные ответы ничего не стоят."
+                                    helper="Только буквы. Неверное ключевое слово стоит 1 HP."
                                     value={value}
                                     onChange={(e) => {
                                         setValue(e.target.value);

@@ -17,7 +17,7 @@ const COMPLETE_LINES = [
 const isLetter = (ch) => /\p{L}/u.test(ch);
 
 export default function Level10Cipher() {
-    const { completed, complete, next } = useSceneApi(10);
+    const { completed, complete, damage, say, next } = useSceneApi(10);
 
     const [letters, setLetters] = useState(() => Array(LENGTH).fill(""));
     const [note, setNote] = useState("");
@@ -65,9 +65,11 @@ export default function Level10Cipher() {
             complete();
         } else {
             play("error");
+            damage();
             setNote(
-                "РАСШИФРОВКА ОТКЛОНЕНА: слово не совпадает с передачей.",
+                "РАСШИФРОВКА ОТКЛОНЕНА: слово не совпадает с передачей. Списан 1 HP.",
             );
+            say("Неверная расшифровка стоит 1 HP.", "dim");
         }
     };
 

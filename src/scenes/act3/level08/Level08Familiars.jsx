@@ -51,7 +51,7 @@ function Damaged({ text }) {
 }
 
 export default function Level08Familiars() {
-    const { completed, complete, say, next } = useSceneApi(8);
+    const { completed, complete, damage, say, next } = useSceneApi(8);
 
     const [stage, setStage] = useState(completed ? "done" : "match");
     const [picks, setPicks] = useState({ "001": "", "002": "" });
@@ -70,8 +70,9 @@ export default function Level08Familiars() {
             );
         } else {
             play("error");
+            damage();
             setNote(
-                "СБОЙ ВОССТАНОВЛЕНИЯ: как минимум одна запись сопоставлена не с тем фамильяром.",
+                "СБОЙ ВОССТАНОВЛЕНИЯ: как минимум одна кличка сопоставлена не с тем фамильяром. Списан 1 HP.",
             );
         }
     };
@@ -85,7 +86,10 @@ export default function Level08Familiars() {
             complete();
         } else {
             play("error");
-            setNote("ПРОВЕРКА НАБЛЮДАТЕЛЬНОСТИ ПРОВАЛЕНА: перечитайте записи.");
+            damage();
+            setNote(
+                "ПРОВЕРКА НАБЛЮДАТЕЛЬНОСТИ ПРОВАЛЕНА: перечитайте записи. Списан 1 HP.",
+            );
         }
     };
 

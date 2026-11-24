@@ -14,9 +14,24 @@ import s from "./final.module.css";
 const REPORT = [
     { k: "text", text: "ФИНАЛЬНЫЙ ОТЧЕТ", tone: "title", delay: 520 },
     { k: "gap", delay: 100 },
-    { k: "leader", label: "Тестовые сценарии", status: "ЗАВЕРШЕНЫ", delay: 480 },
-    { k: "leader", label: "Целостность памяти", status: "ВОССТАНОВЛЕНА", delay: 440 },
-    { k: "leader", label: "Личность игрока", status: "ПОДТВЕРЖДЕНА", delay: 440 },
+    {
+        k: "leader",
+        label: "Тестовые сценарии",
+        status: "ЗАВЕРШЕНЫ",
+        delay: 480,
+    },
+    {
+        k: "leader",
+        label: "Целостность памяти",
+        status: "ВОССТАНОВЛЕНА",
+        delay: 440,
+    },
+    {
+        k: "leader",
+        label: "Личность игрока",
+        status: "ПОДТВЕРЖДЕНА",
+        delay: 440,
+    },
     {
         k: "leader",
         label: "Фрагменты архива",
@@ -122,9 +137,9 @@ export default function FinalReport() {
         const at = (ms, fn) => veilTimers.current.push(setTimeout(fn, ms));
 
         at(2600, () => setVeilOn(true));
-        at(5600, () => setPackageOn(true));
-        at(8800, () => useGameStore.getState().completeGame());
-        at(10200, () => setEngraved(true));
+        at(3600, () => setPackageOn(true));
+        at(5800, () => useGameStore.getState().completeGame());
+        at(8800, () => setEngraved(true));
     }, [stage]);
 
     const musicRef = useRef(null);

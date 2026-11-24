@@ -49,7 +49,7 @@ const ACCEPTED = [
 const BARS = 28;
 
 export default function Level12Signal() {
-    const { completed, complete } = useSceneApi(12);
+    const { completed, complete, damage, say } = useSceneApi(12);
 
     const [stage, setStage] = useState(completed ? "done" : "signal");
     const [playing, setPlaying] = useState(false);
@@ -91,7 +91,11 @@ export default function Level12Signal() {
             setStage("verified");
         } else {
             play("error");
-            setNote("НЕСОВПАДЕНИЕ СИГНАЛА: переданное слово не восстановлено.");
+            damage();
+            setNote(
+                "НЕСОВПАДЕНИЕ СИГНАЛА: переданное слово не восстановлено. Списан 1 HP.",
+            );
+            say("Неверный ввод стоит 1 HP.", "dim");
         }
     };
 

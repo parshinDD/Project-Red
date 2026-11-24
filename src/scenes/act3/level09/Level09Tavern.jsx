@@ -82,10 +82,12 @@ export default function Level09Tavern() {
         }
     };
 
+    const solvedAll = finished || completed;
+
     return (
         <LevelFrame objective="Ответьте на три вопроса. Навещать их можно в любом порядке.">
             <div className={s.layout}>
-                {finished ? (
+                {solvedAll ? (
                     <CompletePanel
                         title="Таверна"
                         lines={COMPLETE_LINES}

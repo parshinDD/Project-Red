@@ -74,7 +74,7 @@ function Damaged({ text }) {
 }
 
 export default function Level11Titans() {
-    const { completed, complete, next } = useSceneApi(11);
+    const { completed, complete, damage, say, next } = useSceneApi(11);
 
     const [stage, setStage] = useState(completed ? "done" : "scale");
     const [map, setMap] = useState({ "01": "", "02": "", "03": "" });
@@ -94,7 +94,8 @@ export default function Level11Titans() {
             setStage("identify");
         } else {
             play("error");
-            setNote("НЕСОВПАДЕНИЕ МАСШТАБА: сверьтесь с таблицей.");
+            damage();
+            setNote("НЕСОВПАДЕНИЕ МАСШТАБА: сверьтесь с таблицей. Списан 1 HP.");
         }
     };
 
@@ -103,7 +104,9 @@ export default function Level11Titans() {
 
         if (conflict) {
             play("error");
+            damage();
             setNote(conflict);
+            say("Неверное сопоставление стоит 1 HP.", "dim");
         } else {
             play("cardFlip");
             play("found");
@@ -134,7 +137,9 @@ export default function Level11Titans() {
 
         if (rejected) {
             play("error");
+            damage();
             setNote(rejected);
+            say("Неверное сопоставление стоит 1 HP.", "dim");
         } else {
             play("trialPass");
             setNote("");
@@ -152,7 +157,8 @@ export default function Level11Titans() {
             complete();
         } else {
             play("error");
-            setNote("КОД ОТКЛОНЕН.");
+            damage();
+            setNote("КОД ОТКЛОНЕН. Списан 1 HP.");
         }
     };
 

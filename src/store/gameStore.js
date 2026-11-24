@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import {
     FIRST_NODE,
+    HINT_DELAYS,
     SAVE_VERSION,
     START_HP,
     STORAGE_KEY,
@@ -21,6 +22,7 @@ const initialData = () => ({
     achievements: [],
     levelProgress: {},
     hintsUsed: {},
+    levelSeconds: {},
     actHpLost: {},
     flags: {},
     finale: "LOCKED", // LOCKED | ASSEMBLY | ARCHIVE_READY | COMPLETE
@@ -79,8 +81,10 @@ export const useGameStore = create(
                     const node = getNode(nodeId);
                     const actLevels = levelsOfAct(node.act).map((n) => n.level);
                     const levelProgress = { ...s.levelProgress };
+                    const levelSeconds = { ...s.levelSeconds };
 
                     actLevels.forEach((l) => delete levelProgress[l]);
+                    actLevels.forEach((l) => delete levelSeconds[l]);
 
                     return {
                         nodeId,
@@ -88,9 +92,11 @@ export const useGameStore = create(
                         hp: START_HP,
                         attempt: s.attempt + 1,
                         levelProgress,
+                        levelSeconds,
                         completedLevels: s.completedLevels.filter(
                             (l) => !actLevels.includes(l),
                         ),
+                        shards: s.shards.filter((l) => !actLevels.includes(l)),
                     };
                 }),
 
@@ -108,6 +114,36 @@ export const useGameStore = create(
                         [lvl]: { ...s.levelProgress[lvl], ...patch },
                     },
                 })),
+
+            hintAt: (lvl) => {
+                const used = get().hintsUsed[lvl] ?? 0;
+                const spent = get().levelSeconds[lvl] ?? 0;
+                const next = HINT_DELAYS[used];
+
+                if (next == null) return { ready: false, used };
+
+                return {
+                    ready: spent >= next,
+                    used,
+                    next,
+                    left: Math.max(0, next - spent),
+                };
+            },
+
+            tickLevel: (lvl, seconds) => {
+                const s = get();
+
+                if (
+                    s.phase !== "LEVEL_ACTIVE" ||
+                    s.completedLevels.includes(lvl)
+                )
+                    return;
+
+                const cur = s.levelSeconds[lvl] ?? 0;
+
+                if (seconds > cur)
+                    set({ levelSeconds: { ...s.levelSeconds, [lvl]: seconds } });
+            },
 
             markActComplete: (act) => {
                 const s = get();

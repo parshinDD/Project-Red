@@ -55,7 +55,7 @@ export const FINAL_LINES = [
         pause: 900,
     },
     {
-        text: "Вместо этого появилась целая игра - и потрудиться пришлось тебе.",
+        text: "Вместо этого появилась игра - и тебе пришлось потрудиться.",
         pause: 900,
     },
     {
@@ -72,4 +72,4 @@ export const FINAL_LINES = [
     { text: "Следующего уровня нет.", pause: 2400, tone: "system" },
 ];
 
-export const PACKAGE_LINE = "Осталось найти посылку";
+export const PACKAGE_LINE = "Осталось лишь найти посылку...";

@@ -24,7 +24,7 @@ const COMPLETE_LINES = [
 ];
 
 export default function Level06LiarVote() {
-    const { completed, complete, say, next } = useSceneApi(6);
+    const { completed, complete, damage, say, next } = useSceneApi(6);
 
     const [marked, setMarked] = useState([]);
     const [flag, setFlag] = useState(null);
@@ -47,8 +47,9 @@ export default function Level06LiarVote() {
         if (bad) {
             setFlag(bad.id);
             play("error");
+            damage();
             say(
-                `ОТЧЕТ ОТКЛОНЕН: показание подозреваемого ${bad.id} не согласуется с отмеченным набором. HP не списывается.`,
+                `ОТЧЕТ ОТКЛОНЕН: показание подозреваемого ${bad.id} не согласуется с отмеченным набором. Списан 1 HP.`,
                 "err",
             );
 
@@ -136,8 +137,8 @@ export default function Level06LiarVote() {
                                 </p>
                                 <p className={s.text}>
                                     {flag
-                                        ? `ОТЧЕТ ОТКЛОНЕН - показание подозреваемого ${flag} не согласуется с отмеченным набором.`
-                                        : "Ошибочные отчеты ничего не стоят."}
+                                        ? `ОТЧЕТ ОТКЛОНЕН - показание подозреваемого ${flag} не согласуется с отмеченным набором. Списан 1 HP.`
+                                        : "Ошибочный отчет стоит 1 HP."}
                                 </p>
                             </TerminalWindow>
                             <div className={s.actions}>

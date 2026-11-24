@@ -6,3 +6,4 @@ export const TOTAL_SHARDS = 12;
 export const GAME_OVER_SECONDS = 10;
 export const REQUIRED_PLAYER_ID = "sofa";
 export const FIRST_NODE = "prologue.boot";
+export const HINT_DELAYS = [60, 180, 600];
