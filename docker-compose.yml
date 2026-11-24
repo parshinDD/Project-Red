@@ -1,0 +1,15 @@
+services:
+  frontend:
+    build: ./
+    container_name: project_red_frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    logging:
+      driver: "none"
+    networks:
+      - web-network
+
+networks:
+  web-network:
+    driver: bridge

@@ -1,0 +1,12 @@
+node_modules
+dist
+.git
+.gitignore
+*.md
+.env
+.env.*
+deploy.sh
+setup-ssl.sh
+docker-compose.yml
+Dockerfile
+nginx
