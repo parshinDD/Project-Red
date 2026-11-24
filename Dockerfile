@@ -14,7 +14,32 @@ FROM nginx:alpine
 
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+RUN printf '%s\n' \
+    'server {' \
+    '    listen 3000;' \
+    '    server_name project-red.ru;' \
+    '    root /usr/share/nginx/html;' \
+    '    index index.html;' \
+    '    gzip on;' \
+    '    gzip_comp_level 5;' \
+    '    gzip_types text/css application/javascript application/json image/svg+xml;' \
+    '    gzip_vary on;' \
+    '    location / {' \
+    '        try_files $uri $uri/ /index.html;' \
+    '    }' \
+    '    location ~* ^/assets/ {' \
+    '        add_header Cache-Control "public, immutable, max-age=31536000";' \
+    '        try_files $uri =404;' \
+    '    }' \
+    '    location ~* ^/(audio|decay|fonts)/ {' \
+    '        add_header Cache-Control "public, max-age=604800";' \
+    '        try_files $uri =404;' \
+    '    }' \
+    '    location ~* \.(ico|png|webmanifest|xml|svg)$ {' \
+    '        add_header Cache-Control "public, immutable, max-age=31536000";' \
+    '        try_files $uri =404;' \
+    '    }' \
+    '}' > /etc/nginx/conf.d/default.conf
 
 EXPOSE 3000
 
